@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IELTS Vocab: Work & Career</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .animate-fade-in { animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        @keyframes fadeIn { 
+            from { opacity: 0; transform: translateY(10px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+        
+        /* Custom scrollbar for lists */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #6ee7b7; border-radius: 4px; } /* Emerald-300 */
+        ::-webkit-scrollbar-thumb:hover { background: #34d399; } /* Emerald-400 */
+
+        /* 3D Flip Card Styles */
+        .perspective-1000 { perspective: 1000px; }
+        .transform-style-3d { transform-style: preserve-3d; }
+        .backface-hidden { backface-visibility: hidden; }
+        .rotate-y-180 { transform: rotateY(180deg); }
+        
+        /* Essay Highlights */
+        .highlight-phrase {
+            background-color: #d1fae5; /* emerald-100 */
+            color: #059669; /* emerald-600 */
+            padding: 2px 4px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-emerald-50/40 text-gray-800 font-sans pb-12">
+
+    <!-- Header -->
+    <header class="bg-white border-b border-emerald-100 sticky top-0 z-10 shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
+                <div class="flex items-center gap-4">
+                    <div class="p-3 bg-teal-600 text-white rounded-xl shadow-md shadow-teal-200">
+                        <i data-lucide="briefcase" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl sm:text-3xl font-extrabold text-gray-900">IELTS Vocabulary</h1>
+                        <p class="text-sm text-teal-600 font-medium mt-1">Topic: Work & Career</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tabs -->
+            <div class="flex overflow-x-auto mt-6 border-b border-gray-100 hide-scrollbar gap-2 sm:gap-6">
+                <button onclick="switchTab('vocab')" id="tab-btn-vocab" class="whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-teal-700 border-b-2 border-teal-700 transition-colors flex items-center gap-2">
+                    <i data-lucide="hash" class="w-4 h-4"></i> Core Vocab
+                </button>
+                <button onclick="switchTab('phrases')" id="tab-btn-phrases" class="whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-gray-500 border-b-2 border-transparent hover:text-gray-800 transition-colors flex items-center gap-2">
+                    <i data-lucide="book-open" class="w-4 h-4"></i> Essay Phrases
+                </button>
+                <button onclick="switchTab('proscons')" id="tab-btn-proscons" class="whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-gray-500 border-b-2 border-transparent hover:text-gray-800 transition-colors flex items-center gap-2">
+                    <i data-lucide="home" class="w-4 h-4"></i> Work From Home
+                </button>
+                <button onclick="switchTab('writing')" id="tab-btn-writing" class="whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-gray-500 border-b-2 border-transparent hover:text-gray-800 transition-colors flex items-center gap-2">
+                    <i data-lucide="pen-tool" class="w-4 h-4"></i> Writing Task 2
+                </button>
+                <button onclick="switchTab('flashcards')" id="tab-btn-flashcards" class="whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-gray-500 border-b-2 border-transparent hover:text-gray-800 transition-colors flex items-center gap-2">
+                    <i data-lucide="layers" class="w-4 h-4"></i> Flashcards
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+        
+        <!-- Tab: Core Vocab -->
+        <section id="tab-vocab" class="animate-fade-in block">
+            <div class="flex flex-col lg:flex-row gap-6">
+                <!-- Vocab List -->
+                <div class="flex-1 space-y-6">
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-teal-100">
+                        <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-6">
+                            <h2 class="text-xl font-bold text-gray-800 flex items-center gap-2">
+                                <i data-lucide="list" class="w-5 h-5 text-teal-500"></i> General Work Vocab
+                            </h2>
+                            <div class="relative w-full sm:w-64">
+                                <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                                <input type="text" onkeyup="filterList('vocab-list', this.value)" placeholder="Search vocabulary..." class="w-full pl-9 pr-4 py-2 bg-teal-50/50 border border-teal-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 transition-all">
+                            </div>
+                        </div>
+                        
+                        <ul id="vocab-list" class="space-y-3 max-h-[600px] overflow-y-auto pr-2">
+                            <!-- Populated by JS -->
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Side Panel -->
+                <div class="lg:w-1/3 bg-gradient-to-b from-emerald-50 to-teal-50 p-6 rounded-2xl border border-emerald-100 h-fit lg:sticky lg:top-48 shadow-inner">
+                    <h2 class="text-xl font-bold text-emerald-900 mb-6 flex items-center gap-2">
+                        <i data-lucide="zap" class="w-5 h-5 text-emerald-600"></i> WFH Basics
+                    </h2>
+                    <div id="side-list" class="space-y-4">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tab: Reading Phrases -->
+        <section id="tab-phrases" class="animate-fade-in hidden">
+            <div class="bg-white p-6 sm:p-8 rounded-3xl shadow-sm border border-teal-100 mb-8">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-800">Essay Collocations</h2>
+                        <p class="text-gray-500 mt-1">Key expressions from the working hours essay.</p>
+                    </div>
+                    <div class="relative w-full sm:w-64">
+                        <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                        <input type="text" onkeyup="filterPhrases(this.value)" placeholder="Search phrases..." class="w-full pl-9 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 transition-all">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" id="phrases-grid">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Tab: Work From Home -->
+        <section id="tab-proscons" class="animate-fade-in hidden">
+            <div class="bg-white rounded-3xl shadow-sm border border-teal-100 overflow-hidden mb-8">
+                <div class="bg-teal-800 p-8 text-center text-white">
+                    <i data-lucide="laptop" class="w-12 h-12 mx-auto mb-4 text-teal-300"></i>
+                    <h2 class="text-3xl font-bold tracking-wide mb-2">Work From Home (WFH)</h2>
+                    <p class="text-teal-200">The advantages and disadvantages of remote working</p>
+                </div>
+
+                <div class="flex flex-col md:flex-row">
+                    <!-- Pros -->
+                    <div class="w-full md:w-1/2 p-6 sm:p-8 border-r border-gray-100 bg-emerald-50/30">
+                        <h3 class="text-xl font-bold text-emerald-700 mb-6 flex items-center gap-2">
+                            <i data-lucide="thumbs-up" class="w-5 h-5"></i> Ưu điểm (Pros)
+                        </h3>
+                        <div id="wfh-pros" class="space-y-6">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+
+                    <!-- Cons -->
+                    <div class="w-full md:w-1/2 p-6 sm:p-8 bg-rose-50/30">
+                        <h3 class="text-xl font-bold text-rose-700 mb-6 flex items-center gap-2">
+                            <i data-lucide="thumbs-down" class="w-5 h-5"></i> Nhược điểm (Cons)
+                        </h3>
+                        <div id="wfh-cons" class="space-y-6">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Tab: Writing Task 2 -->
+        <section id="tab-writing" class="animate-fade-in hidden">
+            <div class="bg-white p-6 sm:p-8 rounded-3xl shadow-sm border border-teal-100 mb-8 max-w-4xl mx-auto">
+                <div class="mb-8 border-b border-gray-200 pb-6">
+                    <span class="bg-teal-100 text-teal-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">Sample Essay</span>
+                    <h2 class="text-2xl font-bold text-gray-800 mt-4 mb-2">Working Long Hours</h2>
+                    <p class="text-gray-600 italic">"People tend to work longer hours nowadays. Working long hours has a negative effect on themselves, their families and the society so working hours should be restricted. Do you agree or disagree?"</p>
+                </div>
+
+                <div class="space-y-6 text-gray-700 leading-relaxed text-lg font-serif" id="essay-content">
+                    <p>Working longer hours is getting more common in today's society. I personally believe that this trend not only <span class="highlight-phrase" title="Có tác động nghiêm trọng đến">has a severe impact on</span> the workers themselves, but also on their families and the community as a whole. Therefore, I totally agree with the idea of limiting working hours.</p>
+                    
+                    <p>A few decades ago, a person normally worked an average of eight hours per day. Average daily working hours in recent years, however, have significantly increased to ten or even fourteen. This, in my opinion, <span class="highlight-phrase" title="Ảnh hưởng bất lợi đến">adversely affects</span> employees' health and productivity. For example, people who spend longer at work are more likely to <span class="highlight-phrase" title="Mắc các vấn đề về sức khỏe">suffer from various health issues</span>, ranging from fatigue to more serious problems like anxiety disorders or even stroke. Failing health leads to more sick leave, <span class="highlight-phrase" title="Hiệu suất làm việc kém">poor work performance</span> and low productivity. My cousin is <span class="highlight-phrase" title="1 ví dụ điển hình">a case in point</span>. Working nearly twelve hours on a daily basis, he <span class="highlight-phrase" title="Thường xuyên cảm thấy kiệt sức">frequently feels exhausted</span> and makes more errors at work than he used to.</p>
+
+                    <p>I also think that working long hours has <span class="highlight-phrase" title="Gây ra hậu quả nặng nề">serious consequences</span> for families and communities. At the family level, <span class="highlight-phrase" title="Lịch trình công việc bận rộn">busy work schedules</span> prevent people from taking frequent family trips or even just having meals together. Relationships among members are greatly weakened if they cannot <span class="highlight-phrase" title="Dành thời gian cho nhau">make time for each other</span>. In terms of community life, overworked people do not <span class="highlight-phrase" title="Dành thời gian cho hoạt động tình nguyện">devote time to voluntary activity</span> that brings benefits for their society. My uncle, for example, hardly has time for local community service projects such as conservation work or working with a charity because he works more than sixty hours per week.</p>
+
+                    <p>In conclusion, I would argue that working time should be reduced since the frequency of long working hours <span class="highlight-phrase" title="Gây ra tác động xấu đối với">exerts an adverse effect on</span> employees, their family bonds and their community.</p>
+                </div>
+                <div class="mt-8 pt-4 border-t border-gray-100 flex justify-between text-sm text-gray-400">
+                    <span>Hover over highlighted phrases for translation.</span>
+                    <span>293 words</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tab: Flashcards -->
+        <section id="tab-flashcards" class="animate-fade-in hidden">
+            <div class="max-w-3xl mx-auto text-center space-y-6">
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-teal-100">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-2">Study Mode</h2>
+                    <p class="text-gray-500 mb-8">Click the card to flip it and reveal the meaning.</p>
+                    
+                    <!-- Flashcard Container -->
+                    <div id="flashcard-container" class="relative w-full h-64 cursor-pointer group perspective-1000 mx-auto" onclick="flipCard()">
+                        <div id="flashcard-inner" class="w-full h-full transition-all duration-500 transform-style-3d">
+                            
+                            <!-- Front -->
+                            <div class="absolute inset-0 backface-hidden bg-gradient-to-br from-teal-600 to-emerald-700 text-white border-2 border-teal-400 rounded-2xl shadow-lg flex flex-col items-center justify-center p-6 text-center">
+                                <i data-lucide="refresh-cw" class="w-6 h-6 absolute top-4 right-4 text-white/50 opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                                <h3 id="card-front-text" class="text-2xl md:text-3xl font-bold px-4"></h3>
+                                <p class="text-teal-200 mt-6 text-sm uppercase tracking-widest font-semibold">Tap to reveal</p>
+                            </div>
+
+                            <!-- Back -->
+                            <div class="absolute inset-0 backface-hidden rotate-y-180 bg-white text-gray-800 border-2 border-teal-200 rounded-2xl shadow-lg flex flex-col items-center justify-center p-6 text-center">
+                                <p id="card-back-en" class="text-base text-gray-500 font-medium italic mb-3 px-4"></p>
+                                <p id="card-back-vi" class="text-xl font-bold text-teal-700 px-4"></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Controls -->
+                    <div class="flex justify-center items-center gap-6 mt-8">
+                        <button onclick="prevCard()" class="p-3 rounded-full bg-gray-100 text-gray-600 hover:bg-teal-100 hover:text-teal-700 transition-colors">
+                            <i data-lucide="chevron-left" class="w-6 h-6"></i>
+                        </button>
+                        <span id="card-counter" class="font-bold text-gray-500 text-lg min-w-[4rem]">1 / 10</span>
+                        <button onclick="nextCard()" class="p-3 rounded-full bg-gray-100 text-gray-600 hover:bg-teal-100 hover:text-teal-700 transition-colors">
+                            <i data-lucide="chevron-right" class="w-6 h-6"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Data & Logic -->
+    <script>
+        // --- DATA ---
+        
+        // Tab 1: Vocab
+        const generalVocabData = [
+            { en: "work productivity", vi: "năng suất làm việc" },
+            { en: "a nine-to-five job", vi: "công việc giờ hành chính" },
+            { en: "poor work performance", vi: "hiệu suất làm việc kém" },
+            { en: "sick leave", vi: "nghỉ phép vì bệnh" },
+            { en: "professional work environment", vi: "môi trường làm việc chuyên nghiệp" },
+            { en: "to get a well-paid job", vi: "có được 1 công việc được trả lương tốt" },
+            { en: "to earn a high salary", vi: "có được mức lương cao" },
+            { en: "job satisfaction", vi: "sự hài lòng khi làm việc" },
+            { en: "to work long hours", vi: "làm việc nhiều giờ" },
+            { en: "to limit work hours", vi: "giới hạn giờ làm việc" },
+            { en: "to suffer from various health issues", vi: "mắc các vấn đề về sức khỏe" },
+            { en: "low productivity", vi: "năng suất thấp" },
+            { en: "a case in point", vi: "1 ví dụ điển hình" },
+            { en: "to frequently feel exhausted", vi: "thường xuyên cảm thấy kiệt sức" },
+            { en: "to make more errors at work", vi: "sai sót nhiều hơn tại sở làm" },
+            { en: "to have serious consequences for ...", vi: "gây ra hậu quả nặng nề cho..." },
+            { en: "busy work schedules", vi: "lịch trình công việc bận rộn" },
+            { en: "to be self-employed", vi: "tự làm chủ" },
+            { en: "to pursue a career", vi: "theo đuổi sự nghiệp" },
+            { en: "to learn various skills and experience", vi: "học được những kỹ năng và kinh nghiệm" }
+        ];
+
+        const sidePanelData = [
+            { term: "to provide us with flexibility and convenience", vi: "cung cấp sự linh hoạt và tiện lợi" },
+            { term: "do not need to go to the office on a daily basis", vi: "không cần tới công sở hàng ngày" },
+            { term: "to save a large amount of time commuting", vi: "tiết kiệm 1 lượng lớn thời gian đi lại" },
+            { term: "to require high levels of discipline and commitment", vi: "đòi hỏi mức độ kỷ luật và cam kết cao" }
+        ];
+
+        // Tab 2: Reading Phrases
+        const phrasesData = [
+            { phrase: "to have a severe impact on", engDef: "to strongly and negatively affect something or someone", viDef: "có tác động nghiêm trọng đến" },
+            { phrase: "adversely affects", engDef: "has a negative or harmful effect on", viDef: "ảnh hưởng bất lợi đến" },
+            { phrase: "ranging from fatigue to more serious problems", engDef: "spanning a variety of issues from tiredness to severe conditions", viDef: "từ mệt mỏi đến các vấn đề nghiêm trọng hơn" },
+            { phrase: "to make time for each other", engDef: "to prioritize spending time with one another despite busy schedules", viDef: "dành thời gian cho nhau" },
+            { phrase: "to devote time to voluntary activity", engDef: "to dedicate personal hours for unpaid, charitable work", viDef: "dành thời gian cho hoạt động tình nguyện" },
+            { phrase: "exerts an adverse effect on", engDef: "applies a negative influence upon", viDef: "gây ra tác động xấu đối với" }
+        ];
+
+        // Tab 3: WFH Pros and Cons
+        const wfhProsData = [
+            { en: "Working from home provides us with flexibility and convenience in our daily lives.", vi: "Làm việc tại nhà cung cấp cho chúng ta sự linh hoạt và tiện lợi." },
+            { en: "Employees do not need to go to the office on a daily basis.", vi: "Nhân viên không cần tới công sở hàng ngày." },
+            { en: "It helps save a large amount of time commuting back and forth to work.", vi: "Tiết kiệm 1 lượng lớn thời gian đi lại (tới chỗ làm rồi về)." },
+            { en: "Workers have the freedom to choose where and when they want to work.", vi: "Có sự tự do lựa chọn nơi đâu và khi nào họ muốn làm việc." }
+        ];
+
+        const wfhConsData = [
+            { en: "It requires high levels of discipline and commitment as there is no supervision.", vi: "Đòi hỏi mức độ kỷ luật và cam kết cao vì không có sự giám sát." },
+            { en: "Remote workers might experience feelings of loneliness and isolation sometimes.", vi: "Thỉnh thoảng có thể trải qua cảm giác cô đơn và đơn độc." },
+            { en: "It is easy to get distracted by things like movies or online games, meaning they cannot concentrate entirely on their work.", vi: "Dễ dàng bị sao nhãng bởi các thứ như phim, games online, nghĩa là không thể hoàn toàn tập trung." },
+            { en: "There is less chance to interact and communicate directly with colleagues and clients, making it difficult to develop social skills.", vi: "Có ít cơ hội tương tác trực tiếp, khó phát triển các kỹ năng xã hội." }
+        ];
+
+
+        let flashcardDeck = [];
+        let currentCardIndex = 0;
+        let isCardFlipped = false;
+
+        // --- RENDERING FUNCTIONS ---
+
+        function renderGeneralVocab() {
+            const container = document.getElementById('vocab-list');
+            container.innerHTML = generalVocabData.map(item => `
+                <li class="p-4 bg-gray-50 hover:bg-teal-50 border border-gray-100 hover:border-teal-200 rounded-xl transition-all duration-200 group list-item-vocab">
+                    <div class="font-bold text-[16px] text-gray-800 group-hover:text-teal-800 term leading-snug">${item.en}</div>
+                    <div class="text-[14px] font-medium text-gray-600 mt-2 translation">${item.vi}</div>
+                </li>
+            `).join('');
+        }
+
+        function renderSidePanel() {
+            const container = document.getElementById('side-list');
+            container.innerHTML = sidePanelData.map(item => `
+                <div class="bg-white p-4 rounded-xl shadow-sm border border-emerald-100">
+                    <h3 class="font-bold text-emerald-800 text-sm md:text-md mb-2 leading-snug">${item.term}</h3>
+                    <span class="inline-block bg-emerald-100 text-emerald-700 text-xs px-2 py-1 rounded font-medium">${item.vi}</span>
+                </div>
+            `).join('');
+        }
+
+        function renderPhrasesGrid() {
+            const container = document.getElementById('phrases-grid');
+            container.innerHTML = phrasesData.map(item => `
+                <div class="phrase-card bg-white p-5 rounded-xl border border-gray-200 hover:border-teal-300 shadow-sm hover:shadow transition-all group flex flex-col h-full">
+                    <h3 class="text-lg font-bold text-gray-800 mb-2 group-hover:text-teal-600 phrase-title">${item.phrase}</h3>
+                    <p class="text-sm text-gray-500 italic mb-4 phrase-eng">${item.engDef}</p>
+                    <div class="mt-auto pt-3 border-t border-gray-100">
+                        <p class="font-semibold text-gray-800 phrase-vi">${item.viDef}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderProsConsSections() {
+            const prosContainer = document.getElementById('wfh-pros');
+            prosContainer.innerHTML = wfhProsData.map(item => `
+                <div class="bg-white p-4 rounded-xl border border-emerald-100 shadow-sm relative pl-10">
+                    <i data-lucide="check-circle" class="absolute left-3 top-4 w-5 h-5 text-emerald-500"></i>
+                    <p class="font-medium text-gray-800 text-sm md:text-base leading-relaxed">${item.en}</p>
+                    <p class="text-sm text-gray-500 mt-2 pt-2 border-t border-gray-50">${item.vi}</p>
+                </div>
+            `).join('');
+
+            const consContainer = document.getElementById('wfh-cons');
+            consContainer.innerHTML = wfhConsData.map(item => `
+                <div class="bg-white p-4 rounded-xl border border-rose-100 shadow-sm relative pl-10">
+                    <i data-lucide="alert-circle" class="absolute left-3 top-4 w-5 h-5 text-rose-500"></i>
+                    <p class="font-medium text-gray-800 text-sm md:text-base leading-relaxed">${item.en}</p>
+                    <p class="text-sm text-gray-500 mt-2 pt-2 border-t border-gray-50">${item.vi}</p>
+                </div>
+            `).join('');
+        }
+
+        // --- FLASHCARD LOGIC ---
+        
+        function initFlashcards() {
+            // Combine vocab for flashcards
+            flashcardDeck = [
+                ...generalVocabData.map(i => ({ front: i.en, backEn: "", backVi: i.vi })),
+                ...sidePanelData.map(i => ({ front: i.term, backEn: "Topic: Work from Home", backVi: i.vi })),
+                ...phrasesData.map(i => ({ front: i.phrase, backEn: i.engDef, backVi: i.viDef }))
+            ];
+            // Shuffle
+            flashcardDeck.sort(() => Math.random() - 0.5);
+            currentCardIndex = 0;
+            updateFlashcardView();
+        }
+
+        function updateFlashcardView() {
+            const card = flashcardDeck[currentCardIndex];
+            document.getElementById('card-front-text').innerText = card.front;
+            document.getElementById('card-back-en').innerText = card.backEn;
+            document.getElementById('card-back-vi').innerText = card.backVi;
+            
+            if(card.backEn === "") {
+                document.getElementById('card-back-en').classList.add('hidden');
+            } else {
+                document.getElementById('card-back-en').classList.remove('hidden');
+            }
+
+            document.getElementById('card-counter').innerText = `${currentCardIndex + 1} / ${flashcardDeck.length}`;
+            
+            if (isCardFlipped) {
+                document.getElementById('flashcard-inner').classList.remove('rotate-y-180');
+                isCardFlipped = false;
+            }
+        }
+
+        function flipCard() {
+            document.getElementById('flashcard-inner').classList.toggle('rotate-y-180');
+            isCardFlipped = !isCardFlipped;
+        }
+
+        function nextCard() {
+            if (currentCardIndex < flashcardDeck.length - 1) {
+                currentCardIndex++;
+                updateFlashcardView();
+            }
+        }
+
+        function prevCard() {
+            if (currentCardIndex > 0) {
+                currentCardIndex--;
+                updateFlashcardView();
+            }
+        }
+
+        // --- INTERACTIVITY LOGIC ---
+
+        function switchTab(tabId) {
+            // Hide all tabs
+            const tabs = ['vocab', 'phrases', 'proscons', 'writing', 'flashcards'];
+            tabs.forEach(id => {
+                document.getElementById(`tab-${id}`).classList.add('hidden');
+                document.getElementById(`tab-${id}`).classList.remove('block');
+                
+                // Reset tab button styles
+                const btn = document.getElementById(`tab-btn-${id}`);
+                btn.className = "whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-gray-500 border-b-2 border-transparent hover:text-gray-800 transition-colors flex items-center gap-2";
+            });
+
+            // Show active tab
+            document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+            document.getElementById(`tab-${tabId}`).classList.add('block');
+            
+            // Set active tab button style
+            const activeBtn = document.getElementById(`tab-btn-${tabId}`);
+            activeBtn.className = "whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-teal-700 border-b-2 border-teal-700 transition-colors flex items-center gap-2";
+        }
+
+        function filterList(listId, query) {
+            const list = document.getElementById(listId);
+            const items = list.getElementsByClassName('list-item-vocab');
+            const lowerQuery = query.toLowerCase();
+
+            for (let i = 0; i < items.length; i++) {
+                const text = items[i].innerText.toLowerCase();
+                if (text.includes(lowerQuery)) {
+                    items[i].style.display = "";
+                } else {
+                    items[i].style.display = "none";
+                }
+            }
+        }
+
+        function filterPhrases(query) {
+            const cards = document.getElementsByClassName('phrase-card');
+            const lowerQuery = query.toLowerCase();
+
+            for (let i = 0; i < cards.length; i++) {
+                const text = cards[i].innerText.toLowerCase();
+                if (text.includes(lowerQuery)) {
+                    cards[i].style.display = "";
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+        }
+
+        // --- INITIALIZATION ---
+        document.addEventListener('DOMContentLoaded', () => {
+            renderGeneralVocab();
+            renderSidePanel();
+            renderPhrasesGrid();
+            renderProsConsSections();
+            initFlashcards();
+            
+            // Initialize Lucide icons
+            lucide.createIcons();
+        });
+    </script>
+</body>
+</html>
