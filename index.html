@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IELTS Vocabulary Masterclass | Topic-by-Topic Guide</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              200: '#c7d2fe',
+              300: '#a5b4fc',
+              400: '#818cf8',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+              800: '#3730a3',
+              900: '#312e81',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Smooth scroll */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Hero animation */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero-title {
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    .hero-subtitle {
+      animation: fadeInUp 0.8s ease-out 0.1s both;
+    }
+
+    .hero-btn {
+      animation: fadeInUp 0.8s ease-out 0.2s both;
+    }
+
+    /* Feature cards hover effect */
+    .feature-card {
+      transition: all 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 25px -5px rgba(99, 102, 241, 0.1);
+    }
+
+    /* Lesson card animation */
+    .lesson-card {
+      transition: all 0.3s ease;
+    }
+
+    .lesson-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 25px -5px rgba(99, 102, 241, 0.15);
+    }
+
+    /* Stats counter animation */
+    @keyframes countUp {
+      from {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .stat-item {
+      animation: countUp 0.6s ease-out;
+    }
+
+    /* Pulse animation */
+    @keyframes pulse-glow {
+      0%, 100% {
+        box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.7);
+      }
+      50% {
+        box-shadow: 0 0 0 10px rgba(99, 102, 241, 0);
+      }
+    }
+
+    .pulse-glow {
+      animation: pulse-glow 2s infinite;
+    }
+
+    /* Gradient text */
+    .gradient-text {
+      background: linear-gradient(135deg, #6366f1 0%, #4338ca 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Section divider */
+    .section-divider {
+      background: linear-gradient(90deg, transparent, #6366f1, transparent);
+      height: 2px;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans selection:bg-brand-200">
+
+  <!-- Navigation -->
+  <nav class="bg-white shadow-md sticky top-0 z-40">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <div class="flex items-center gap-3">
+          <div class="bg-brand-600 p-2 rounded-lg text-white">
+            <i class="fa-solid fa-graduation-cap text-xl"></i>
+          </div>
+          <span class="font-bold text-xl gradient-text">IELTS Vocab Master</span>
+        </div>
+        <a href="#topics" class="bg-brand-600 text-white px-6 py-2 rounded-lg hover:bg-brand-700 transition-colors font-semibold flex items-center gap-2 shadow-md">
+          <i class="fa-solid fa-book"></i> Start Learning
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-slate-900 via-brand-900 to-brand-800 text-white py-20 sm:py-32 relative overflow-hidden">
+    <!-- Background decorative elements -->
+    <div class="absolute inset-0 opacity-20 pointer-events-none">
+      <div class="absolute top-10 left-10 w-72 h-72 bg-brand-400 rounded-full blur-3xl"></div>
+      <div class="absolute bottom-10 right-10 w-96 h-96 bg-brand-500 rounded-full blur-3xl"></div>
+    </div>
+
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="text-center space-y-8">
+        <h1 class="hero-title text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight">
+          Master Essential <span class="text-brand-300">IELTS Vocabulary</span>
+        </h1>
+        
+        <p class="hero-subtitle text-xl sm:text-2xl text-brand-100 max-w-3xl mx-auto leading-relaxed">
+          Boost your Lexical Resource score with our comprehensive, topic-based guides. Explore advanced phrases, collocations, and essays tailored for IELTS Writing and Speaking.
+        </p>
+
+        <div class="hero-btn flex flex-col sm:flex-row gap-4 justify-center pt-6">
+          <a href="#topics" class="bg-white text-brand-900 px-8 py-4 rounded-lg hover:bg-brand-50 transition-all font-bold text-lg shadow-lg hover:shadow-xl flex items-center justify-center gap-2">
+            <i class="fa-solid fa-rocket"></i> Explore All 20 Topics
+          </a>
+          <a href="#about" class="border-2 border-white text-white px-8 py-4 rounded-lg hover:bg-brand-800 transition-all font-bold text-lg flex items-center justify-center gap-2">
+            <i class="fa-solid fa-circle-info"></i> How It Works
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="bg-white py-16 border-b border-brand-100">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
+        <div class="stat-item text-center">
+          <div class="text-5xl font-bold gradient-text mb-3">20</div>
+          <p class="text-gray-600 text-lg">Exam Topics</p>
+          <p class="text-sm text-gray-500 mt-1">Covering every common IELTS theme</p>
+        </div>
+        <div class="stat-item text-center">
+          <div class="text-5xl font-bold gradient-text mb-3">500+</div>
+          <p class="text-gray-600 text-lg">Band 8.0+ Phrases</p>
+          <p class="text-sm text-gray-500 mt-1">Idioms, synonyms, and collocations</p>
+        </div>
+        <div class="stat-item text-center">
+          <div class="text-5xl font-bold gradient-text mb-3">100%</div>
+          <p class="text-gray-600 text-lg">Interactive</p>
+          <p class="text-sm text-gray-500 mt-1">Flashcards & bilingual readings</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="py-20 sm:py-24">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl sm:text-5xl font-bold mb-4">Why Learn By Topic?</h2>
+        <div class="section-divider mx-auto w-24 mb-6"></div>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+          In IELTS, vocabulary makes up 25% of your score for both Speaking and Writing. Studying by topic ensures you have the right words ready for any prompt.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="feature-card bg-white p-8 rounded-xl border-2 border-brand-100 shadow-sm text-center">
+          <div class="bg-brand-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+            <i class="fa-solid fa-layer-group text-brand-600 text-2xl"></i>
+          </div>
+          <h3 class="font-bold text-xl text-gray-900 mb-3">Thematic Grouping</h3>
+          <p class="text-gray-600">Connect words logically. Remembering vocabulary is much easier when terms are linked to a central theme like 'Crime' or 'Education'.</p>
+        </div>
+
+        <div class="feature-card bg-white p-8 rounded-xl border-2 border-brand-100 shadow-sm text-center">
+          <div class="bg-brand-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+            <i class="fa-solid fa-pen-fancy text-brand-600 text-2xl"></i>
+          </div>
+          <h3 class="font-bold text-xl text-gray-900 mb-3">Ready for Task 2</h3>
+          <p class="text-gray-600">Each module includes sample essays and arguments (Pros & Cons) to help you generate ideas for Writing Task 2 instantly.</p>
+        </div>
+
+        <div class="feature-card bg-white p-8 rounded-xl border-2 border-brand-100 shadow-sm text-center">
+          <div class="bg-brand-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+            <i class="fa-solid fa-clone text-brand-600 text-2xl"></i>
+          </div>
+          <h3 class="font-bold text-xl text-gray-900 mb-3">Interactive Flashcards</h3>
+          <p class="text-gray-600">Memorize effectively. Every topic comes with built-in 3D flip cards to test your recall of English meanings and Vietnamese translations.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Topics Grid Section -->
+  <section id="topics" class="py-20 sm:py-32 bg-gray-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl sm:text-5xl font-bold mb-4">Vocabulary Modules</h2>
+        <div class="section-divider mx-auto w-24 mb-6"></div>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+          Select a topic below to explore core vocabulary, idioms, essay phrases, and interactive study modes.
+        </p>
+      </div>
+
+      <!-- 20 Topic Cards Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        
+        <a href="GMO.html" class="lesson-card bg-white rounded-xl shadow-sm overflow-hidden border-2 border-transparent hover:border-brand-300 flex flex-col">
+          <div class="bg-gradient-to-r from-brand-500 to-brand-600 h-16 flex items-center justify-center text-white">
+            <i class="fa-solid fa-dna text-3xl opacity-40"></i>
+          </div>
+          <div class="p-5 flex-1 flex flex-col">
+            <h3 class="font-bold text-lg text-gray-900 mb-1">GMO</h3>
+            <p class="text-gray-500 text-sm mb-4 flex-1">Genetic engineering, crop yields, and biological ethics.</p>
+            <div class="flex items-center gap-2 text-brand-600 font-semibold text-sm"><span>Learn Vocab</span><i class="fa-solid fa-arrow-right"></i></div>
+          </div>
+        </a>
+
+        <a href="affixes.html" class="lesson-card bg-white rounded-xl shadow-sm overflow-hidden border-2 border-transparent hover:border-brand-300 flex flex-col">
+          <div class="bg-gradient-to-r from-brand-500 to-brand-600 h-16 flex items-center justify-center text-white">
+            <i class="fa-solid fa-puzzle-piece text-3xl opacity-40"></i>
+          </div>
+          <div class="p-5 flex-1 flex flex-col">
+            <h3 class="font-bold text-lg text-gray-900 mb-1">Affixes</h3>
+            <p class="text-gray-500 text-sm mb-4 flex-1">Master prefixes and suffixes to guess unknown words.</p>
+            <div class="flex items-center gap-2 text-brand-600 font-semibold text-sm"><span>Learn Vocab</span><i class="fa-solid fa-arrow-right"></i></div>
+          </div>
+        </a>
+
+        <a href="cohabitation.html" class="lesson-card bg-white rounded-xl shadow-sm overflow-hidden border-2 border-transparent hover:border-brand-300 flex flex-col">
+          <div class="bg-gradient-to-r from-brand-500 to-brand-600 h-16 flex items-center justify-center text-white">
+            <i class="fa-solid fa-house-user text-3xl opacity-40"></i>
+          </div>
+          <div class="p-5 flex-1 flex flex-col">
+            <h3 class="font-bold text-lg text-gray-900 mb-1">Cohabitation</h3>
+            <p class="text-gray-500 text-sm mb-4 flex-1">Living together, relationships, and modern living trends.</p>
+            <div class="flex items-center gap-2 text-brand-600 font-semibold text-sm"><span>Learn Vocab</span><i class="fa-solid fa-arrow-right"></i></div>
+          </div>
+        </a>
+
+        <a href="covid-19.html" class="lesson-card bg-white rounded-xl shadow-sm overflow-hidden border-2 border-transparent hover:border-brand-300 flex flex-col">
+          <div class="bg-gradient-to-r from-brand-500 to-brand-600 h-16 flex items-center justify-center text-white">
+            <i class="fa-solid fa-virus text-3xl opacity-40"></i>
+          </div>
+          <div class="p-5 flex-1 flex flex-col">
+            <h3 class="font-bold text-lg text-gray-900 mb-1">Covid-19</h3>
+            <p class="text-gray-500 text-sm mb-4 flex-1">Pandemics, public health measures, and global impacts.</p>
+            <div class="flex items-center gap-2 text-brand-600 font-semibold text-sm"><span>Learn Vocab</span><i class="fa-solid fa-arrow-right"></i></div>
+          </div>
+        </a>
+
+        <a href="crime.html" class="lesson-card bg-white rounded-xl shadow-sm overflow-hidden border-2 border-transparent hover:border-brand-300 flex flex-col">
+          <div class="bg-gradient-to-r from-brand-500 to-brand-600 h-16 flex items-center justify-center text-white">
+            <i class="fa-solid fa-gavel text-3xl opacity-40"></i>
+          </div>
+          <div class="p-5 flex-1 flex flex-col">
+            <h3 class="font-bold text-lg text-gray-900 mb-1">Crime</h3>
+            <p class="text-gray-500 text-sm mb-4 flex-1">Law enforcement, juvenile delinquency, and rehabilitation.</p>
+            <div class="flex items-center gap-2 text-brand-600 font-semibold text-sm"><span>Learn Vocab</span><i class="fa-solid fa-arrow-right"></i></div>
+          </div>
+        </a>
+
+        <a href="daily%20routine.html" class="lesson-card bg-white rounded-xl shadow-sm overflow-hidden border-2 border-transparent hover:border-brand-300 flex flex-col">
+          <div class="bg-gradient-to-r from-brand-500 to-brand-600 h-16 flex items-center justify-center text-white">
+            <i class="fa-solid fa-clock text-3xl opacity-40"></i>
+          </div>
+          <div class="p-5 flex-1 flex flex-col">
+            <h3 class="font-bold text-lg text-gray-900 mb-1">Daily Routine</h3>
+            <p class="text-gray-500 text-sm mb-4 flex-1">Habits, time management, and lifestyle choices.</p>
+            <div class="flex items-center gap-2 text-brand-600 font-semibold text-sm"><span>Learn Vocab</span><i class="fa-solid fa-arrow-right"></i></div>
+          </div>
+        </a>
+
+        <a href="education.html" class="lesson-card bg-white rounded-xl shadow-sm overflow-hidden border-2 border-transparent hover:border-brand-300 flex flex-col">
+          <div class="bg-gradient-to-r from-brand-500 to-brand-600 h-16 flex items-center justify-center text-white">
+            <i class="fa-solid fa-graduation-cap text-3xl opacity-40"></i>
+          </div>
+          <div class="p-5 flex-1 flex flex-col">
+            <h3 class="font-bold text-lg text-gray-900 mb-1">Education</h3>
+            <p class="text-gray-500 text-sm mb-4 flex-1">Schooling, academic achievements, and study abroad.</p>
+            <div class="flex items-center gap-2 text-brand-600 font-semibold text-sm"><span>Learn Vocab</span><i class="fa-solid fa-arrow-right"></i></div>
+          </div>
+        </a>
+
+        <a href="family.html" class="lesson-card bg-white rounded-xl shadow-sm overflow-hidden border-2 border-transparent hover:border-brand-300 flex flex-col">
+          <div class="bg-gradient-to-r from-brand-500 to-brand-600 h-16 flex items-center justify-center text-white">
+            <i class="fa-solid fa-people-roof text-3xl opacity-40"></i>
+          </div>
+          <div class="p-5 flex-1 flex flex-col">
+            <h3 class="font-bold text-lg text-gray-900 mb-1">Family</h3>
+            <p class="text-gray-500 text-sm mb-4 flex-1">Parenting, generation gaps, and household dynamics.</p>
+            <div class="flex items-center gap-2 text-brand-600 font-semibold text-sm"><span>Learn Vocab</span><i class="fa-solid fa-arrow-right"></i></div>
+          </div>
+        </a>
+
+        <a href="free%20time.html" class="lesson-card bg-white rounded-xl shadow-sm overflow-hidden border-2 border-transparent hover:border-brand-300 flex flex-col">
+          <div class="bg-gradient-to-r from-brand-500 to-brand-600 h-16 flex items-center justify-center text-white">
+            <i class="fa-solid fa-bicycle text-3xl opacity-40"></i>
+          </div>
+          <div class="p-5 flex-1 flex flex-col">
+            <h3 class="font-bold text-lg text-gray-900 mb-1">Free Time</h3>
+            <p class="text-gray-500 text-sm mb-4 flex-1">Hobbies, relaxation, entertainment, and leisure activities.</p>
+            <div class="flex items-center gap-2 text-brand-600 font-semibold text-sm"><span>Learn Vocab</span><i class="fa-solid fa-arrow-right"></i></div>
+          </div>
+        </a>
+
+        <a href="friendship.html" class="lesson-card bg-white rounded-xl shadow-sm overflow-hidden border-2 border-transparent hover:border-brand-300 flex flex-col">
+          <div class="bg-gradient-to-r from-brand-500 to-brand-600 h-16 flex items-center justify-center text-white">
+            <i class="fa-solid fa-user-group text-3xl opacity-40"></i>
+          </div>
+          <div class="p-5 flex-1 flex flex-col">
+            <h3 class="font-bold text-lg text-gray-900 mb-1">Friendship</h3>
+            <p class="text-gray-500 text-sm mb-4 flex-1">Socializing, trust, peer pressure, and building connections.</p>
+            <div class="flex items-center gap-2 text-brand-600 font-semibold text-sm"><span>Learn Vocab</span><i class="fa-solid fa-arrow-right"></i></div>
+          </div>
+        </a>
+
+        <a href="global%20warming.html" class="lesson-card bg-white rounded-xl shadow-sm overflow-hidden border-2 border-transparent hover:border-brand-300 flex flex-col">
+          <div class="bg-gradient-to-r from-brand-500 to-brand-600 h-16 flex items-center justify-center text-white">
+            <i class="fa-solid fa-temperature-arrow-up text-3xl opacity-40"></i>
+          </div>
+          <div class="p-5 flex-1 flex flex-col">
+            <h3 class="font-bold text-lg text-gray-900 mb-1">Global Warming</h3>
+            <p class="text-gray-500 text-sm mb-4 flex-1">Climate change, carbon footprint, and environmental action.</p>
+            <div class="flex items-center gap-2 text-brand-600 font-semibold text-sm"><span>Learn Vocab</span><i class="fa-solid fa-arrow-right"></i></div>
+          </div>
+        </a>
+
+        <a href="languages.html" class="lesson-card bg-white rounded-xl shadow-sm overflow-hidden border-2 border-transparent hover:border-brand-300 flex flex-col">
+          <div class="bg-gradient-to-r from-brand-500 to-brand-600 h-16 flex items-center justify-center text-white">
+            <i class="fa-solid fa-language text-3xl opacity-40"></i>
+          </div>
+          <div class="p-5 flex-1 flex flex-col">
+            <h3 class="font-bold text-lg text-gray-900 mb-1">Languages</h3>
+            <p class="text-gray-500 text-sm mb-4 flex-1">Bilingualism, language barriers, and cultural preservation.</p>
+            <div class="flex items-center gap-2 text-brand-600 font-semibold text-sm"><span>Learn Vocab</span><i class="fa-solid fa-arrow-right"></i></div>
+          </div>
+        </a>
+
+        <a href="makeup.html" class="lesson-card bg-white rounded-xl shadow-sm overflow-hidden border-2 border-transparent hover:border-brand-300 flex flex-col">
+          <div class="bg-gradient-to-r from-brand-500 to-brand-600 h-16 flex items-center justify-center text-white">
+            <i class="fa-solid fa-wand-magic-sparkles text-3xl opacity-40"></i>
+          </div>
+          <div class="p-5 flex-1 flex flex-col">
+            <h3 class="font-bold text-lg text-gray-900 mb-1">Makeup</h3>
+            <p class="text-gray-500 text-sm mb-4 flex-1">Cosmetics, beauty standards, and personal appearance.</p>
+            <div class="flex items-center gap-2 text-brand-600 font-semibold text-sm"><span>Learn Vocab</span><i class="fa-solid fa-arrow-right"></i></div>
+          </div>
+        </a>
+
+        <a href="money.html" class="lesson-card bg-white rounded-xl shadow-sm overflow-hidden border-2 border-transparent hover:border-brand-300 flex flex-col">
+          <div class="bg-gradient-to-r from-brand-500 to-brand-600 h-16 flex items-center justify-center text-white">
+            <i class="fa-solid fa-money-bill-wave text-3xl opacity-40"></i>
+          </div>
+          <div class="p-5 flex-1 flex flex-col">
+            <h3 class="font-bold text-lg text-gray-900 mb-1">Money</h3>
+            <p class="text-gray-500 text-sm mb-4 flex-1">Finance, consumerism, wealth inequality, and investments.</p>
+            <div class="flex items-center gap-2 text-brand-600 font-semibold text-sm"><span>Learn Vocab</span><i class="fa-solid fa-arrow-right"></i></div>
+          </div>
+        </a>
+
+        <a href="personality%20%26%20traits.html" class="lesson-card bg-white rounded-xl shadow-sm overflow-hidden border-2 border-transparent hover:border-brand-300 flex flex-col">
+          <div class="bg-gradient-to-r from-brand-500 to-brand-600 h-16 flex items-center justify-center text-white">
+            <i class="fa-solid fa-masks-theater text-3xl opacity-40"></i>
+          </div>
+          <div class="p-5 flex-1 flex flex-col">
+            <h3 class="font-bold text-lg text-gray-900 mb-1">Personality & Traits</h3>
+            <p class="text-gray-500 text-sm mb-4 flex-1">Characteristics, emotional intelligence, and behaviors.</p>
+            <div class="flex items-center gap-2 text-brand-600 font-semibold text-sm"><span>Learn Vocab</span><i class="fa-solid fa-arrow-right"></i></div>
+          </div>
+        </a>
+
+        <a href="plastic%20pollution.html" class="lesson-card bg-white rounded-xl shadow-sm overflow-hidden border-2 border-transparent hover:border-brand-300 flex flex-col">
+          <div class="bg-gradient-to-r from-brand-500 to-brand-600 h-16 flex items-center justify-center text-white">
+            <i class="fa-solid fa-bottle-water text-3xl opacity-40"></i>
+          </div>
+          <div class="p-5 flex-1 flex flex-col">
+            <h3 class="font-bold text-lg text-gray-900 mb-1">Plastic Pollution</h3>
+            <p class="text-gray-500 text-sm mb-4 flex-1">Waste management, recycling, and environmental damage.</p>
+            <div class="flex items-center gap-2 text-brand-600 font-semibold text-sm"><span>Learn Vocab</span><i class="fa-solid fa-arrow-right"></i></div>
+          </div>
+        </a>
+
+        <a href="poverty.html" class="lesson-card bg-white rounded-xl shadow-sm overflow-hidden border-2 border-transparent hover:border-brand-300 flex flex-col">
+          <div class="bg-gradient-to-r from-brand-500 to-brand-600 h-16 flex items-center justify-center text-white">
+            <i class="fa-solid fa-hand-holding-dollar text-3xl opacity-40"></i>
+          </div>
+          <div class="p-5 flex-1 flex flex-col">
+            <h3 class="font-bold text-lg text-gray-900 mb-1">Poverty</h3>
+            <p class="text-gray-500 text-sm mb-4 flex-1">Social issues, lack of resources, and welfare programs.</p>
+            <div class="flex items-center gap-2 text-brand-600 font-semibold text-sm"><span>Learn Vocab</span><i class="fa-solid fa-arrow-right"></i></div>
+          </div>
+        </a>
+
+        <a href="process%20%26%20map%20vocab.html" class="lesson-card bg-white rounded-xl shadow-sm overflow-hidden border-2 border-transparent hover:border-brand-300 flex flex-col">
+          <div class="bg-gradient-to-r from-brand-500 to-brand-600 h-16 flex items-center justify-center text-white">
+            <i class="fa-solid fa-map-location-dot text-3xl opacity-40"></i>
+          </div>
+          <div class="p-5 flex-1 flex flex-col">
+            <h3 class="font-bold text-lg text-gray-900 mb-1">Process & Map Vocab</h3>
+            <p class="text-gray-500 text-sm mb-4 flex-1">Essential phrases for describing task 1 charts and maps.</p>
+            <div class="flex items-center gap-2 text-brand-600 font-semibold text-sm"><span>Learn Vocab</span><i class="fa-solid fa-arrow-right"></i></div>
+          </div>
+        </a>
+
+        <a href="social%20media.html" class="lesson-card bg-white rounded-xl shadow-sm overflow-hidden border-2 border-transparent hover:border-brand-300 flex flex-col">
+          <div class="bg-gradient-to-r from-brand-500 to-brand-600 h-16 flex items-center justify-center text-white">
+            <i class="fa-solid fa-share-nodes text-3xl opacity-40"></i>
+          </div>
+          <div class="p-5 flex-1 flex flex-col">
+            <h3 class="font-bold text-lg text-gray-900 mb-1">Social Media</h3>
+            <p class="text-gray-500 text-sm mb-4 flex-1">Online communication, screen time, and digital connectivity.</p>
+            <div class="flex items-center gap-2 text-brand-600 font-semibold text-sm"><span>Learn Vocab</span><i class="fa-solid fa-arrow-right"></i></div>
+          </div>
+        </a>
+
+        <a href="work.html" class="lesson-card bg-white rounded-xl shadow-sm overflow-hidden border-2 border-transparent hover:border-brand-300 flex flex-col">
+          <div class="bg-gradient-to-r from-brand-500 to-brand-600 h-16 flex items-center justify-center text-white">
+            <i class="fa-solid fa-briefcase text-3xl opacity-40"></i>
+          </div>
+          <div class="p-5 flex-1 flex flex-col">
+            <h3 class="font-bold text-lg text-gray-900 mb-1">Work</h3>
+            <p class="text-gray-500 text-sm mb-4 flex-1">Careers, productivity, work-life balance, and remote work.</p>
+            <div class="flex items-center gap-2 text-brand-600 font-semibold text-sm"><span>Learn Vocab</span><i class="fa-solid fa-arrow-right"></i></div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="bg-gradient-to-r from-brand-600 to-brand-800 text-white py-16 sm:py-24">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-4xl sm:text-5xl font-bold mb-6">Ready to Ace Your IELTS?</h2>
+      <p class="text-xl text-brand-100 mb-8 max-w-2xl mx-auto">
+        Start building your advanced vocabulary repertoire today. Select a module above and start mastering complex terminology and essay collocations!
+      </p>
+      <a href="#topics" class="inline-flex items-center gap-2 bg-white text-brand-700 px-8 py-4 rounded-lg hover:bg-brand-50 transition-all font-bold text-lg shadow-lg hover:shadow-xl">
+        <i class="fa-solid fa-arrow-up"></i> Go To Topics
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-slate-900 text-slate-400 py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+        <div>
+          <div class="flex items-center gap-2 mb-4">
+            <div class="bg-brand-600 p-2 rounded-lg text-white">
+              <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+            <span class="font-bold text-white">IELTS Vocab Master</span>
+          </div>
+          <p class="text-sm">Your ultimate open-source guide to mastering vocabulary by topic for IELTS Writing and Speaking.</p>
+        </div>
+        <div>
+          <h4 class="font-bold text-white mb-4">Popular Topics</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="education.html" class="hover:text-brand-400 transition">Education</a></li>
+            <li><a href="work.html" class="hover:text-brand-400 transition">Work & Career</a></li>
+            <li><a href="social%20media.html" class="hover:text-brand-400 transition">Social Media</a></li>
+            <li><a href="crime.html" class="hover:text-brand-400 transition">Crime & Law</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-bold text-white mb-4">Environment</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="global%20warming.html" class="hover:text-brand-400 transition">Global Warming</a></li>
+            <li><a href="plastic%20pollution.html" class="hover:text-brand-400 transition">Plastic Pollution</a></li>
+            <li><a href="GMO.html" class="hover:text-brand-400 transition">GMO</a></li>
+            <li><a href="covid-19.html" class="hover:text-brand-400 transition">Covid-19</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-bold text-white mb-4">Connect</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#" class="hover:text-brand-400 transition flex items-center gap-2"><i class="fa-brands fa-github"></i> GitHub Repository</a></li>
+            <li class="text-slate-500">Free educational content</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="border-t border-slate-800 pt-8 text-center text-sm">
+        <p>&copy; 2026 IELTS Vocab Master. Designed for English learners worldwide.</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
