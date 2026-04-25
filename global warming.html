@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IELTS Vocab: Global Warming</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .animate-fade-in { animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        @keyframes fadeIn { 
+            from { opacity: 0; transform: translateY(10px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+        
+        /* Custom scrollbar for lists */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #6ee7b7; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #34d399; }
+
+        /* 3D Flip Card Styles */
+        .perspective-1000 { perspective: 1000px; }
+        .transform-style-3d { transform-style: preserve-3d; }
+        .backface-hidden { backface-visibility: hidden; }
+        .rotate-y-180 { transform: rotateY(180deg); }
+        
+        /* Highlight specific words in text */
+        .highlight-vocab {
+            background-color: #dcfce7;
+            color: #166534;
+            font-weight: 600;
+            padding: 0 4px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .highlight-vocab:hover {
+            background-color: #bbf7d0;
+        }
+        
+        /* Essay Plan Lines */
+        .tree-line {
+            border-left: 2px solid #fdba74;
+            position: relative;
+        }
+        .tree-line::before {
+            content: '';
+            position: absolute;
+            width: 1rem;
+            height: 2px;
+            background-color: #fdba74;
+            left: 0;
+            top: 1.5rem;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-emerald-50/40 text-gray-800 font-sans pb-12">
+
+    <!-- Header -->
+    <header class="bg-white border-b border-emerald-100 sticky top-0 z-10 shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
+                <div class="flex items-center gap-4">
+                    <div class="p-3 bg-emerald-600 text-white rounded-xl shadow-md shadow-emerald-200">
+                        <i data-lucide="globe-2" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl sm:text-3xl font-extrabold text-gray-900">IELTS Vocabulary</h1>
+                        <p class="text-sm text-emerald-600 font-medium mt-1">Topic: Global Warming & Environment</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tabs -->
+            <div class="flex overflow-x-auto mt-6 border-b border-gray-100 hide-scrollbar gap-2 sm:gap-6">
+                <button onclick="switchTab('vocab')" id="tab-btn-vocab" class="whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-emerald-700 border-b-2 border-emerald-700 transition-colors flex items-center gap-2">
+                    <i data-lucide="list" class="w-4 h-4"></i> Core Vocab & Synonyms
+                </button>
+                <button onclick="switchTab('writing')" id="tab-btn-writing" class="whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-gray-500 border-b-2 border-transparent hover:text-gray-800 transition-colors flex items-center gap-2">
+                    <i data-lucide="pen-tool" class="w-4 h-4"></i> Writing Task 2
+                </button>
+                <button onclick="switchTab('reading')" id="tab-btn-reading" class="whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-gray-500 border-b-2 border-transparent hover:text-gray-800 transition-colors flex items-center gap-2">
+                    <i data-lucide="book-open" class="w-4 h-4"></i> Reading Practice
+                </button>
+                <button onclick="switchTab('flashcards')" id="tab-btn-flashcards" class="whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-gray-500 border-b-2 border-transparent hover:text-gray-800 transition-colors flex items-center gap-2">
+                    <i data-lucide="layers" class="w-4 h-4"></i> Flashcards
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+        
+        <!-- Tab: Core Vocab & Synonyms -->
+        <section id="tab-vocab" class="animate-fade-in block">
+            <div class="flex flex-col lg:flex-row gap-6">
+                <!-- Vocab List -->
+                <div class="flex-1 space-y-6">
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-emerald-100">
+                        <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-6">
+                            <h2 class="text-xl font-bold text-gray-800 flex items-center gap-2">
+                                <i data-lucide="leaf" class="w-5 h-5 text-emerald-500"></i> Environmental Phrases
+                            </h2>
+                            <div class="relative w-full sm:w-64">
+                                <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                                <input type="text" onkeyup="filterList('vocab-list', this.value)" placeholder="Search vocabulary..." class="w-full pl-9 pr-4 py-2 bg-emerald-50/50 border border-emerald-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all">
+                            </div>
+                        </div>
+                        
+                        <ul id="vocab-list" class="space-y-3 max-h-[700px] overflow-y-auto pr-2">
+                            <!-- Populated by JS -->
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Synonyms Panel -->
+                <div class="lg:w-1/2 space-y-6">
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-amber-100">
+                        <h2 class="text-xl font-bold text-gray-800 flex items-center gap-2 mb-6">
+                            <i data-lucide="git-compare" class="w-5 h-5 text-amber-500"></i> IELTS Synonyms
+                        </h2>
+                        <div class="relative mb-4">
+                            <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                            <input type="text" onkeyup="filterList('synonym-list', this.value)" placeholder="Search synonyms..." class="w-full pl-9 pr-4 py-2 bg-amber-50/30 border border-amber-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all">
+                        </div>
+                        <ul id="synonym-list" class="space-y-3 max-h-[580px] overflow-y-auto pr-2">
+                            <!-- Populated by JS -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tab: Writing Task 2 -->
+        <section id="tab-writing" class="animate-fade-in hidden">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                
+                <!-- Essay Plan (Mind Map style) -->
+                <div class="bg-white rounded-3xl shadow-sm border border-emerald-100 overflow-hidden h-fit">
+                    <div class="bg-slate-800 p-6 text-center text-white">
+                        <h2 class="text-2xl font-bold tracking-wide mb-1">Essay Plan</h2>
+                        <p class="text-emerald-300 text-sm">Causes and Solutions</p>
+                    </div>
+                    <div class="p-6 bg-slate-50 space-y-8">
+                        
+                        <!-- Causes -->
+                        <div>
+                            <h3 class="text-lg font-bold text-rose-700 mb-4 flex items-center gap-2">
+                                <i data-lucide="flame" class="w-5 h-5"></i> Causes (Body 1)
+                            </h3>
+                            <div class="space-y-4 pl-2">
+                                <div class="tree-line pl-6">
+                                    <span class="font-bold text-gray-800 block mb-1">Rising levels of greenhouse gases</span>
+                                    <span class="text-sm text-gray-600 bg-white px-2 py-1 rounded border border-gray-200 shadow-sm inline-block">Encourage power stations</span>
+                                </div>
+                                <div class="tree-line pl-6">
+                                    <span class="font-bold text-gray-800 block mb-1">Deforestation</span>
+                                    <span class="text-sm text-gray-600 bg-white px-2 py-1 rounded border border-gray-200 shadow-sm inline-block">Cutting down trees (trees absorb CO2)</span>
+                                </div>
+                                <div class="mt-4 p-3 bg-rose-100 text-rose-800 rounded-lg text-sm font-medium border border-rose-200 text-center">
+                                    Result: Increasing concentration of CO2 → Trap heat → Global Warming
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Solutions -->
+                        <div>
+                            <h3 class="text-lg font-bold text-emerald-700 mb-4 flex items-center gap-2">
+                                <i data-lucide="shield-check" class="w-5 h-5"></i> Solutions (Body 2)
+                            </h3>
+                            <div class="space-y-4 pl-2">
+                                <div class="tree-line pl-6">
+                                    <span class="font-bold text-gray-800 block mb-1">Governments</span>
+                                    <div class="flex flex-col gap-2 mt-1">
+                                        <span class="text-sm text-gray-600 bg-white px-2 py-1 rounded border border-gray-200 shadow-sm">Use clean energy sources</span>
+                                        <span class="text-sm text-gray-600 bg-white px-2 py-1 rounded border border-gray-200 shadow-sm">Stricter punishments for illegal logging</span>
+                                    </div>
+                                </div>
+                                <div class="tree-line pl-6">
+                                    <span class="font-bold text-gray-800 block mb-1">Individuals</span>
+                                    <div class="flex flex-col gap-2 mt-1">
+                                        <span class="text-sm text-gray-600 bg-white px-2 py-1 rounded border border-gray-200 shadow-sm">Plant more trees in gardens</span>
+                                        <span class="text-sm text-gray-600 bg-white px-2 py-1 rounded border border-gray-200 shadow-sm">Take part in environmental protection campaigns</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Essay Text -->
+                <div class="bg-white p-6 sm:p-8 rounded-3xl shadow-sm border border-emerald-100">
+                    <div class="mb-6 border-b border-gray-200 pb-6">
+                        <h2 class="text-xl font-bold text-gray-800 mb-2">Prompt</h2>
+                        <p class="text-gray-600 italic text-sm">"Global warming is one of the most serious issues that the world is facing today. What are the causes of global warming and what measures can governments and individuals take to tackle the issue?"</p>
+                    </div>
+
+                    <div class="space-y-5 text-gray-700 leading-relaxed text-[15px]" id="essay-content">
+                        <p>One of the most <b>pressing environmental issues</b> which is <b>posing a serious threat to</b> the world is global warming. This essay will look at some <b>primary causes of this</b> and suggest several possible <b>solutions</b> to this problem.</p>
+                        
+                        <p>There are a number of reasons why the earth is getting warmer than ever before. The first reason is the levels of <b>greenhouse gases</b> released from power plants to the air are rising at alarming rates. This leads to an <b>increasing concentration of carbon dioxide</b> in our atmosphere, acting as a roof of a greenhouse, <b>trapping heat</b> and causing global warming. Another reason for rising global temperatures is <b>deforestation</b>. It is widely known that trees help <b>absorb carbon dioxide</b> in the air and thus reduce climate change. However, with large areas of forests being cut down for different purposes, carbon dioxide and other heat-trapping gases will continue to rise, <b>contributing to global warming</b>.</p>
+
+                        <p>There are various <b>measures that could be implemented to tackle the problem</b> of global warming. First, it is necessary for the government to encourage power stations and plants to use more <b>environmentally-friendly energy sources</b> such as nuclear or renewable energy instead of fossil fuels. Second, <b>stricter punishments should be imposed</b> for illegal logging and forest clearance to make sure that forests are properly managed and protected. As individuals, we can help <b>mitigate global warming</b> by planting more trees in our gardens or taking part in environmental protection programmes such as community planting. By taking these actions, this problem would be properly tackled.</p>
+
+                        <p>In conclusion, there are various factors leading to global warming and steps need to be taken to <b>address this serious issue</b>.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Tab: Reading Practice -->
+        <section id="tab-reading" class="animate-fade-in hidden">
+            <div class="bg-white p-6 sm:p-8 rounded-3xl shadow-sm border border-emerald-100 mb-8">
+                <div class="flex items-center gap-3 mb-6 pb-6 border-b border-emerald-100">
+                    <div class="bg-amber-100 text-amber-600 p-2 rounded-lg">
+                        <i data-lucide="book-open" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-800">Reading Comprehension</h2>
+                        <p class="text-gray-500 text-sm">National Geographic Snippet</p>
+                    </div>
+                </div>
+
+                <div class="flex flex-col md:flex-row gap-8">
+                    <!-- Article Text -->
+                    <div class="flex-1 space-y-6 text-gray-700 text-lg leading-relaxed font-serif">
+                        <p>
+                            <span class="highlight-vocab" title="sông băng">Glaciers</span> are melting, sea levels are rising, cloud forests are dying, and wildlife is scrambling <span class="highlight-vocab" title="theo kịp">to keep pace</span>. It has become clear that humans have caused most of the past century's warming by <span class="highlight-vocab" title="thải, xả ...">releasing</span> heat-trapping gases as we power our modern lives. Called greenhouse gases, their levels are higher now than at any time in the last 800,000 years.
+                        </p>
+                        <p>
+                            We often call the result global warming, but it is causing a set of changes to the Earth's climate, or long-term weather patterns, that varies from place to place. While many people think of global warming and climate change as <span class="highlight-vocab" title="từ đồng nghĩa">synonyms</span>, scientists use "climate change" when describing the <span class="highlight-vocab" title="phức tạp">complex</span> <span class="highlight-vocab" title="sự thay đổi">shifts</span> now affecting our planet's weather and climate systems - in part because some areas actually get cooler in the short term.
+                        </p>
+                        <p>
+                            Climate change <span class="highlight-vocab" title="bao gồm">encompasses</span> not only rising average temperatures but also <span class="highlight-vocab" title="các hiện tượng thời tiết khắc nghiệt">extreme weather events</span>, shifting wildlife populations and habitats, rising seas, and a range of other impacts. All of those changes are <span class="highlight-vocab" title="xuất hiện">emerging</span> as humans continue to add heat-trapping greenhouse gases to the atmosphere, changing the rhythms of climate that all living things have come <span class="highlight-vocab" title="phụ thuộc vào">to rely on</span>.
+                        </p>
+                    </div>
+
+                    <!-- Article Vocab Notes -->
+                    <div class="md:w-1/3 bg-emerald-50/50 p-6 rounded-2xl border border-emerald-200 h-fit sticky top-24">
+                        <h3 class="font-bold text-emerald-800 mb-4 flex items-center gap-2">
+                            <i data-lucide="notebook-pen" class="w-5 h-5"></i> Reading Notes
+                        </h3>
+                        <div id="reading-vocab-list" class="space-y-4">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Tab: Flashcards -->
+        <section id="tab-flashcards" class="animate-fade-in hidden">
+            <div class="max-w-3xl mx-auto text-center space-y-6">
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-emerald-100">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-2">Study Mode</h2>
+                    <p class="text-gray-500 mb-8">Click the card to flip it and reveal the meaning.</p>
+                    
+                    <!-- Flashcard Container -->
+                    <div id="flashcard-container" class="relative w-full h-64 cursor-pointer group perspective-1000 mx-auto" onclick="flipCard()">
+                        <div id="flashcard-inner" class="w-full h-full transition-all duration-500 transform-style-3d">
+                            
+                            <!-- Front -->
+                            <div class="absolute inset-0 backface-hidden bg-gradient-to-br from-emerald-600 to-teal-700 text-white border-2 border-emerald-400 rounded-2xl shadow-lg flex flex-col items-center justify-center p-6 text-center">
+                                <i data-lucide="refresh-cw" class="w-6 h-6 absolute top-4 right-4 text-white/50 opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                                <h3 id="card-front-text" class="text-2xl md:text-3xl font-bold px-4"></h3>
+                                <p class="text-emerald-200 mt-6 text-sm uppercase tracking-widest font-semibold">Tap to reveal</p>
+                            </div>
+
+                            <!-- Back -->
+                            <div class="absolute inset-0 backface-hidden rotate-y-180 bg-white text-gray-800 border-2 border-emerald-200 rounded-2xl shadow-lg flex flex-col items-center justify-center p-6 text-center">
+                                <p id="card-back-en" class="text-base text-gray-500 font-medium italic mb-3 px-4"></p>
+                                <p id="card-back-vi" class="text-xl font-bold text-emerald-700 px-4"></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Controls -->
+                    <div class="flex justify-center items-center gap-6 mt-8">
+                        <button onclick="prevCard()" class="p-3 rounded-full bg-gray-100 text-gray-600 hover:bg-emerald-100 hover:text-emerald-700 transition-colors">
+                            <i data-lucide="chevron-left" class="w-6 h-6"></i>
+                        </button>
+                        <span id="card-counter" class="font-bold text-gray-500 text-lg min-w-[4rem]">1 / 10</span>
+                        <button onclick="nextCard()" class="p-3 rounded-full bg-gray-100 text-gray-600 hover:bg-emerald-100 hover:text-emerald-700 transition-colors">
+                            <i data-lucide="chevron-right" class="w-6 h-6"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Data & Logic -->
+    <script>
+        // --- DATA ---
+        
+        // Tab 1: Core Vocab
+        const generalVocabData = [
+            { en: "to reduce carbon emissions", vi: "giảm lượng khí thải carbon" },
+            { en: "to be one of the biggest threats to our planet", vi: "một trong những mối đe dọa lớn nhất đối với hành tinh của chúng ta" },
+            { en: "to limit global warming", vi: "hạn chế sự nóng lên toàn cầu" },
+            { en: "extreme weather events", vi: "các hiện tượng thời tiết khắc nghiệt" },
+            { en: "to become more intense", vi: "trở nên dữ dội hơn" },
+            { en: "to make a significant contribution to ...", vi: "đóng góp đáng kể vào..." },
+            { en: "to fuel the climate crisis", vi: "thúc đẩy cuộc khủng hoảng khí hậu" },
+            { en: "to push precious wildlife closer to the brink of extinction", vi: "đẩy động vật hoang dã quý giá đến gần bờ vực tuyệt chủng" },
+            { en: "to pledge urgent action", vi: "cam kết hành động khẩn cấp" },
+            { en: "to shift to more sustainable ways of farming", vi: "chuyển sang các phương pháp canh tác bền vững hơn" },
+            { en: "to protect against investment in fossil fuels", vi: "bảo vệ chống lại sự đầu tư vào nhiên liệu hóa thạch" },
+            { en: "to reduce your environmental impact", vi: "giảm tác động môi trường của bạn" },
+            { en: "to switch from a regular petrol vehicle to an electric car", vi: "chuyển từ xe chạy xăng thông thường sang xe điện" },
+            { en: "to trap heat in the atmosphere and warm the planet", vi: "giữ nhiệt trong khí quyển và làm hành tinh của chúng ta ấm lên" },
+            { en: "to absorb CO2 from the atmosphere", vi: "hấp thụ CO2 từ khí quyển" },
+            { en: "to call for urgent action on climate change", vi: "kêu gọi hành động khẩn cấp về biến đổi khí hậu" },
+            { en: "to fight for the health of our planet", vi: "chiến đấu cho sức khỏe của hành tinh của chúng ta" },
+            { en: "the greenhouse gas effect", vi: "hiệu ứng nhà kính" },
+            { en: "to pose a serious threat to life on earth", vi: "đe dọa nghiêm trọng đến sự sống trên trái đất" }
+        ];
+
+        // Tab 1: Synonyms
+        const synonymsData = [
+            { en: "global warming", syn: "increasing global temperatures", vi: "nóng lên toàn cầu" },
+            { en: "cause severe damage to...", syn: "pose a serious threat to...", vi: "gây hậu quả nặng nề cho / đe dọa nghiêm trọng đến..." },
+            { en: "extreme weather events", syn: "natural disasters (blizzards, droughts, tsunamis)", vi: "thời tiết khắc nghiệt / thảm họa tự nhiên" },
+            { en: "environmental damage", syn: "environmental degradation / deterioration", vi: "suy thoái môi trường" },
+            { en: "carbon emissions", syn: "heat-trapping gases / greenhouse gases / toxic gases", vi: "khí thải carbon / khí thải nhà kính" },
+            { en: "fossil fuels", syn: "petrol, oil and natural gas / non-renewable energy sources", vi: "nhiên liệu hóa thạch / nguồn năng lượng không tái tạo" },
+            { en: "renewable energy sources", syn: "environmentally-friendly energy sources", vi: "nguồn năng lượng tái tạo / thân thiện với môi trường" },
+            { en: "deforestation", syn: "forest clearance / cutting down trees illegally", vi: "việc tàn phá rừng / chặt cây bất hợp pháp" },
+            { en: "threatened and endangered animals", syn: "animal species which are on the verge of extinction", vi: "loài động vật có nguy cơ tuyệt chủng cao" },
+            { en: "to be important", syn: "play an important role", vi: "đóng vai trò quan trọng" },
+            { en: "air pollution", syn: "poor air quality", vi: "ô nhiễm không khí / chất lượng không khí kém" },
+            { en: "a huge amount of waste", syn: "millions of tonnes of waste", vi: "lượng chất thải khổng lồ" },
+            { en: "cause...", syn: "lead to... / result in...", vi: "gây ra vấn đề gì" },
+            { en: "to be responsible for...", syn: "take the responsibility for...", vi: "chịu trách nhiệm về vấn đề gì" },
+            { en: "save the earth", syn: "protect our planet / protect the environment", vi: "bảo vệ trái đất / bảo vệ môi trường" },
+            { en: "solve", syn: "tackle / address / mitigate", vi: "giải quyết vấn đề gì" },
+            { en: "impose stricter punishments on...", syn: "impose more stringent regulations on", vi: "áp đặt hình phạt / quy định chặt chẽ hơn" }
+        ];
+
+        // Tab 3: Reading Vocab
+        const readingVocabData = [
+            { en: "glacier", type: "(n)", phonetic: "/ˈɡleɪʃər/", def: "a slow-moving mass or river of ice: sông băng" },
+            { en: "to keep pace", type: "", phonetic: "", def: "to move, increase, change at the same speed: theo kịp" },
+            { en: "to release something", type: "(v)", phonetic: "/rɪˈliːs/", def: "to allow a substance to flow out from somewhere: thải, xả ..." },
+            { en: "synonym", type: "(n)", phonetic: "/ˈsɪnənɪm/", def: "a word that has the same or nearly the same meaning: từ đồng nghĩa" },
+            { en: "complex", type: "(adj)", phonetic: "/ˈkɑːmpleks/", def: "made of many different things or parts that are connected: phức tạp" },
+            { en: "shift", type: "(n)", phonetic: "/ʃɪft/", def: "change: sự thay đổi" },
+            { en: "encompass", type: "(v)", phonetic: "/ɪnˈkʌmpəs/", def: "include: bao gồm" },
+            { en: "extreme weather events", type: "", phonetic: "", def: "unexpected, unusual, severe, or unseasonal weather: các hiện tượng thời tiết khắc nghiệt" },
+            { en: "to emerge", type: "(v)", phonetic: "/ɪˈmɜːrdʒ/", def: "appear: xuất hiện" },
+            { en: "to rely on ...", type: "", phonetic: "", def: "to need or depend on: phụ thuộc vào" }
+        ];
+
+        let flashcardDeck = [];
+        let currentCardIndex = 0;
+        let isCardFlipped = false;
+
+        // --- RENDERING FUNCTIONS ---
+
+        function renderVocabList() {
+            const container = document.getElementById('vocab-list');
+            container.innerHTML = generalVocabData.map(item => `
+                <li class="p-4 bg-gray-50 hover:bg-emerald-50 border border-gray-100 hover:border-emerald-200 rounded-xl transition-all duration-200 group list-item-vocab">
+                    <div class="font-bold text-[16px] text-gray-800 group-hover:text-emerald-700 term leading-snug">${item.en}</div>
+                    <div class="text-[14px] font-medium text-gray-600 mt-2 translation">${item.vi}</div>
+                </li>
+            `).join('');
+        }
+
+        function renderSynonymsList() {
+            const container = document.getElementById('synonym-list');
+            container.innerHTML = synonymsData.map(item => `
+                <li class="p-4 bg-white border border-gray-100 hover:border-amber-300 rounded-xl shadow-sm transition-all duration-200 group list-item-vocab">
+                    <div class="font-bold text-[15px] text-gray-800 group-hover:text-amber-700 term">${item.en}</div>
+                    <div class="flex items-center gap-2 my-2 text-amber-500">
+                        <i data-lucide="arrow-right-left" class="w-4 h-4"></i>
+                        <span class="font-semibold text-gray-700">${item.syn}</span>
+                    </div>
+                    <div class="text-[13px] text-gray-500 italic translation">${item.vi}</div>
+                </li>
+            `).join('');
+        }
+
+        function renderReadingVocab() {
+            const container = document.getElementById('reading-vocab-list');
+            container.innerHTML = readingVocabData.map(item => `
+                <div class="bg-white p-3 rounded-lg border border-emerald-100 shadow-sm">
+                    <div class="font-bold text-emerald-800 text-sm mb-1 flex flex-wrap items-baseline gap-1">
+                        <span>${item.en}</span>
+                        ${item.type ? `<span class="text-xs text-gray-400 font-normal">${item.type}</span>` : ''}
+                        ${item.phonetic ? `<span class="text-xs text-emerald-600/70 font-normal ml-1">${item.phonetic}</span>` : ''}
+                    </div>
+                    <div class="text-[13px] text-gray-600 leading-relaxed">${item.def}</div>
+                </div>
+            `).join('');
+        }
+
+
+        // --- FLASHCARD LOGIC ---
+        
+        function initFlashcards() {
+            // Combine vocab for flashcards
+            flashcardDeck = [
+                ...generalVocabData.map(i => ({ front: i.en, backEn: "", backVi: i.vi })),
+                ...synonymsData.map(i => ({ front: i.en, backEn: `Synonym: ${i.syn}`, backVi: i.vi })),
+                ...readingVocabData.map(i => ({ front: i.en, backEn: i.def, backVi: "" }))
+            ];
+            // Shuffle
+            flashcardDeck.sort(() => Math.random() - 0.5);
+            currentCardIndex = 0;
+            updateFlashcardView();
+        }
+
+        function updateFlashcardView() {
+            const card = flashcardDeck[currentCardIndex];
+            document.getElementById('card-front-text').innerText = card.front;
+            document.getElementById('card-back-en').innerText = card.backEn;
+            document.getElementById('card-back-vi').innerText = card.backVi;
+            
+            if(!card.backEn) {
+                document.getElementById('card-back-en').classList.add('hidden');
+            } else {
+                document.getElementById('card-back-en').classList.remove('hidden');
+            }
+
+            if(!card.backVi) {
+                document.getElementById('card-back-vi').classList.add('hidden');
+            } else {
+                document.getElementById('card-back-vi').classList.remove('hidden');
+            }
+
+            document.getElementById('card-counter').innerText = `${currentCardIndex + 1} / ${flashcardDeck.length}`;
+            
+            if (isCardFlipped) {
+                document.getElementById('flashcard-inner').classList.remove('rotate-y-180');
+                isCardFlipped = false;
+            }
+        }
+
+        function flipCard() {
+            document.getElementById('flashcard-inner').classList.toggle('rotate-y-180');
+            isCardFlipped = !isCardFlipped;
+        }
+
+        function nextCard() {
+            if (currentCardIndex < flashcardDeck.length - 1) {
+                currentCardIndex++;
+                updateFlashcardView();
+            }
+        }
+
+        function prevCard() {
+            if (currentCardIndex > 0) {
+                currentCardIndex--;
+                updateFlashcardView();
+            }
+        }
+
+        // --- INTERACTIVITY LOGIC ---
+
+        function switchTab(tabId) {
+            // Hide all tabs
+            const tabs = ['vocab', 'writing', 'reading', 'flashcards'];
+            tabs.forEach(id => {
+                document.getElementById(`tab-${id}`).classList.add('hidden');
+                document.getElementById(`tab-${id}`).classList.remove('block');
+                
+                // Reset tab button styles
+                const btn = document.getElementById(`tab-btn-${id}`);
+                btn.className = "whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-gray-500 border-b-2 border-transparent hover:text-gray-800 transition-colors flex items-center gap-2";
+            });
+
+            // Show active tab
+            document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+            document.getElementById(`tab-${tabId}`).classList.add('block');
+            
+            // Set active tab button style
+            const activeBtn = document.getElementById(`tab-btn-${tabId}`);
+            activeBtn.className = "whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-emerald-700 border-b-2 border-emerald-700 transition-colors flex items-center gap-2";
+        }
+
+        function filterList(listId, query) {
+            const list = document.getElementById(listId);
+            const items = list.getElementsByClassName('list-item-vocab');
+            const lowerQuery = query.toLowerCase();
+
+            for (let i = 0; i < items.length; i++) {
+                if (items[i].parentElement.id !== listId) continue;
+
+                const text = items[i].innerText.toLowerCase();
+                if (text.includes(lowerQuery)) {
+                    items[i].style.display = "";
+                } else {
+                    items[i].style.display = "none";
+                }
+            }
+        }
+
+        // --- INITIALIZATION ---
+        document.addEventListener('DOMContentLoaded', () => {
+            renderVocabList();
+            renderSynonymsList();
+            renderReadingVocab();
+            initFlashcards();
+            
+            // Initialize Lucide icons
+            lucide.createIcons();
+        });
+    </script>
+</body>
+</html>

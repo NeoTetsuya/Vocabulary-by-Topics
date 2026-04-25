@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IELTS Vocab: Friendship</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .animate-fade-in { animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        @keyframes fadeIn { 
+            from { opacity: 0; transform: translateY(10px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+        
+        /* Custom scrollbar for lists */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #fbcfe8; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #f472b6; }
+
+        /* 3D Flip Card Styles */
+        .perspective-1000 { perspective: 1000px; }
+        .transform-style-3d { transform-style: preserve-3d; }
+        .backface-hidden { backface-visibility: hidden; }
+        .rotate-y-180 { transform: rotateY(180deg); }
+    </style>
+</head>
+<body class="min-h-screen bg-rose-50/40 text-gray-800 font-sans pb-12">
+
+    <!-- Header -->
+    <header class="bg-white border-b border-rose-100 sticky top-0 z-10 shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
+                <div class="flex items-center gap-4">
+                    <div class="p-3 bg-rose-500 text-white rounded-xl shadow-md shadow-rose-200">
+                        <i data-lucide="heart-handshake" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl sm:text-3xl font-extrabold text-gray-900">IELTS Vocabulary</h1>
+                        <p class="text-sm text-rose-600 font-medium mt-1">Topic: Friendship & Relationships</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tabs -->
+            <div class="flex overflow-x-auto mt-6 border-b border-gray-100 hide-scrollbar gap-2 sm:gap-6">
+                <button onclick="switchTab('vocab')" id="tab-btn-vocab" class="whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-rose-600 border-b-2 border-rose-600 transition-colors flex items-center gap-2">
+                    <i data-lucide="list" class="w-4 h-4"></i> Core Vocab & Article
+                </button>
+                <button onclick="switchTab('idioms')" id="tab-btn-idioms" class="whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-gray-500 border-b-2 border-transparent hover:text-gray-800 transition-colors flex items-center gap-2">
+                    <i data-lucide="message-circle" class="w-4 h-4"></i> Idioms & Phrases
+                </button>
+                <button onclick="switchTab('speaking')" id="tab-btn-speaking" class="whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-gray-500 border-b-2 border-transparent hover:text-gray-800 transition-colors flex items-center gap-2">
+                    <i data-lucide="mic" class="w-4 h-4"></i> Speaking Sample
+                </button>
+                <button onclick="switchTab('flashcards')" id="tab-btn-flashcards" class="whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-gray-500 border-b-2 border-transparent hover:text-gray-800 transition-colors flex items-center gap-2">
+                    <i data-lucide="layers" class="w-4 h-4"></i> Practice Flashcards
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+        
+        <!-- Tab: Core Vocab & Article -->
+        <section id="tab-vocab" class="animate-fade-in block">
+            <div class="flex flex-col lg:flex-row gap-6">
+                <!-- Vocab List -->
+                <div class="flex-1 space-y-6">
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-rose-100">
+                        <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-6">
+                            <h2 class="text-xl font-bold text-gray-800 flex items-center gap-2">
+                                <i data-lucide="users" class="w-5 h-5 text-rose-500"></i> Actions & Qualities
+                            </h2>
+                            <div class="relative w-full sm:w-64">
+                                <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                                <input type="text" onkeyup="filterList('vocab-list', this.value)" placeholder="Search vocabulary..." class="w-full pl-9 pr-4 py-2 bg-rose-50/50 border border-rose-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-rose-500 transition-all">
+                            </div>
+                        </div>
+                        
+                        <ul id="vocab-list" class="space-y-3 max-h-[600px] overflow-y-auto pr-2">
+                            <!-- Populated by JS -->
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Article Panel -->
+                <div class="lg:w-1/3 bg-gradient-to-b from-pink-50 to-rose-50 p-6 rounded-2xl border border-pink-100 h-fit lg:sticky lg:top-48 shadow-inner">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="bg-pink-200 p-2 rounded-lg text-pink-700"><i data-lucide="book-open" class="w-5 h-5"></i></div>
+                        <h2 class="text-xl font-bold text-rose-900">What is a true friend?</h2>
+                    </div>
+                    <p class="text-sm text-gray-600 italic mb-4">Finding someone you really click with can be quite a challenge. A true friend...</p>
+                    <div id="article-list" class="space-y-4">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tab: Idioms -->
+        <section id="tab-idioms" class="animate-fade-in hidden">
+            <div class="bg-white p-6 sm:p-8 rounded-3xl shadow-sm border border-rose-100 mb-8">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-800">Phrasal Verbs & Idioms</h2>
+                        <p class="text-gray-500 mt-1">Colloquial expressions used when talking about relationships.</p>
+                    </div>
+                    <div class="relative w-full sm:w-64">
+                        <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                        <input type="text" onkeyup="filterIdioms(this.value)" placeholder="Search idioms..." class="w-full pl-9 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-rose-500 transition-all">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" id="idioms-grid">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Tab: Speaking Sample -->
+        <section id="tab-speaking" class="animate-fade-in hidden">
+            <div class="bg-white p-6 sm:p-8 rounded-3xl shadow-sm border border-rose-100 max-w-5xl mx-auto mb-8">
+                
+                <div class="flex items-center gap-4 mb-8 border-b border-rose-100 pb-6">
+                    <div class="bg-rose-100 text-rose-600 p-3 rounded-xl">
+                        <i data-lucide="mic" class="w-8 h-8"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-800">IELTS Speaking Part 2</h2>
+                        <p class="text-gray-500 mt-1 font-medium">Describe one of your best friends.</p>
+                    </div>
+                </div>
+
+                <!-- Dual Language Script -->
+                <div class="space-y-4" id="speaking-script">
+                    <!-- Populated by JS -->
+                </div>
+
+            </div>
+        </section>
+        
+        <!-- Tab: Flashcards -->
+        <section id="tab-flashcards" class="animate-fade-in hidden">
+            <div class="max-w-3xl mx-auto text-center space-y-6">
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-rose-100">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-2">Study Mode</h2>
+                    <p class="text-gray-500 mb-8">Click the card to flip it and reveal the meaning.</p>
+                    
+                    <!-- Flashcard Container -->
+                    <div id="flashcard-container" class="relative w-full h-64 cursor-pointer group perspective-1000 mx-auto" onclick="flipCard()">
+                        <div id="flashcard-inner" class="w-full h-full transition-all duration-500 transform-style-3d">
+                            
+                            <!-- Front -->
+                            <div class="absolute inset-0 backface-hidden bg-gradient-to-br from-rose-500 to-pink-600 text-white border-2 border-rose-400 rounded-2xl shadow-lg flex flex-col items-center justify-center p-6 text-center">
+                                <i data-lucide="refresh-cw" class="w-6 h-6 absolute top-4 right-4 text-white/50 opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                                <h3 id="card-front-text" class="text-2xl md:text-3xl font-bold px-4"></h3>
+                                <p class="text-rose-100 mt-6 text-sm uppercase tracking-widest font-semibold">Tap to reveal</p>
+                            </div>
+
+                            <!-- Back -->
+                            <div class="absolute inset-0 backface-hidden rotate-y-180 bg-white text-gray-800 border-2 border-rose-200 rounded-2xl shadow-lg flex flex-col items-center justify-center p-6 text-center">
+                                <p id="card-back-en" class="text-base text-gray-500 font-medium italic mb-3 px-4"></p>
+                                <p id="card-back-vi" class="text-xl font-bold text-rose-700 px-4"></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Controls -->
+                    <div class="flex justify-center items-center gap-6 mt-8">
+                        <button onclick="prevCard()" class="p-3 rounded-full bg-gray-100 text-gray-600 hover:bg-rose-100 hover:text-rose-700 transition-colors">
+                            <i data-lucide="chevron-left" class="w-6 h-6"></i>
+                        </button>
+                        <span id="card-counter" class="font-bold text-gray-500 text-lg min-w-[4rem]">1 / 10</span>
+                        <button onclick="nextCard()" class="p-3 rounded-full bg-gray-100 text-gray-600 hover:bg-rose-100 hover:text-rose-700 transition-colors">
+                            <i data-lucide="chevron-right" class="w-6 h-6"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Data & Logic -->
+    <script>
+        // --- DATA ---
+        
+        // Tab 1: Core Vocab
+        const generalVocabData = [
+            { en: "to stay even when everyone else has left", vi: "ở lại ngay cả khi những người khác đã rời bỏ bạn" },
+            { en: "to never let you feel that you're alone", vi: "không bao giờ để bạn cảm thấy rằng bạn cô đơn" },
+            { en: "never talk behind your back", vi: "không bao giờ nói xấu sau lưng bạn" },
+            { en: "to show up for friends when they promise they will", vi: "có mặt để giúp bạn khi họ hứa họ sẽ tới" },
+            { en: "to be there for you in any situation", vi: "bên bạn trong bất kỳ hoàn cảnh nào" },
+            { en: "to speak openly from the heart", vi: "những gì họ nói ra xuất phát từ chính trái tim họ" },
+            { en: "to keep their promises", vi: "giữ lời hứa" },
+            { en: "to believe in your potential to reach your dreams", vi: "tin tưởng vào tiềm năng đạt được ước mơ của bạn" },
+            { en: "to understand who you are and what you need", vi: "thực sự hiểu bạn và biết bạn cần gì" },
+            { en: "to be with you through thick and thin", vi: "bên bạn trong bất kỳ hoàn cảnh nào (trong lúc thăng trầm)" },
+            { en: "to get your back no matter what situation you're about to walk into", vi: "hỗ trợ bạn trong bất kỳ hoàn cảnh nào" },
+            { en: "to make friends", vi: "kết bạn" },
+            { en: "to find people with similar interests", vi: "tìm thấy những người có sở thích giống bạn" },
+            { en: "to give others a hand", vi: "giúp đỡ người khác" },
+            { en: "to stand by you", vi: "ở bên cạnh bạn" }
+        ];
+
+        const articleData = [
+            { title: "1. Makes you feel good", desc: "You should feel good hanging out with them. If they put you down or make you feel bad on a regular basis, something is missing." },
+            { title: "2. Accepts you for who you are", desc: "You don't have to pretend to fit in. They don't try to change you. You can put down your mask, relax, and be yourself." },
+            { title: "3. Is honest and trustworthy", desc: "Honesty is important. You can trust them to tell the truth and keep promises. Lying is a sign they're not trustworthy." }
+        ];
+
+        // Tab 2: Idioms & Phrasal Verbs
+        const idiomsData = [
+            { idiom: "to click with somebody", engDef: "to quickly become friends with", viDef: "nhanh chóng trở thành bạn với ai đó" },
+            { idiom: "to have someone's best interests at heart", engDef: "to be concerned about someone and want to help them", viDef: "quan tâm tới ai đó, sẵn sàng giúp đỡ họ" },
+            { idiom: "to hang out", engDef: "to spend a lot of time in a place or with someone", viDef: "đi chơi (với ai đó)" },
+            { idiom: "to put somebody down", engDef: "to make someone feel stupid or unimportant by criticizing them", viDef: "chỉ trích ai đó, làm họ thấy xấu hổ" },
+            { idiom: "to make somebody feel bad", engDef: "to make somebody feel ashamed and sorry", viDef: "khiến ai đó cảm thấy tồi tệ, tội lỗi" },
+            { idiom: "to pretend", engDef: "to behave as if something is true when you know that it is not", viDef: "giả vờ" },
+            { idiom: "to fit in", engDef: "to feel that you belong to a particular group and are accepted", viDef: "hòa nhập" },
+            { idiom: "to be yourself", engDef: "say what you think, express what you feel, and talk about what interests you", viDef: "là chính mình" },
+            { idiom: "to keep a promise", engDef: "to fulfill or be faithful to a promise one has made", viDef: "giữ lời hứa" },
+            { idiom: "to lie to someone", engDef: "to say or write something that is not true in order to deceive someone", viDef: "nói dối ai đó" }
+        ];
+
+        // Tab 3: Speaking Script
+        const speakingData = [
+            { en: "I'm going to talk about Hazel, who is one of my closest friends ever.", vi: "Tôi sẽ nói về Hazel, một trong những người bạn thân nhất của tôi từ trước đến giờ." },
+            { en: "Actually, Hazel is her English name; her Vietnamese name is Ly. But I'll use Hazel because I know she likes that.", vi: "Thật ra, Hazel là tên tiếng Anh của cô ấy; tên tiếng Việt của cô là Lý. Nhưng tôi sẽ gọi Hazel vì tôi biết cô ấy thích điều đó." },
+            { en: "She's one year younger than me. We used to live next door, but now we live in the same flat.", vi: "Cô ấy nhỏ hơn tôi một tuổi. Chúng tôi đã từng là hàng xóm, nhưng bây giờ chúng tôi sống trong cùng một căn hộ." },
+            { en: "I want to talk about Hazel for several reasons.", vi: "Tôi muốn nói về Hazel vì một vài lý do." },
+            { en: "First, she's very kind. She's willing to give others a hand, and she always stands by me whenever I need help.", vi: "Đầu tiên, cô ấy rất tốt bụng. Cô ấy sẵn sàng giúp đỡ người khác và cô ấy luôn sát cánh bên tôi mỗi khi tôi cần giúp đỡ." },
+            { en: "Last year, I had a high fever and had to be hospitalised for a week. She took a week off to take care of me.", vi: "Năm ngoái, tôi bị sốt cao và phải nhập viện một tuần. Cô ấy nghỉ một tuần để chăm sóc tôi." },
+            { en: "Second, she's a patient person. Unlike me who can get angry very easily, Hazel's able to stay calm in almost every situation.", vi: "Thứ hai, cô ấy là một người kiên nhẫn. Khác với tôi, người có thể nổi giận rất dễ dàng, Hazel có thể giữ bình tĩnh trong hầu hết mọi tình huống." },
+            { en: "In terms of being patient, I am learning a lot from her.", vi: "Về mặt kiên nhẫn, tôi đang học hỏi được nhiều điều từ cô ấy." },
+            { en: "I remember last week, both of us had to wait for another friend for nearly two hours because he got up late and got stuck in traffic.", vi: "Tôi nhớ tuần trước, cả hai chúng tôi phải đợi một người bạn khác gần hai tiếng đồng hồ vì anh ấy dậy muộn và bị kẹt xe." },
+            { en: "During those two hours, I kind of lost my temper and constantly complained. I was pacing back and forth, while Hazel was just sitting there reading a book.", vi: "Trong hai giờ đó, tôi mất bình tĩnh và liên tục phàn nàn. Tôi đi đi lại lại, trong khi Hazel chỉ ngồi đó đọc sách." },
+            { en: "At first, I was really angry and wondered why she was so relaxed in that situation, but afterwards, she said to me: 'You need to learn how to enjoy every minute of your life'.", vi: "Lúc đầu, tôi thực sự bực tức và tự hỏi tại sao cô ấy rất thoải mái trong tình huống đó, nhưng sau đó, cô ấy nói với tôi: 'Cậu cần học cách tận hưởng từng giây phút trong cuộc sống của bạn'." },
+            { en: "Then, I realised that I was wasting my time doing pointless things, and from that moment, I knew that I needed to learn to control my temper so that I could enjoy little things in life.", vi: "Sau đó, tôi nhận ra rằng tôi đang lãng phí thời gian làm những việc vô nghĩa, và từ lúc đó, tôi biết rằng tôi cần phải học cách kiềm chế sự nóng nảy của mình để có thể tận hưởng những điều nhỏ nhặt trong cuộc sống." },
+            { en: "I'm so lucky to have a friend like her. So, if I had to talk about one of my best friends, it would have to be Hazel.", vi: "Tôi rất may mắn khi có một người bạn như cô ấy. Vậy nên, nếu tôi phải nói về một trong những người bạn thân nhất của tôi, thì đó phải là Hazel." }
+        ];
+
+        let flashcardDeck = [];
+        let currentCardIndex = 0;
+        let isCardFlipped = false;
+
+        // --- RENDERING FUNCTIONS ---
+
+        function renderVocabList() {
+            const container = document.getElementById('vocab-list');
+            container.innerHTML = generalVocabData.map(item => `
+                <li class="p-4 bg-gray-50 hover:bg-rose-50 border border-gray-100 hover:border-rose-200 rounded-xl transition-all duration-200 group list-item-vocab">
+                    <div class="font-bold text-[16px] text-gray-800 group-hover:text-rose-700 term leading-snug">${item.en}</div>
+                    <div class="text-[14px] font-medium text-gray-600 mt-2 translation">${item.vi}</div>
+                </li>
+            `).join('');
+        }
+
+        function renderArticle() {
+            const container = document.getElementById('article-list');
+            container.innerHTML = articleData.map(item => `
+                <div class="bg-white p-4 rounded-xl border border-rose-100 shadow-sm">
+                    <h3 class="font-bold text-rose-800 text-[15px] mb-1">${item.title}</h3>
+                    <p class="text-sm text-gray-600 leading-relaxed">${item.desc}</p>
+                </div>
+            `).join('');
+        }
+
+        function renderIdiomsGrid() {
+            const container = document.getElementById('idioms-grid');
+            container.innerHTML = idiomsData.map(item => `
+                <div class="idiom-card bg-white p-5 rounded-xl border border-gray-200 hover:border-rose-300 shadow-sm hover:shadow transition-all group flex flex-col h-full">
+                    <h3 class="text-lg font-bold text-gray-800 mb-2 group-hover:text-rose-600 idiom-title">${item.idiom}</h3>
+                    <p class="text-sm text-gray-500 italic mb-4 idiom-eng">${item.engDef}</p>
+                    <div class="mt-auto pt-3 border-t border-gray-100">
+                        <p class="font-semibold text-rose-700 idiom-vi">${item.viDef}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderSpeakingScript() {
+            const container = document.getElementById('speaking-script');
+            container.innerHTML = speakingData.map(item => `
+                <div class="flex flex-col md:flex-row gap-2 md:gap-6 p-4 bg-gray-50 hover:bg-rose-50 rounded-xl border border-gray-100 hover:border-rose-200 transition-colors">
+                    <div class="flex-1 text-gray-800 font-medium text-[16px] leading-relaxed">${item.en}</div>
+                    <div class="flex-1 text-rose-700 text-[15px] leading-relaxed border-t md:border-t-0 md:border-l border-rose-200/60 pt-3 md:pt-0 md:pl-6 italic">
+                        ${item.vi}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // --- FLASHCARD LOGIC ---
+        
+        function initFlashcards() {
+            // Combine vocab for flashcards
+            flashcardDeck = [
+                ...generalVocabData.map(i => ({ front: i.en, backEn: "", backVi: i.vi })),
+                ...idiomsData.map(i => ({ front: i.idiom, backEn: i.engDef, backVi: i.viDef }))
+            ];
+            // Shuffle
+            flashcardDeck.sort(() => Math.random() - 0.5);
+            currentCardIndex = 0;
+            updateFlashcardView();
+        }
+
+        function updateFlashcardView() {
+            const card = flashcardDeck[currentCardIndex];
+            document.getElementById('card-front-text').innerText = card.front;
+            document.getElementById('card-back-en').innerText = card.backEn;
+            document.getElementById('card-back-vi').innerText = card.backVi;
+            
+            if(!card.backEn) {
+                document.getElementById('card-back-en').classList.add('hidden');
+            } else {
+                document.getElementById('card-back-en').classList.remove('hidden');
+            }
+
+            document.getElementById('card-counter').innerText = `${currentCardIndex + 1} / ${flashcardDeck.length}`;
+            
+            if (isCardFlipped) {
+                document.getElementById('flashcard-inner').classList.remove('rotate-y-180');
+                isCardFlipped = false;
+            }
+        }
+
+        function flipCard() {
+            document.getElementById('flashcard-inner').classList.toggle('rotate-y-180');
+            isCardFlipped = !isCardFlipped;
+        }
+
+        function nextCard() {
+            if (currentCardIndex < flashcardDeck.length - 1) {
+                currentCardIndex++;
+                updateFlashcardView();
+            }
+        }
+
+        function prevCard() {
+            if (currentCardIndex > 0) {
+                currentCardIndex--;
+                updateFlashcardView();
+            }
+        }
+
+        // --- INTERACTIVITY LOGIC ---
+
+        function switchTab(tabId) {
+            // Hide all tabs
+            const tabs = ['vocab', 'idioms', 'speaking', 'flashcards'];
+            tabs.forEach(id => {
+                document.getElementById(`tab-${id}`).classList.add('hidden');
+                document.getElementById(`tab-${id}`).classList.remove('block');
+                
+                // Reset tab button styles
+                const btn = document.getElementById(`tab-btn-${id}`);
+                btn.className = "whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-gray-500 border-b-2 border-transparent hover:text-gray-800 transition-colors flex items-center gap-2";
+            });
+
+            // Show active tab
+            document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+            document.getElementById(`tab-${tabId}`).classList.add('block');
+            
+            // Set active tab button style
+            const activeBtn = document.getElementById(`tab-btn-${tabId}`);
+            activeBtn.className = "whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-rose-600 border-b-2 border-rose-600 transition-colors flex items-center gap-2";
+        }
+
+        function filterList(listId, query) {
+            const list = document.getElementById(listId);
+            const items = list.getElementsByClassName('list-item-vocab');
+            const lowerQuery = query.toLowerCase();
+
+            for (let i = 0; i < items.length; i++) {
+                const text = items[i].innerText.toLowerCase();
+                if (text.includes(lowerQuery)) {
+                    items[i].style.display = "";
+                } else {
+                    items[i].style.display = "none";
+                }
+            }
+        }
+
+        function filterIdioms(query) {
+            const cards = document.getElementsByClassName('idiom-card');
+            const lowerQuery = query.toLowerCase();
+
+            for (let i = 0; i < cards.length; i++) {
+                const text = cards[i].innerText.toLowerCase();
+                if (text.includes(lowerQuery)) {
+                    cards[i].style.display = "";
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+        }
+
+        // --- INITIALIZATION ---
+        document.addEventListener('DOMContentLoaded', () => {
+            renderVocabList();
+            renderArticle();
+            renderIdiomsGrid();
+            renderSpeakingScript();
+            initFlashcards();
+            
+            // Initialize Lucide icons
+            lucide.createIcons();
+        });
+    </script>
+</body>
+</html>

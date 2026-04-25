@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IELTS Vocab: Free Time</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .animate-fade-in { animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        @keyframes fadeIn { 
+            from { opacity: 0; transform: translateY(10px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+        
+        /* Custom scrollbar for lists */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #d8b4fe; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #c084fc; }
+
+        /* 3D Flip Card Styles */
+        .perspective-1000 { perspective: 1000px; }
+        .transform-style-3d { transform-style: preserve-3d; }
+        .backface-hidden { backface-visibility: hidden; }
+        .rotate-y-180 { transform: rotateY(180deg); }
+    </style>
+</head>
+<body class="min-h-screen bg-purple-50/40 text-gray-800 font-sans pb-12">
+
+    <!-- Header -->
+    <header class="bg-white border-b border-purple-100 sticky top-0 z-10 shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
+                <div class="flex items-center gap-4">
+                    <div class="p-3 bg-purple-600 text-white rounded-xl shadow-md shadow-purple-200">
+                        <i data-lucide="coffee" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl sm:text-3xl font-extrabold text-gray-900">IELTS Vocabulary</h1>
+                        <p class="text-sm text-purple-600 font-medium mt-1">Topic: Free Time & Hobbies</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tabs -->
+            <div class="flex overflow-x-auto mt-6 border-b border-gray-100 hide-scrollbar gap-2 sm:gap-6">
+                <button onclick="switchTab('vocab')" id="tab-btn-vocab" class="whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-purple-700 border-b-2 border-purple-700 transition-colors flex items-center gap-2">
+                    <i data-lucide="list" class="w-4 h-4"></i> Vocab & Activities
+                </button>
+                <button onclick="switchTab('idioms')" id="tab-btn-idioms" class="whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-gray-500 border-b-2 border-transparent hover:text-gray-800 transition-colors flex items-center gap-2">
+                    <i data-lucide="message-circle" class="w-4 h-4"></i> Idioms
+                </button>
+                <button onclick="switchTab('notebook')" id="tab-btn-notebook" class="whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-gray-500 border-b-2 border-transparent hover:text-gray-800 transition-colors flex items-center gap-2">
+                    <i data-lucide="book-open" class="w-4 h-4"></i> Notebook & Quotes
+                </button>
+                <button onclick="switchTab('flashcards')" id="tab-btn-flashcards" class="whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-gray-500 border-b-2 border-transparent hover:text-gray-800 transition-colors flex items-center gap-2">
+                    <i data-lucide="layers" class="w-4 h-4"></i> Flashcards
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+        
+        <!-- Tab: Core Vocab -->
+        <section id="tab-vocab" class="animate-fade-in block">
+            <div class="flex flex-col lg:flex-row gap-6">
+                <!-- Vocab List -->
+                <div class="flex-1 space-y-6">
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-purple-100">
+                        <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-6">
+                            <h2 class="text-xl font-bold text-gray-800 flex items-center gap-2">
+                                <i data-lucide="calendar" class="w-5 h-5 text-purple-500"></i> Free Time Lexicon
+                            </h2>
+                            <div class="relative w-full sm:w-64">
+                                <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                                <input type="text" onkeyup="filterList('vocab-list', this.value)" placeholder="Search vocabulary..." class="w-full pl-9 pr-4 py-2 bg-purple-50/50 border border-purple-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all">
+                            </div>
+                        </div>
+                        
+                        <div class="overflow-y-auto pr-2 max-h-[600px]" id="vocab-list">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Examples Panel -->
+                <div class="lg:w-1/3 bg-gradient-to-b from-fuchsia-50 to-purple-50 p-6 rounded-2xl border border-fuchsia-100 h-fit lg:sticky lg:top-48 shadow-inner">
+                    <h2 class="text-xl font-bold text-purple-900 mb-6 flex items-center gap-2">
+                        <i data-lucide="quote" class="w-5 h-5 text-fuchsia-500"></i> Contextual Examples
+                    </h2>
+                    <div id="examples-list" class="space-y-5">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tab: Idioms -->
+        <section id="tab-idioms" class="animate-fade-in hidden">
+            <div class="bg-white p-6 sm:p-8 rounded-3xl shadow-sm border border-purple-100 mb-8">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-800">Idioms & Phrasal Verbs</h2>
+                        <p class="text-gray-500 mt-1">Figurative language used to describe relaxation and hobbies.</p>
+                    </div>
+                    <div class="relative w-full sm:w-64">
+                        <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                        <input type="text" onkeyup="filterIdioms(this.value)" placeholder="Search idioms..." class="w-full pl-9 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" id="idioms-grid">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Tab: Notebook & Quotes -->
+        <section id="tab-notebook" class="animate-fade-in hidden">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                <!-- Left: Notebook Study Guide -->
+                <div class="bg-white rounded-3xl shadow-sm border border-purple-100 overflow-hidden">
+                    <div class="bg-slate-800 p-6 text-center text-white">
+                        <i data-lucide="pen-tool" class="w-8 h-8 mx-auto mb-3 text-purple-300"></i>
+                        <h2 class="text-2xl font-bold tracking-wide">Notebook Additions</h2>
+                    </div>
+                    <div class="p-6 bg-slate-50 space-y-4">
+                        <h3 class="font-bold text-purple-800 mb-4 border-b border-purple-200 pb-2">Why you should schedule free time</h3>
+                        <ol class="space-y-4 text-gray-700 list-decimal pl-5">
+                            <li class="pl-2"><b>Free time becomes important to you:</b> When you schedule your free time, you're making that activity a priority.</li>
+                            <li class="pl-2"><b>Show others they are a priority:</b> If you pack your calendar with work, you're telling close ones work is more important.</li>
+                            <li class="pl-2"><b>Have something to look forward to:</b> No matter how crazy the day gets, you always have something great afterwards.</li>
+                            <li class="pl-2"><b>Put to better use:</b> Setting aside time ensures that what you do with that time actually matters.</li>
+                            <li class="pl-2"><b>Feel more in control:</b> Knowing when you have free time helps you decide how best to spend that limited time.</li>
+                        </ol>
+
+                        <h3 class="font-bold text-purple-800 mt-8 mb-4 border-b border-purple-200 pb-2">Extra Notebook Vocab</h3>
+                        <div id="notebook-grid" class="space-y-3">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Motivational Quotes -->
+                <div class="bg-white rounded-3xl shadow-sm border border-fuchsia-100 overflow-hidden">
+                    <div class="bg-gradient-to-r from-fuchsia-600 to-purple-600 p-6 text-center text-white">
+                        <i data-lucide="clock" class="w-8 h-8 mx-auto mb-3 text-fuchsia-200"></i>
+                        <h2 class="text-2xl font-bold tracking-wide">Quotes About Time</h2>
+                    </div>
+                    <div class="p-6 space-y-5" id="quotes-list">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Tab: Flashcards -->
+        <section id="tab-flashcards" class="animate-fade-in hidden">
+            <div class="max-w-3xl mx-auto text-center space-y-6">
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-purple-100">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-2">Study Mode</h2>
+                    <p class="text-gray-500 mb-8">Click the card to flip it and reveal the meaning.</p>
+                    
+                    <!-- Flashcard Container -->
+                    <div id="flashcard-container" class="relative w-full h-64 cursor-pointer group perspective-1000 mx-auto" onclick="flipCard()">
+                        <div id="flashcard-inner" class="w-full h-full transition-all duration-500 transform-style-3d">
+                            
+                            <!-- Front -->
+                            <div class="absolute inset-0 backface-hidden bg-gradient-to-br from-purple-600 to-fuchsia-700 text-white border-2 border-purple-400 rounded-2xl shadow-lg flex flex-col items-center justify-center p-6 text-center">
+                                <i data-lucide="refresh-cw" class="w-6 h-6 absolute top-4 right-4 text-white/50 opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                                <h3 id="card-front-text" class="text-2xl md:text-3xl font-bold px-4"></h3>
+                                <p class="text-purple-200 mt-6 text-sm uppercase tracking-widest font-semibold">Tap to reveal</p>
+                            </div>
+
+                            <!-- Back -->
+                            <div class="absolute inset-0 backface-hidden rotate-y-180 bg-white text-gray-800 border-2 border-purple-200 rounded-2xl shadow-lg flex flex-col items-center justify-center p-6 text-center">
+                                <p id="card-back-en" class="text-base text-gray-500 font-medium italic mb-3 px-4"></p>
+                                <p id="card-back-vi" class="text-xl font-bold text-purple-700 px-4"></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Controls -->
+                    <div class="flex justify-center items-center gap-6 mt-8">
+                        <button onclick="prevCard()" class="p-3 rounded-full bg-gray-100 text-gray-600 hover:bg-purple-100 hover:text-purple-700 transition-colors">
+                            <i data-lucide="chevron-left" class="w-6 h-6"></i>
+                        </button>
+                        <span id="card-counter" class="font-bold text-gray-500 text-lg min-w-[4rem]">1 / 10</span>
+                        <button onclick="nextCard()" class="p-3 rounded-full bg-gray-100 text-gray-600 hover:bg-purple-100 hover:text-purple-700 transition-colors">
+                            <i data-lucide="chevron-right" class="w-6 h-6"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Data & Logic -->
+    <script>
+        // --- DATA ---
+        
+        // Tab 1: Core Vocab
+        const generalVocabData = [
+            { en: "free time / spare time", vi: "thời gian rảnh" },
+            { en: "to have a bit of spare time", vi: "có một chút thời gian rảnh rỗi" },
+            { en: "to have a little \"me time\"", vi: "có một chút thời gian dành cho riêng mình" },
+            { en: "to make the most of your free time", vi: "tận dụng tối đa thời gian rảnh" },
+            { en: "to make time for yourself", vi: "dành thời gian cho chính mình" },
+            { en: "to spend your free time in a productive way", vi: "dành thời gian rảnh rỗi của bạn một cách hiệu quả" },
+            { en: "to schedule your free time", vi: "lên kế hoạch cho thời gian rảnh của bạn" },
+            { en: "to make something a priority", vi: "ưu tiên điều gì" },
+            { en: "to be put in better use", vi: "được sử dụng tốt hơn" },
+            { en: "free time activities", vi: "các hoạt động trong thời gian rảnh" },
+            { en: "to set aside your free time", vi: "dành 1 khoảng thời gian cho bản thân bạn" }
+        ];
+
+        const activitiesVocabData = [
+            { en: "read a book", vi: "đọc sách" },
+            { en: "to hang out with friends", vi: "đi chơi với bạn bè" },
+            { en: "to go for a walk", vi: "đi dạo" },
+            { en: "to take a bath", vi: "tắm" },
+            { en: "to paint your nails", vi: "sơn móng tay" },
+            { en: "to go shopping for a new outfit", vi: "mua 1 bộ đồ mới" },
+            { en: "to bake a cake", vi: "nướng bánh" },
+            { en: "to call an old friend", vi: "gọi cho 1 người bạn cũ" },
+            { en: "to play a musical instrument", vi: "chơi nhạc cụ" }
+        ];
+
+        const importanceVocabData = [
+            { en: "to reduce stress levels", vi: "giảm căng thẳng" },
+            { en: "to feel refreshed", vi: "cảm thấy sảng khoái" },
+            { en: "to forget your everyday worries", vi: "quên đi những lo lắng hàng ngày của bạn" },
+            { en: "to calm you down", vi: "bình tĩnh lại, bớt lo lắng" },
+            { en: "to recharge your mind and body", vi: "nạp năng lượng cho tâm trí và cơ thể" }
+        ];
+
+        const examplesData = [
+            { en: "If you're a culture vulture, New York has everything you could want - opera, theatre, museums, and more.", vi: "Nếu bạn là một người mê văn hóa, New York có mọi thứ bạn có thể muốn - opera, nhà hát, viện bảo tàng, v.v." },
+            { en: "She locks herself away for hours in front of the computer and goes online every night.", vi: "Cô ấy nhốt mình hàng giờ trước máy tính và lên mạng hàng đêm." },
+            { en: "He's totally hooked on motor racing these days.", vi: "Hiện tại anh ấy rất mê đua xe." },
+            { en: "What do you get up to at weekends, Mariana?", vi: "Bạn thường làm gì vào cuối tuần vậy Mariana?" }
+        ];
+
+        // Tab 2: Idioms
+        const idiomsData = [
+            { idiom: "culture vulture", engDef: "big fan of anything cultural", viDef: "người yêu thích các loại hình văn hóa" },
+            { idiom: "couch potato", engDef: "physically inactive person", viDef: "người có lối sống thụ động" },
+            { idiom: "to lock yourself away", engDef: "to isolate yourself from the world", viDef: "\"khóa\" mình lại, cô lập với thế giới bên ngoài" },
+            { idiom: "to be hooked on", engDef: "to be addicted to", viDef: "nghiện ..." },
+            { idiom: "to chill out", engDef: "to relax", viDef: "thư giãn, xả hơi" },
+            { idiom: "to come round", engDef: "to come to someone's house", viDef: "đến nhà ai" },
+            { idiom: "to get up to", engDef: "to do", viDef: "làm (một việc gì đó)" },
+            { idiom: "to catch up with", engDef: "to get the latest news", viDef: "bắt kịp, theo kịp (tin tức)" },
+            { idiom: "to be into", engDef: "to be interested in something", viDef: "thích, hứng thú với..." },
+            { idiom: "time flies", engDef: "it passes very quickly", viDef: "thời gian trôi nhanh quá" },
+            { idiom: "time is money", engDef: "time is as valuable as money", viDef: "thời gian đáng giá như tiền bạc" },
+            { idiom: "to go through a rough time", engDef: "to experience a difficult time", viDef: "trải qua giai đoạn khó khăn" },
+            { idiom: "to be pressed for time", engDef: "to be in a hurry", viDef: "vội, bị thúc bách về thời gian" },
+            { idiom: "once in a blue moon", engDef: "very rarely", viDef: "hiếm khi" },
+            { idiom: "to take the weight off your mind", engDef: "to allow you to stop worrying", viDef: "trút bỏ gánh nặng suy nghĩ" }
+        ];
+
+        // Tab 3: Notebook
+        const notebookVocabData = [
+            { term: "amateur", desc: "someone who does something as a hobby, not a job." },
+            { term: "dabbler", desc: "a person who never keeps doing one activity for long." },
+            { term: "chores", desc: "boring tasks that have to be done (e.g. mowing the lawn)." },
+            { term: "shopaholic", desc: "a person addicted to shopping." },
+            { term: "went off", desc: "stopped liking, lost interest in..." },
+            { term: "full diary", desc: "having a lot of activities (a hectic social life)." },
+            { term: "keen participant in", desc: "someone who takes part enthusiastically." }
+        ];
+
+        const quotesData = [
+            { quote: "Life begins when you step out of your comfort zone.", author: "Neale Donald Walsch", vi: "Cuộc sống thực sự bắt đầu khi bạn bước chân ra khỏi quỹ đạo an toàn của chính mình." },
+            { quote: "Lost time is never found again.", author: "Benjamin Franklin", vi: "Thời gian đã trôi qua sẽ không bao giờ tìm lại được." },
+            { quote: "Your time is limited, so don't waste it living someone else's life.", author: "Steve Jobs", vi: "Thời gian của bạn là có hạn, đừng lãng phí thời gian để sống cuộc đời của người khác." },
+            { quote: "Either you run the day or the day runs you.", author: "Jim Rohn", vi: "Nếu bạn không làm chủ 1 ngày của bạn, bạn sẽ mất kiểm soát về thời gian." },
+            { quote: "Time and health are two precious assets that we don't recognize and appreciate until they have been depleted.", author: "Denis Waitley", vi: "Thời gian và sức khỏe là hai tài sản quý giá mà chúng ta không nhận ra cho đến khi chúng cạn kiệt." }
+        ];
+
+        let flashcardDeck = [];
+        let currentCardIndex = 0;
+        let isCardFlipped = false;
+
+        // --- RENDERING FUNCTIONS ---
+
+        function renderVocabSection(title, data) {
+            let html = `
+                <div class="mb-6 mt-6 first:mt-0">
+                    <h3 class="font-bold text-purple-700 bg-purple-100 px-3 py-1 inline-block rounded-md text-sm uppercase tracking-wider mb-3">${title}</h3>
+                    <ul class="space-y-3">
+            `;
+            
+            html += data.map(item => `
+                <li class="p-4 bg-gray-50 hover:bg-purple-50 border border-gray-100 hover:border-purple-200 rounded-xl transition-all duration-200 group list-item-vocab">
+                    <div class="font-bold text-[16px] text-gray-800 group-hover:text-purple-800 term leading-snug">${item.en}</div>
+                    <div class="text-[14px] font-medium text-gray-600 mt-2 translation">${item.vi}</div>
+                </li>
+            `).join('');
+            
+            html += `</ul></div>`;
+            return html;
+        }
+
+        function renderAllVocab() {
+            const container = document.getElementById('vocab-list');
+            container.innerHTML = 
+                renderVocabSection("Free Time Phrases", generalVocabData) +
+                renderVocabSection("Common Activities", activitiesVocabData) +
+                renderVocabSection("Importance of Free Time", importanceVocabData);
+        }
+
+        function renderExamples() {
+            const container = document.getElementById('examples-list');
+            container.innerHTML = examplesData.map(ex => `
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-fuchsia-100 relative group hover:shadow-md transition-shadow">
+                    <i data-lucide="quote" class="w-8 h-8 text-fuchsia-50 absolute top-3 right-3 z-0"></i>
+                    <p class="font-medium text-gray-800 text-sm md:text-base leading-relaxed relative z-10">${ex.en}</p>
+                    <p class="text-sm text-fuchsia-700/90 mt-3 pt-3 border-t border-fuchsia-50 relative z-10 font-medium">${ex.vi}</p>
+                </div>
+            `).join('');
+        }
+
+        function renderIdiomsGrid() {
+            const container = document.getElementById('idioms-grid');
+            container.innerHTML = idiomsData.map(item => `
+                <div class="idiom-card bg-white p-5 rounded-xl border border-gray-200 hover:border-purple-300 shadow-sm hover:shadow transition-all group flex flex-col h-full">
+                    <h3 class="text-lg font-bold text-gray-800 mb-2 group-hover:text-purple-600 idiom-title">${item.idiom}</h3>
+                    <p class="text-sm text-gray-500 italic mb-4 idiom-eng">${item.engDef}</p>
+                    <div class="mt-auto pt-3 border-t border-gray-100">
+                        <p class="font-semibold text-purple-800 idiom-vi">${item.viDef}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderNotebookGrid() {
+            const container = document.getElementById('notebook-grid');
+            container.innerHTML = notebookVocabData.map(item => `
+                <div class="bg-white p-4 rounded-xl border border-purple-100 shadow-sm relative pl-10 hover:border-purple-300 transition-colors">
+                    <i data-lucide="edit-2" class="absolute left-3 top-4 w-4 h-4 text-purple-300"></i>
+                    <h3 class="text-[15px] font-bold text-purple-800 mb-1">${item.term}</h3>
+                    <p class="text-sm text-gray-600 leading-relaxed">${item.desc}</p>
+                </div>
+            `).join('');
+        }
+
+        function renderQuotes() {
+            const container = document.getElementById('quotes-list');
+            container.innerHTML = quotesData.map(item => `
+                <div class="border-l-4 border-fuchsia-400 pl-4 py-2">
+                    <p class="text-lg font-semibold text-gray-800 mb-1">"${item.quote}"</p>
+                    <p class="text-sm font-bold text-fuchsia-600 mb-2">— ${item.author}</p>
+                    <p class="text-sm text-gray-500 italic">${item.vi}</p>
+                </div>
+            `).join('');
+        }
+
+        // --- FLASHCARD LOGIC ---
+        
+        function initFlashcards() {
+            // Combine vocab for flashcards
+            flashcardDeck = [
+                ...generalVocabData.map(i => ({ front: i.en, backEn: "", backVi: i.vi })),
+                ...activitiesVocabData.map(i => ({ front: i.en, backEn: "", backVi: i.vi })),
+                ...importanceVocabData.map(i => ({ front: i.en, backEn: "", backVi: i.vi })),
+                ...idiomsData.map(i => ({ front: i.idiom, backEn: i.engDef, backVi: i.viDef })),
+                ...notebookVocabData.map(i => ({ front: i.term, backEn: i.desc, backVi: "" }))
+            ];
+            // Shuffle
+            flashcardDeck.sort(() => Math.random() - 0.5);
+            currentCardIndex = 0;
+            updateFlashcardView();
+        }
+
+        function updateFlashcardView() {
+            const card = flashcardDeck[currentCardIndex];
+            document.getElementById('card-front-text').innerText = card.front;
+            document.getElementById('card-back-en').innerText = card.backEn;
+            document.getElementById('card-back-vi').innerText = card.backVi;
+            
+            if(!card.backEn) {
+                document.getElementById('card-back-en').classList.add('hidden');
+            } else {
+                document.getElementById('card-back-en').classList.remove('hidden');
+            }
+
+            if(!card.backVi) {
+                document.getElementById('card-back-vi').classList.add('hidden');
+            } else {
+                document.getElementById('card-back-vi').classList.remove('hidden');
+            }
+
+            document.getElementById('card-counter').innerText = `${currentCardIndex + 1} / ${flashcardDeck.length}`;
+            
+            if (isCardFlipped) {
+                document.getElementById('flashcard-inner').classList.remove('rotate-y-180');
+                isCardFlipped = false;
+            }
+        }
+
+        function flipCard() {
+            document.getElementById('flashcard-inner').classList.toggle('rotate-y-180');
+            isCardFlipped = !isCardFlipped;
+        }
+
+        function nextCard() {
+            if (currentCardIndex < flashcardDeck.length - 1) {
+                currentCardIndex++;
+                updateFlashcardView();
+            }
+        }
+
+        function prevCard() {
+            if (currentCardIndex > 0) {
+                currentCardIndex--;
+                updateFlashcardView();
+            }
+        }
+
+        // --- INTERACTIVITY LOGIC ---
+
+        function switchTab(tabId) {
+            // Hide all tabs
+            const tabs = ['vocab', 'idioms', 'notebook', 'flashcards'];
+            tabs.forEach(id => {
+                document.getElementById(`tab-${id}`).classList.add('hidden');
+                document.getElementById(`tab-${id}`).classList.remove('block');
+                
+                // Reset tab button styles
+                const btn = document.getElementById(`tab-btn-${id}`);
+                btn.className = "whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-gray-500 border-b-2 border-transparent hover:text-gray-800 transition-colors flex items-center gap-2";
+            });
+
+            // Show active tab
+            document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+            document.getElementById(`tab-${tabId}`).classList.add('block');
+            
+            // Set active tab button style
+            const activeBtn = document.getElementById(`tab-btn-${tabId}`);
+            activeBtn.className = "whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-purple-700 border-b-2 border-purple-700 transition-colors flex items-center gap-2";
+        }
+
+        function filterList(listId, query) {
+            const list = document.getElementById(listId);
+            const items = list.getElementsByClassName('list-item-vocab');
+            const lowerQuery = query.toLowerCase();
+
+            for (let i = 0; i < items.length; i++) {
+                const text = items[i].innerText.toLowerCase();
+                if (text.includes(lowerQuery)) {
+                    items[i].style.display = "";
+                } else {
+                    items[i].style.display = "none";
+                }
+            }
+        }
+
+        function filterIdioms(query) {
+            const cards = document.getElementsByClassName('idiom-card');
+            const lowerQuery = query.toLowerCase();
+
+            for (let i = 0; i < cards.length; i++) {
+                const text = cards[i].innerText.toLowerCase();
+                if (text.includes(lowerQuery)) {
+                    cards[i].style.display = "";
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+        }
+
+        // --- INITIALIZATION ---
+        document.addEventListener('DOMContentLoaded', () => {
+            renderAllVocab();
+            renderExamples();
+            renderIdiomsGrid();
+            renderNotebookGrid();
+            renderQuotes();
+            initFlashcards();
+            
+            // Initialize Lucide icons
+            lucide.createIcons();
+        });
+    </script>
+</body>
+</html>

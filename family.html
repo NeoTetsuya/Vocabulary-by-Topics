@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IELTS Vocab: Family</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .animate-fade-in { animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        @keyframes fadeIn { 
+            from { opacity: 0; transform: translateY(10px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+        
+        /* Custom scrollbar for lists */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #5eead4; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #2dd4bf; }
+
+        /* 3D Flip Card Styles */
+        .perspective-1000 { perspective: 1000px; }
+        .transform-style-3d { transform-style: preserve-3d; }
+        .backface-hidden { backface-visibility: hidden; }
+        .rotate-y-180 { transform: rotateY(180deg); }
+    </style>
+</head>
+<body class="min-h-screen bg-teal-50/40 text-gray-800 font-sans pb-12">
+
+    <!-- Header -->
+    <header class="bg-white border-b border-teal-100 sticky top-0 z-10 shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
+                <div class="flex items-center gap-4">
+                    <div class="p-3 bg-teal-600 text-white rounded-xl shadow-md shadow-teal-200">
+                        <i data-lucide="users" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl sm:text-3xl font-extrabold text-gray-900">IELTS Vocabulary</h1>
+                        <p class="text-sm text-teal-600 font-medium mt-1">Topic: Family & Relationships</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tabs -->
+            <div class="flex overflow-x-auto mt-6 border-b border-gray-100 hide-scrollbar gap-2 sm:gap-6">
+                <button onclick="switchTab('vocab')" id="tab-btn-vocab" class="whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-teal-700 border-b-2 border-teal-700 transition-colors flex items-center gap-2">
+                    <i data-lucide="home" class="w-4 h-4"></i> Core Vocab & Problems
+                </button>
+                <button onclick="switchTab('idioms')" id="tab-btn-idioms" class="whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-gray-500 border-b-2 border-transparent hover:text-gray-800 transition-colors flex items-center gap-2">
+                    <i data-lucide="message-circle" class="w-4 h-4"></i> Family Idioms
+                </button>
+                <button onclick="switchTab('notebook')" id="tab-btn-notebook" class="whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-gray-500 border-b-2 border-transparent hover:text-gray-800 transition-colors flex items-center gap-2">
+                    <i data-lucide="book-open" class="w-4 h-4"></i> Notebook Additions
+                </button>
+                <button onclick="switchTab('flashcards')" id="tab-btn-flashcards" class="whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-gray-500 border-b-2 border-transparent hover:text-gray-800 transition-colors flex items-center gap-2">
+                    <i data-lucide="layers" class="w-4 h-4"></i> Flashcards
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+        
+        <!-- Tab: Core Vocab -->
+        <section id="tab-vocab" class="animate-fade-in block">
+            <div class="flex flex-col lg:flex-row gap-6">
+                <!-- Vocab List -->
+                <div class="flex-1 space-y-6">
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-teal-100">
+                        <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-6">
+                            <h2 class="text-xl font-bold text-gray-800 flex items-center gap-2">
+                                <i data-lucide="list" class="w-5 h-5 text-teal-500"></i> General Vocabulary
+                            </h2>
+                            <div class="relative w-full sm:w-64">
+                                <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                                <input type="text" onkeyup="filterList('vocab-list', this.value)" placeholder="Search vocabulary..." class="w-full pl-9 pr-4 py-2 bg-teal-50/50 border border-teal-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 transition-all">
+                            </div>
+                        </div>
+                        
+                        <div class="overflow-y-auto pr-2 max-h-[600px]" id="vocab-list">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Examples Panel -->
+                <div class="lg:w-1/3 bg-gradient-to-b from-cyan-50 to-teal-50 p-6 rounded-2xl border border-cyan-100 h-fit lg:sticky lg:top-48 shadow-inner">
+                    <h2 class="text-xl font-bold text-teal-900 mb-6 flex items-center gap-2">
+                        <i data-lucide="quote" class="w-5 h-5 text-teal-600"></i> Contextual Examples
+                    </h2>
+                    <div id="examples-list" class="space-y-5">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tab: Idioms -->
+        <section id="tab-idioms" class="animate-fade-in hidden">
+            <div class="bg-white p-6 sm:p-8 rounded-3xl shadow-sm border border-teal-100 mb-8">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-800">Family Idioms & Expressions</h2>
+                        <p class="text-gray-500 mt-1">Common figurative language used to describe family dynamics.</p>
+                    </div>
+                    <div class="relative w-full sm:w-64">
+                        <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                        <input type="text" onkeyup="filterIdioms(this.value)" placeholder="Search idioms..." class="w-full pl-9 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 transition-all">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" id="idioms-grid">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Tab: Notebook Additions -->
+        <section id="tab-notebook" class="animate-fade-in hidden">
+            <div class="bg-white rounded-3xl shadow-sm border border-teal-100 overflow-hidden mb-8">
+                <div class="bg-slate-800 p-8 text-center text-white">
+                    <i data-lucide="book-open" class="w-12 h-12 mx-auto mb-4 text-teal-300"></i>
+                    <h2 class="text-3xl font-bold tracking-wide mb-2">Notebook Extracts</h2>
+                    <p class="text-teal-200">Advanced phrasal verbs and expressions from handwritten study notes</p>
+                </div>
+
+                <div class="p-6 sm:p-8 bg-slate-50">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="notebook-grid">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Tab: Flashcards -->
+        <section id="tab-flashcards" class="animate-fade-in hidden">
+            <div class="max-w-3xl mx-auto text-center space-y-6">
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-teal-100">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-2">Study Mode</h2>
+                    <p class="text-gray-500 mb-8">Click the card to flip it and reveal the meaning.</p>
+                    
+                    <!-- Flashcard Container -->
+                    <div id="flashcard-container" class="relative w-full h-64 cursor-pointer group perspective-1000 mx-auto" onclick="flipCard()">
+                        <div id="flashcard-inner" class="w-full h-full transition-all duration-500 transform-style-3d">
+                            
+                            <!-- Front -->
+                            <div class="absolute inset-0 backface-hidden bg-gradient-to-br from-teal-600 to-cyan-700 text-white border-2 border-teal-400 rounded-2xl shadow-lg flex flex-col items-center justify-center p-6 text-center">
+                                <i data-lucide="refresh-cw" class="w-6 h-6 absolute top-4 right-4 text-white/50 opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                                <h3 id="card-front-text" class="text-2xl md:text-3xl font-bold px-4"></h3>
+                                <p class="text-teal-200 mt-6 text-sm uppercase tracking-widest font-semibold">Tap to reveal</p>
+                            </div>
+
+                            <!-- Back -->
+                            <div class="absolute inset-0 backface-hidden rotate-y-180 bg-white text-gray-800 border-2 border-teal-200 rounded-2xl shadow-lg flex flex-col items-center justify-center p-6 text-center">
+                                <p id="card-back-en" class="text-base text-gray-500 font-medium italic mb-3 px-4"></p>
+                                <p id="card-back-vi" class="text-xl font-bold text-teal-700 px-4"></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Controls -->
+                    <div class="flex justify-center items-center gap-6 mt-8">
+                        <button onclick="prevCard()" class="p-3 rounded-full bg-gray-100 text-gray-600 hover:bg-teal-100 hover:text-teal-700 transition-colors">
+                            <i data-lucide="chevron-left" class="w-6 h-6"></i>
+                        </button>
+                        <span id="card-counter" class="font-bold text-gray-500 text-lg min-w-[4rem]">1 / 10</span>
+                        <button onclick="nextCard()" class="p-3 rounded-full bg-gray-100 text-gray-600 hover:bg-teal-100 hover:text-teal-700 transition-colors">
+                            <i data-lucide="chevron-right" class="w-6 h-6"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Data & Logic -->
+    <script>
+        // --- DATA ---
+        
+        // Tab 1: Core Vocab
+        const generalVocabData = [
+            { en: "to have a laugh together", vi: "cười cùng nhau" },
+            { en: "to spend quality time with your family", vi: "dành khoảng thời gian chất lượng cùng gia đình" },
+            { en: "to get on well with each other", vi: "hòa thuận với nhau" },
+            { en: "to look up to my father", vi: "noi gương cha tôi" },
+            { en: "to put your family first", vi: "đặt gia đình của bạn lên trên hết" },
+            { en: "to set a good example", vi: "nêu gương tốt" },
+            { en: "to balance your work and home life", vi: "cân bằng giữa công việc và cuộc sống gia đình" },
+            { en: "to read someone like an open book", vi: "hiểu rất rõ ai đó" },
+            { en: "to get married", vi: "cưới ..." },
+            { en: "a loving and caring family", vi: "một gia đình tràn đầy yêu thương và sự quan tâm" },
+            { en: "to hang out together", vi: "cùng nhau đi chơi" },
+            { en: "to make a living", vi: "kiếm sống" }
+        ];
+
+        const problemsVocabData = [
+            { en: "infidelity", vi: "sự không chung thủy (ngoại tình)", desc: "the act of not being faithful to your wife, husband or partner, by having sex with somebody else" },
+            { en: "separation", vi: "ly thân", desc: "a period of time that people spend apart from each other" },
+            { en: "divorce", vi: "ly hôn", desc: "the legal ending of a marriage" },
+            { en: "abuse", vi: "bạo hành gia đình", desc: "unfair, cruel or violent treatment of somebody" },
+            { en: "neglect", vi: "sự thờ ơ của cha mẹ đối với con cái", desc: "the fact of not giving enough care or attention to something/somebody" },
+            { en: "financial problems", vi: "các vấn đề tài chính", desc: "" },
+            { en: "lack of communication", vi: "thiếu giao tiếp giữ vợ - chồng, cha mẹ - con cái", desc: "" }
+        ];
+
+        // Tab 2: Idioms
+        const idiomsData = [
+            { idiom: "your own flesh and blood", engDef: "a person or people that you are related to", viDef: "máu mủ" },
+            { idiom: "to fight like cat and dog", engDef: "often have angry fights", viDef: "cãi nhau như chó với mèo" },
+            { idiom: "there's little/no love lost between them", engDef: "they don't like each other", viDef: "không còn chút tình cảm nào" },
+            { idiom: "close ranks", engDef: "join together to protect themselves, especially when criticized", viDef: "sát cánh (bảo vệ nhau)" },
+            { idiom: "turn on somebody", engDef: "attack somebody suddenly and unexpectedly", viDef: "tấn công ai đó" },
+            { idiom: "(as) miserable as sin", engDef: "used to emphasize that somebody is very unhappy", viDef: "khốn khổ" },
+            { idiom: "account for something", engDef: "be the explanation or cause of something", viDef: "giải thích điều gì" },
+            { idiom: "take somebody for granted", engDef: "be so accustomed to somebody that you don't appreciate them", viDef: "không trân trọng..." },
+            { idiom: "blood is thicker than water", engDef: "relationships within a family are the strongest and most important ones", viDef: "Một giọt máu đào hơn ao nước lã" },
+            { idiom: "like father, like son", engDef: "saying that a man or boy has the same attitudes/behavior as his father", viDef: "cha nào con nấy" },
+            { idiom: "run in the family", engDef: "if a quality, disease, etc. runs in the family, many members have it", viDef: "di truyền" },
+            { idiom: "the black sheep of the family", engDef: "a person who has done something bad that brings embarrassment to the family", viDef: "thành viên cá biệt trong gia đình" }
+        ];
+
+        // Tab 3: Notebook Phrasal Verbs
+        const notebookData = [
+            { term: "on top of sb/sth", desc: "very close to each other (which often causes problems) / in addition to / on, over, or covering one another." },
+            { term: "result in sth", desc: "cause a particular situation to happen." },
+            { term: "put sb on a pedestal", desc: "admire sb so much that you do not see their faults." },
+            { term: "get away with murder", desc: "do whatever you want without being stopped or punished." },
+            { term: "squeeze sb out", desc: "they are no longer included in sth that they were previously involved in." },
+            { term: "starve sb/sth of sth", desc: "if you are starved of sth, you do not have enough of sth that you need." },
+            { term: "back sb/sth up", desc: "support sb/sth." },
+            { term: "leave sb out", desc: "not include sb." },
+            { term: "distance yourself from sth", desc: "become less involved or connected with sth." },
+            { term: "make a point of doing sth", desc: "make a special effort to do sth." },
+            { term: "lavish sth on sb", desc: "give a lot, often too much, of sth to do." }
+        ];
+
+        const examplesData = [
+            { en: "Child emotional abuse is linked to poor mental development and difficulty making and keeping strong relationships.", vi: "Bạo hành trẻ em về mặt tâm lý dẫn tới sự phát triển trí tuệ kém và những khó khăn trong việc tạo dựng và giữ mối quan hệ bền chặt." },
+            { en: "No matter how tall I grow I will always look up to my father.", vi: "Dù có lớn đến đâu, cha vẫn luôn là người tôi kính trọng (muốn noi gương theo)." },
+            { en: "When you get into trouble, usually your family will be the ones to bail you out, not your friends. After all, blood is thicker than water.", vi: "Khi bạn gặp khó khăn, thông thường gia đình sẽ là người đứng ra cứu giúp bạn chứ không phải bạn bè của bạn. Rốt cuộc, một giọt máu đào hơn ao nước lã." },
+            { en: "I have always been the black sheep of my family. Everyone else has responsible jobs while I have chosen to be an artist.", vi: "Tôi luôn là thành viên cá biệt trong gia đình. Mọi người đều có công việc trách nhiệm trong khi tôi lại chọn trở thành một nghệ sĩ." },
+            { en: "I always believe in the saying \"like father like son\", and I know this little baby will grow up to be just as handsome and talented as his daddy.", vi: "Tôi luôn tin vào câu nói \"cha nào con nấy”, và tôi biết đứa bé này lớn lên sẽ đẹp trai và tài giỏi như cha của cậu ấy." }
+        ];
+
+        let flashcardDeck = [];
+        let currentCardIndex = 0;
+        let isCardFlipped = false;
+
+        // --- RENDERING FUNCTIONS ---
+
+        function renderVocabSection(title, data, isProblem = false) {
+            let html = `
+                <div class="mb-6 mt-6 first:mt-0">
+                    <h3 class="font-bold text-teal-700 bg-teal-50 px-3 py-1 inline-block rounded-md text-sm uppercase tracking-wider mb-3">${title}</h3>
+                    <ul class="space-y-3">
+            `;
+            
+            html += data.map(item => `
+                <li class="p-4 bg-gray-50 hover:bg-teal-50 border border-gray-100 hover:border-teal-200 rounded-xl transition-all duration-200 group list-item-vocab">
+                    <div class="font-bold text-[16px] text-gray-800 group-hover:text-teal-800 term leading-snug">${item.en}</div>
+                    <div class="text-[14px] font-medium text-gray-600 mt-2 translation">${item.vi}</div>
+                    ${isProblem && item.desc ? `<div class="text-xs text-gray-400 mt-2 italic">${item.desc}</div>` : ''}
+                </li>
+            `).join('');
+            
+            html += `</ul></div>`;
+            return html;
+        }
+
+        function renderAllVocab() {
+            const container = document.getElementById('vocab-list');
+            container.innerHTML = 
+                renderVocabSection("General Family Vocabulary", generalVocabData) +
+                renderVocabSection("Family Problems", problemsVocabData, true);
+        }
+
+        function renderExamples(containerId, data) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = data.map(ex => `
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-cyan-100 relative group hover:shadow-md transition-shadow">
+                    <i data-lucide="quote" class="w-8 h-8 text-cyan-50 absolute top-3 right-3 z-0"></i>
+                    <p class="font-medium text-gray-800 text-sm md:text-base leading-relaxed relative z-10">${ex.en}</p>
+                    <p class="text-sm text-cyan-700/90 mt-3 pt-3 border-t border-cyan-50 relative z-10 font-medium">${ex.vi}</p>
+                </div>
+            `).join('');
+        }
+
+        function renderIdiomsGrid() {
+            const container = document.getElementById('idioms-grid');
+            container.innerHTML = idiomsData.map(item => `
+                <div class="idiom-card bg-white p-5 rounded-xl border border-gray-200 hover:border-teal-300 shadow-sm hover:shadow transition-all group flex flex-col h-full">
+                    <h3 class="text-lg font-bold text-gray-800 mb-2 group-hover:text-teal-600 idiom-title">${item.idiom}</h3>
+                    <p class="text-sm text-gray-500 italic mb-4 idiom-eng">${item.engDef}</p>
+                    <div class="mt-auto pt-3 border-t border-gray-100">
+                        <p class="font-semibold text-teal-800 idiom-vi">${item.viDef}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderNotebookGrid() {
+            const container = document.getElementById('notebook-grid');
+            container.innerHTML = notebookData.map(item => `
+                <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm relative pl-12 hover:border-teal-300 transition-colors">
+                    <i data-lucide="edit-3" class="absolute left-4 top-5 w-5 h-5 text-slate-400"></i>
+                    <h3 class="text-[17px] font-bold text-teal-800 mb-2">${item.term}</h3>
+                    <p class="text-sm text-gray-600 leading-relaxed">${item.desc}</p>
+                </div>
+            `).join('');
+        }
+
+        // --- FLASHCARD LOGIC ---
+        
+        function initFlashcards() {
+            // Combine vocab for flashcards
+            flashcardDeck = [
+                ...generalVocabData.map(i => ({ front: i.en, backEn: "", backVi: i.vi })),
+                ...problemsVocabData.map(i => ({ front: i.en, backEn: i.desc, backVi: i.vi })),
+                ...idiomsData.map(i => ({ front: i.idiom, backEn: i.engDef, backVi: i.viDef })),
+                ...notebookData.map(i => ({ front: i.term, backEn: i.desc, backVi: "" }))
+            ];
+            // Shuffle
+            flashcardDeck.sort(() => Math.random() - 0.5);
+            currentCardIndex = 0;
+            updateFlashcardView();
+        }
+
+        function updateFlashcardView() {
+            const card = flashcardDeck[currentCardIndex];
+            document.getElementById('card-front-text').innerText = card.front;
+            document.getElementById('card-back-en').innerText = card.backEn;
+            document.getElementById('card-back-vi').innerText = card.backVi;
+            
+            if(!card.backEn) {
+                document.getElementById('card-back-en').classList.add('hidden');
+            } else {
+                document.getElementById('card-back-en').classList.remove('hidden');
+            }
+
+            if(!card.backVi) {
+                document.getElementById('card-back-vi').classList.add('hidden');
+            } else {
+                document.getElementById('card-back-vi').classList.remove('hidden');
+            }
+
+            document.getElementById('card-counter').innerText = `${currentCardIndex + 1} / ${flashcardDeck.length}`;
+            
+            if (isCardFlipped) {
+                document.getElementById('flashcard-inner').classList.remove('rotate-y-180');
+                isCardFlipped = false;
+            }
+        }
+
+        function flipCard() {
+            document.getElementById('flashcard-inner').classList.toggle('rotate-y-180');
+            isCardFlipped = !isCardFlipped;
+        }
+
+        function nextCard() {
+            if (currentCardIndex < flashcardDeck.length - 1) {
+                currentCardIndex++;
+                updateFlashcardView();
+            }
+        }
+
+        function prevCard() {
+            if (currentCardIndex > 0) {
+                currentCardIndex--;
+                updateFlashcardView();
+            }
+        }
+
+        // --- INTERACTIVITY LOGIC ---
+
+        function switchTab(tabId) {
+            // Hide all tabs
+            const tabs = ['vocab', 'idioms', 'notebook', 'flashcards'];
+            tabs.forEach(id => {
+                document.getElementById(`tab-${id}`).classList.add('hidden');
+                document.getElementById(`tab-${id}`).classList.remove('block');
+                
+                // Reset tab button styles
+                const btn = document.getElementById(`tab-btn-${id}`);
+                btn.className = "whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-gray-500 border-b-2 border-transparent hover:text-gray-800 transition-colors flex items-center gap-2";
+            });
+
+            // Show active tab
+            document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+            document.getElementById(`tab-${tabId}`).classList.add('block');
+            
+            // Set active tab button style
+            const activeBtn = document.getElementById(`tab-btn-${tabId}`);
+            activeBtn.className = "whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-teal-700 border-b-2 border-teal-700 transition-colors flex items-center gap-2";
+        }
+
+        function filterList(listId, query) {
+            const list = document.getElementById(listId);
+            const items = list.getElementsByClassName('list-item-vocab');
+            const lowerQuery = query.toLowerCase();
+
+            for (let i = 0; i < items.length; i++) {
+                const text = items[i].innerText.toLowerCase();
+                if (text.includes(lowerQuery)) {
+                    items[i].style.display = "";
+                } else {
+                    items[i].style.display = "none";
+                }
+            }
+        }
+
+        function filterIdioms(query) {
+            const cards = document.getElementsByClassName('idiom-card');
+            const lowerQuery = query.toLowerCase();
+
+            for (let i = 0; i < cards.length; i++) {
+                const text = cards[i].innerText.toLowerCase();
+                if (text.includes(lowerQuery)) {
+                    cards[i].style.display = "";
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+        }
+
+        // --- INITIALIZATION ---
+        document.addEventListener('DOMContentLoaded', () => {
+            renderAllVocab();
+            renderExamples('examples-list', examplesData);
+            renderIdiomsGrid();
+            renderNotebookGrid();
+            initFlashcards();
+            
+            // Initialize Lucide icons
+            lucide.createIcons();
+        });
+    </script>
+</body>
+</html>

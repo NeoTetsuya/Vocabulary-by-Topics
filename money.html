@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IELTS Vocab: Money & Finance</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .animate-fade-in { animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        @keyframes fadeIn { 
+            from { opacity: 0; transform: translateY(10px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+        
+        /* Custom scrollbar for lists */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #6ee7b7; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #34d399; }
+
+        /* 3D Flip Card Styles */
+        .perspective-1000 { perspective: 1000px; }
+        .transform-style-3d { transform-style: preserve-3d; }
+        .backface-hidden { backface-visibility: hidden; }
+        .rotate-y-180 { transform: rotateY(180deg); }
+    </style>
+</head>
+<body class="min-h-screen bg-emerald-50/40 text-gray-800 font-sans pb-12">
+
+    <!-- Header -->
+    <header class="bg-white border-b border-emerald-100 sticky top-0 z-10 shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
+                <div class="flex items-center gap-4">
+                    <div class="p-3 bg-emerald-600 text-white rounded-xl shadow-md shadow-emerald-200">
+                        <i data-lucide="wallet" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl sm:text-3xl font-extrabold text-gray-900">IELTS Vocabulary</h1>
+                        <p class="text-sm text-emerald-600 font-medium mt-1">Topic: Money, Finance & Budgeting</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tabs -->
+            <div class="flex overflow-x-auto mt-6 border-b border-gray-100 hide-scrollbar gap-2 sm:gap-6">
+                <button onclick="switchTab('vocab')" id="tab-btn-vocab" class="whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-emerald-700 border-b-2 border-emerald-700 transition-colors flex items-center gap-2">
+                    <i data-lucide="landmark" class="w-4 h-4"></i> Financial Vocab
+                </button>
+                <button onclick="switchTab('idioms')" id="tab-btn-idioms" class="whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-gray-500 border-b-2 border-transparent hover:text-gray-800 transition-colors flex items-center gap-2">
+                    <i data-lucide="message-circle" class="w-4 h-4"></i> Money Idioms
+                </button>
+                <button onclick="switchTab('flashcards')" id="tab-btn-flashcards" class="whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-gray-500 border-b-2 border-transparent hover:text-gray-800 transition-colors flex items-center gap-2">
+                    <i data-lucide="layers" class="w-4 h-4"></i> Practice Flashcards
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+        
+        <!-- Tab: Core Vocab -->
+        <section id="tab-vocab" class="animate-fade-in block">
+            <div class="flex flex-col lg:flex-row gap-6">
+                <!-- Vocab List -->
+                <div class="flex-1 space-y-6">
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-emerald-100">
+                        <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-6">
+                            <h2 class="text-xl font-bold text-gray-800 flex items-center gap-2">
+                                <i data-lucide="piggy-bank" class="w-5 h-5 text-emerald-500"></i> Core Vocabulary
+                            </h2>
+                            <div class="relative w-full sm:w-64">
+                                <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                                <input type="text" onkeyup="filterList('vocab-list', this.value)" placeholder="Search vocabulary..." class="w-full pl-9 pr-4 py-2 bg-emerald-50/50 border border-emerald-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all">
+                            </div>
+                        </div>
+                        
+                        <ul id="vocab-list" class="space-y-3 max-h-[650px] overflow-y-auto pr-2">
+                            <!-- Populated by JS -->
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Examples Panel -->
+                <div class="lg:w-1/3 bg-gradient-to-b from-amber-50 to-emerald-50 p-6 rounded-2xl border border-emerald-100 h-fit lg:sticky lg:top-48 shadow-inner">
+                    <h2 class="text-xl font-bold text-emerald-900 mb-6 flex items-center gap-2">
+                        <i data-lucide="quote" class="w-5 h-5 text-emerald-600"></i> Contextual Examples
+                    </h2>
+                    <div id="examples-list" class="space-y-5">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tab: Idioms -->
+        <section id="tab-idioms" class="animate-fade-in hidden">
+            <div class="flex flex-col lg:flex-row gap-6">
+                <!-- Idioms Grid -->
+                <div class="flex-[2] bg-white p-6 sm:p-8 rounded-3xl shadow-sm border border-emerald-100 mb-8">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
+                        <div>
+                            <h2 class="text-2xl font-bold text-gray-800">Money Idioms & Phrases</h2>
+                            <p class="text-gray-500 mt-1">Figurative language used to describe wealth, cost, and income.</p>
+                        </div>
+                        <div class="relative w-full sm:w-64">
+                            <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                            <input type="text" onkeyup="filterIdioms(this.value)" placeholder="Search idioms..." class="w-full pl-9 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5" id="idioms-grid">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+                
+                <!-- Idiom Examples -->
+                <div class="flex-1 bg-slate-800 p-6 sm:p-8 rounded-3xl shadow-sm border border-slate-700 h-fit lg:sticky lg:top-48">
+                    <h2 class="text-xl font-bold text-white mb-6 flex items-center gap-2">
+                        <i data-lucide="lightbulb" class="w-5 h-5 text-amber-400"></i> Idioms in Context
+                    </h2>
+                    <div id="idiom-examples-list" class="space-y-5">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Tab: Flashcards -->
+        <section id="tab-flashcards" class="animate-fade-in hidden">
+            <div class="max-w-3xl mx-auto text-center space-y-6">
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-emerald-100">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-2">Study Mode</h2>
+                    <p class="text-gray-500 mb-8">Click the card to flip it and reveal the meaning.</p>
+                    
+                    <!-- Flashcard Container -->
+                    <div id="flashcard-container" class="relative w-full h-64 cursor-pointer group perspective-1000 mx-auto" onclick="flipCard()">
+                        <div id="flashcard-inner" class="w-full h-full transition-all duration-500 transform-style-3d">
+                            
+                            <!-- Front -->
+                            <div class="absolute inset-0 backface-hidden bg-gradient-to-br from-emerald-600 to-teal-700 text-white border-2 border-emerald-400 rounded-2xl shadow-lg flex flex-col items-center justify-center p-6 text-center">
+                                <i data-lucide="refresh-cw" class="w-6 h-6 absolute top-4 right-4 text-white/50 opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                                <h3 id="card-front-text" class="text-2xl md:text-3xl font-bold px-4"></h3>
+                                <p class="text-emerald-200 mt-6 text-sm uppercase tracking-widest font-semibold">Tap to reveal</p>
+                            </div>
+
+                            <!-- Back -->
+                            <div class="absolute inset-0 backface-hidden rotate-y-180 bg-white text-gray-800 border-2 border-emerald-200 rounded-2xl shadow-lg flex flex-col items-center justify-center p-6 text-center">
+                                <p id="card-back-en" class="text-base text-gray-500 font-medium italic mb-3 px-4"></p>
+                                <p id="card-back-vi" class="text-xl font-bold text-emerald-700 px-4"></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Controls -->
+                    <div class="flex justify-center items-center gap-6 mt-8">
+                        <button onclick="prevCard()" class="p-3 rounded-full bg-gray-100 text-gray-600 hover:bg-emerald-100 hover:text-emerald-700 transition-colors">
+                            <i data-lucide="chevron-left" class="w-6 h-6"></i>
+                        </button>
+                        <span id="card-counter" class="font-bold text-gray-500 text-lg min-w-[4rem]">1 / 10</span>
+                        <button onclick="nextCard()" class="p-3 rounded-full bg-gray-100 text-gray-600 hover:bg-emerald-100 hover:text-emerald-700 transition-colors">
+                            <i data-lucide="chevron-right" class="w-6 h-6"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Data & Logic -->
+    <script>
+        // --- DATA ---
+        
+        // Tab 1: Core Vocab
+        const generalVocabData = [
+            { en: "to save for the future", vi: "tiết kiệm cho tương lai" },
+            { en: "to save for retirement", vi: "tiết kiệm cho việc nghỉ hưu" },
+            { en: "to get out of debt", vi: "thoát khỏi nợ nần" },
+            { en: "a solid credit score", vi: "điểm tín dụng tốt" },
+            { en: "long-term financial goals", vi: "mục tiêu tài chính dài hạn" },
+            { en: "to take control of your finances", vi: "kiểm soát tài chính của bạn" },
+            { en: "financial success", vi: "thành công tài chính" },
+            { en: "long-term savings", vi: "tiết kiệm dài hạn" },
+            { en: "to overspend", vi: "chi tiêu quá mức" },
+            { en: "to set up a budget", vi: "lập ngân sách" },
+            { en: "to make adjustments where necessary", vi: "thực hiện các điều chỉnh khi cần thiết" },
+            { en: "your net income after taxes", vi: "thu nhập ròng của bạn sau thuế" },
+            { en: "to pay off debt", vi: "trả nợ" },
+            { en: "a huge financial burden", vi: "một gánh nặng tài chính lớn" },
+            { en: "to become financially independent", vi: "trở nên độc lập về tài chính" },
+            { en: "an emergency fund", vi: "quỹ cho các trường hợp khẩn cấp" },
+            { en: "to cut your monthly expenses", vi: "cắt giảm chi phí hàng tháng của bạn" },
+            { en: "high-interest credit card debt", vi: "nợ thẻ tín dụng lãi suất cao" },
+            { en: "to make ends meet", vi: "kiếm sống, xoay sở cho đủ sống" },
+            { en: "student loans", vi: "khoản vay cho sinh viên" }
+        ];
+
+        const examplesData = [
+            { en: "Quality work became harder to find and people were unable to save for the future.", vi: "Công việc chất lượng ngày càng khó tìm và mọi người không đủ khả năng tiết kiệm cho tương lai của họ." },
+            { en: "Some younger Americans have learned a few key lessons that are helping them save for retirement.", vi: "Một số người Mỹ trẻ tuổi đã học được một số bài học quan trọng giúp họ tiết kiệm để nghỉ hưu." },
+            { en: "If you're wondering how to get out of debt and are considering your options, explore the debt avalanche.", vi: "Nếu bạn đang tự hỏi làm thế nào để thoát khỏi nợ nần, hãy khám phá phương thức quả cầu tuyết (Avalanche)." },
+            { en: "The key thing is to take control of your finances so you know where your money is actually going each month.", vi: "Điều quan trọng là kiểm soát tài chính của bạn để bạn biết tiền của bạn thực sự đi đâu mỗi tháng." },
+            { en: "A university has launched an emergency fund for students facing financial difficulties due to coronavirus.", vi: "Một trường đại học đã phát động một quỹ khẩn cấp cho sinh viên gặp khó khăn về tài chính do coronavirus." },
+            { en: "If you are struggling to make ends meet each month, you may be relying too much on your credit cards.", vi: "Nếu bạn đang phải vật lộn để trang trải cuộc sống hàng tháng, bạn có thể đang phụ thuộc quá nhiều vào thẻ tín dụng của mình." },
+            { en: "Getting control of your student loans is an excellent step to take right now to improve your finances.", vi: "Kiểm soát các khoản vay sinh viên của bạn là một bước tuyệt vời mà bạn nên thực hiện ngay bây giờ để cải thiện tài chính của bạn." }
+        ];
+
+        // Tab 2: Idioms
+        const idiomsData = [
+            { idiom: "money doesn't grow on trees", engDef: "said to warn someone to be careful how much money they spend, because there is only a limited amount", viDef: "tiền không mọc từ trên cây (không nên tiêu pha quá nhiều tiền, vì tiền chỉ có hạn)" },
+            { idiom: "bread and butter", engDef: "a job or activity that provides you with the money you need to live", viDef: "kế sinh nhai, công việc giúp bạn trang trải cuộc sống" },
+            { idiom: "bring home the bacon", engDef: "supply material provision or support; earn a living", viDef: "kiếm tiền về nuôi sống gia đình" },
+            { idiom: "born with a silver spoon in your mouth", engDef: "born into a very wealthy family", viDef: "sinh ra đã ngậm thìa bạc (sinh ra trong gia đình giàu có)" },
+            { idiom: "a penny saved is a penny earned", engDef: "one should not waste money but should save it, even if little by little", viDef: "một xu tiết kiệm cũng chính là một xu làm ra (không nên tiêu xài hoang phí)" },
+            { idiom: "an arm and a leg", engDef: "a lot of money", viDef: "rất đắt đỏ" },
+            { idiom: "break the bank", engDef: "cost too much", viDef: "rất đắt, rất tốn kém" },
+            { idiom: "easy money", engDef: "money that is easily and sometimes dishonestly earned", viDef: "tiền dễ kiếm (không tốn quá nhiều công sức)" },
+            { idiom: "foot the bill", engDef: "to pay for something, esp. something expensive", viDef: "chi trả ..." },
+            { idiom: "on the breadline", engDef: "very poor; with very little money to live on", viDef: "cuộc sống rất khó khăn, nghèo khổ" },
+            { idiom: "pay your (own) way", engDef: "pay for everything yourself without relying on others", viDef: "tự chi trả" }
+        ];
+
+        const idiomExamplesData = [
+            { en: "At least 25% of your monthly income should be put aside as savings because a penny saved is a penny earned.", vi: "Ít nhất 25% thu nhập hàng tháng của bạn nên được dành để tiết kiệm vì một xu tiết kiệm cũng chính là một xu làm ra." },
+            { en: "His parents can't afford to foot the bill for his college education.", vi: "Cha mẹ của anh ấy không đủ khả năng chi trả cho việc học đại học của anh ấy." },
+            { en: "It would be best if you visited that restaurant; the food is really good, and it doesn't cost you an arm and a leg.", vi: "Ăn tại nhà hàng đó là ok nhất; thức ăn rất ngon và không quá đắt đỏ." },
+            { en: "How will you earn your bread and butter if you are never going to be serious about taking a job?", vi: "Làm thế nào để bạn kiếm sống nếu mà bạn không bao giờ nghiêm túc với việc đi tìm 1 công việc?" },
+            { en: "He has never worked hard for anything because he was born with a silver spoon in his mouth. His parents brought everything to him instead.", vi: "Anh ta chưa bao giờ làm việc chăm chỉ vì anh sinh ra đã ngậm thìa bạc trong miệng. Thay vào đó, cha mẹ anh đã chu cấp mọi thứ." }
+        ];
+
+        let flashcardDeck = [];
+        let currentCardIndex = 0;
+        let isCardFlipped = false;
+
+        // --- RENDERING FUNCTIONS ---
+
+        function renderVocabList() {
+            const container = document.getElementById('vocab-list');
+            container.innerHTML = generalVocabData.map(item => `
+                <li class="p-4 bg-gray-50 hover:bg-emerald-50 border border-gray-100 hover:border-emerald-200 rounded-xl transition-all duration-200 group list-item-vocab">
+                    <div class="font-bold text-[16px] text-gray-800 group-hover:text-emerald-700 term leading-snug">${item.en}</div>
+                    <div class="text-[14px] font-medium text-gray-600 mt-2 translation">${item.vi}</div>
+                </li>
+            `).join('');
+        }
+
+        function renderExamples() {
+            const container = document.getElementById('examples-list');
+            container.innerHTML = examplesData.map(ex => `
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-emerald-100 relative group hover:shadow-md transition-shadow">
+                    <i data-lucide="quote" class="w-8 h-8 text-emerald-50 absolute top-3 right-3 z-0"></i>
+                    <p class="font-medium text-gray-800 text-sm md:text-base leading-relaxed relative z-10">${ex.en}</p>
+                    <p class="text-sm text-emerald-700/90 mt-3 pt-3 border-t border-emerald-50 relative z-10 font-medium">${ex.vi}</p>
+                </div>
+            `).join('');
+        }
+
+        function renderIdiomsGrid() {
+            const container = document.getElementById('idioms-grid');
+            container.innerHTML = idiomsData.map(item => `
+                <div class="idiom-card bg-white p-6 rounded-2xl border border-gray-200 hover:border-emerald-300 shadow-sm hover:shadow transition-all group flex flex-col h-full relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-16 h-16 bg-emerald-50 rounded-bl-full -z-10 transition-transform group-hover:scale-110"></div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2 group-hover:text-emerald-600 idiom-title relative z-10">"${item.idiom}"</h3>
+                    <p class="text-sm text-gray-600 font-medium mb-4 idiom-eng relative z-10">${item.engDef}</p>
+                    <div class="mt-auto pt-4 border-t border-gray-100 relative z-10">
+                        <p class="font-medium text-emerald-800 text-sm idiom-vi">${item.viDef}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderIdiomExamples() {
+            const container = document.getElementById('idiom-examples-list');
+            container.innerHTML = idiomExamplesData.map(ex => `
+                <div class="bg-slate-700/50 p-5 rounded-xl border border-slate-600 relative">
+                    <p class="font-medium text-slate-100 text-sm leading-relaxed">${ex.en}</p>
+                    <p class="text-sm text-emerald-300/90 mt-3 pt-3 border-t border-slate-600 font-medium">${ex.vi}</p>
+                </div>
+            `).join('');
+        }
+
+        // --- FLASHCARD LOGIC ---
+        
+        function initFlashcards() {
+            // Combine vocab for flashcards
+            flashcardDeck = [
+                ...generalVocabData.map(i => ({ front: i.en, backEn: "", backVi: i.vi })),
+                ...idiomsData.map(i => ({ front: i.idiom, backEn: i.engDef, backVi: i.viDef }))
+            ];
+            // Shuffle
+            flashcardDeck.sort(() => Math.random() - 0.5);
+            currentCardIndex = 0;
+            updateFlashcardView();
+        }
+
+        function updateFlashcardView() {
+            const card = flashcardDeck[currentCardIndex];
+            document.getElementById('card-front-text').innerText = card.front;
+            document.getElementById('card-back-en').innerText = card.backEn;
+            document.getElementById('card-back-vi').innerText = card.backVi;
+            
+            if(!card.backEn) {
+                document.getElementById('card-back-en').classList.add('hidden');
+            } else {
+                document.getElementById('card-back-en').classList.remove('hidden');
+            }
+
+            if(!card.backVi) {
+                document.getElementById('card-back-vi').classList.add('hidden');
+            } else {
+                document.getElementById('card-back-vi').classList.remove('hidden');
+            }
+
+            document.getElementById('card-counter').innerText = `${currentCardIndex + 1} / ${flashcardDeck.length}`;
+            
+            if (isCardFlipped) {
+                document.getElementById('flashcard-inner').classList.remove('rotate-y-180');
+                isCardFlipped = false;
+            }
+        }
+
+        function flipCard() {
+            document.getElementById('flashcard-inner').classList.toggle('rotate-y-180');
+            isCardFlipped = !isCardFlipped;
+        }
+
+        function nextCard() {
+            if (currentCardIndex < flashcardDeck.length - 1) {
+                currentCardIndex++;
+                updateFlashcardView();
+            }
+        }
+
+        function prevCard() {
+            if (currentCardIndex > 0) {
+                currentCardIndex--;
+                updateFlashcardView();
+            }
+        }
+
+        // --- INTERACTIVITY LOGIC ---
+
+        function switchTab(tabId) {
+            // Hide all tabs
+            const tabs = ['vocab', 'idioms', 'flashcards'];
+            tabs.forEach(id => {
+                document.getElementById(`tab-${id}`).classList.add('hidden');
+                document.getElementById(`tab-${id}`).classList.remove('block');
+                
+                // Reset tab button styles
+                const btn = document.getElementById(`tab-btn-${id}`);
+                btn.className = "whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-gray-500 border-b-2 border-transparent hover:text-gray-800 transition-colors flex items-center gap-2";
+            });
+
+            // Show active tab
+            document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+            document.getElementById(`tab-${tabId}`).classList.add('block');
+            
+            // Set active tab button style
+            const activeBtn = document.getElementById(`tab-btn-${tabId}`);
+            activeBtn.className = "whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-emerald-700 border-b-2 border-emerald-700 transition-colors flex items-center gap-2";
+        }
+
+        function filterList(listId, query) {
+            const list = document.getElementById(listId);
+            let items;
+            
+            if(listId === 'vocab-list') {
+                 items = list.getElementsByClassName('list-item-vocab');
+            }
+
+            const lowerQuery = query.toLowerCase();
+
+            for (let i = 0; i < items.length; i++) {
+                const text = items[i].innerText.toLowerCase();
+                if (text.includes(lowerQuery)) {
+                    items[i].style.display = "";
+                } else {
+                    items[i].style.display = "none";
+                }
+            }
+        }
+
+        function filterIdioms(query) {
+            const cards = document.getElementsByClassName('idiom-card');
+            const lowerQuery = query.toLowerCase();
+
+            for (let i = 0; i < cards.length; i++) {
+                const text = cards[i].innerText.toLowerCase();
+                if (text.includes(lowerQuery)) {
+                    cards[i].style.display = "";
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+        }
+
+        // --- INITIALIZATION ---
+        document.addEventListener('DOMContentLoaded', () => {
+            renderVocabList();
+            renderIdiomsGrid();
+            renderExamples();
+            renderIdiomExamples();
+            initFlashcards();
+            
+            // Initialize Lucide icons
+            lucide.createIcons();
+        });
+    </script>
+</body>
+</html>

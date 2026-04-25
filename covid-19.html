@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IELTS Vocab: COVID-19 & Health</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .animate-fade-in { animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        @keyframes fadeIn { 
+            from { opacity: 0; transform: translateY(10px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+        
+        /* Custom scrollbar for lists */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #6ee7b7; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #34d399; }
+
+        /* 3D Flip Card Styles */
+        .perspective-1000 { perspective: 1000px; }
+        .transform-style-3d { transform-style: preserve-3d; }
+        .backface-hidden { backface-visibility: hidden; }
+        .rotate-y-180 { transform: rotateY(180deg); }
+    </style>
+</head>
+<body class="min-h-screen bg-emerald-50/50 text-gray-800 font-sans pb-12">
+
+    <!-- Header -->
+    <header class="bg-white border-b border-emerald-100 sticky top-0 z-10 shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
+                <div class="flex items-center gap-4">
+                    <div class="p-3 bg-emerald-600 text-white rounded-xl shadow-md shadow-emerald-200">
+                        <i data-lucide="shield-plus" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl sm:text-3xl font-extrabold text-gray-900">IELTS Vocabulary</h1>
+                        <p class="text-sm text-emerald-600 font-medium mt-1">Topic: COVID-19 & Health</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tabs -->
+            <div class="flex overflow-x-auto mt-6 border-b border-gray-100 hide-scrollbar gap-2 sm:gap-8">
+                <button onclick="switchTab('covid')" id="tab-btn-covid" class="whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-emerald-600 border-b-2 border-emerald-600 transition-colors flex items-center gap-2">
+                    <i data-lucide="virus" class="w-4 h-4"></i> COVID-19 & Impacts
+                </button>
+                <button onclick="switchTab('idioms')" id="tab-btn-idioms" class="whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-gray-500 border-b-2 border-transparent hover:text-gray-800 transition-colors flex items-center gap-2">
+                    <i data-lucide="activity" class="w-4 h-4"></i> Health Idioms
+                </button>
+                <button onclick="switchTab('flashcards')" id="tab-btn-flashcards" class="whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-gray-500 border-b-2 border-transparent hover:text-gray-800 transition-colors flex items-center gap-2">
+                    <i data-lucide="layers" class="w-4 h-4"></i> Practice Flashcards
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+        
+        <!-- Tab: COVID-19 & Impacts -->
+        <section id="tab-covid" class="animate-fade-in block">
+            <div class="flex flex-col lg:flex-row gap-6">
+                <!-- Vocab List -->
+                <div class="flex-1 space-y-6">
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-emerald-100">
+                        <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-6">
+                            <h2 class="text-xl font-bold text-gray-800 flex items-center gap-2">
+                                <i data-lucide="stethoscope" class="w-5 h-5 text-emerald-500"></i> Pandemic Vocabulary
+                            </h2>
+                            <div class="relative w-full sm:w-64">
+                                <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                                <input type="text" onkeyup="filterList('covid-list', this.value)" placeholder="Search vocabulary..." class="w-full pl-9 pr-4 py-2 bg-emerald-50/50 border border-emerald-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all">
+                            </div>
+                        </div>
+                        <ul id="covid-list" class="space-y-3 max-h-[400px] overflow-y-auto pr-2">
+                            <!-- Populated by JS -->
+                        </ul>
+                    </div>
+
+                    <!-- Impacts List -->
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-emerald-100">
+                        <h2 class="text-xl font-bold text-gray-800 flex items-center gap-2 mb-6">
+                            <i data-lucide="trending-down" class="w-5 h-5 text-red-500"></i> Impacts of COVID-19
+                        </h2>
+                        <ul id="impact-list" class="space-y-3">
+                            <!-- Populated by JS -->
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Examples Panel -->
+                <div class="lg:w-1/3 bg-gradient-to-b from-teal-50 to-emerald-50 p-6 rounded-2xl border border-teal-100 h-fit lg:sticky lg:top-48 shadow-inner">
+                    <h2 class="text-xl font-bold text-teal-900 mb-6 flex items-center gap-2">
+                        <i data-lucide="book-open" class="w-5 h-5 text-teal-600"></i> Contextual Examples
+                    </h2>
+                    <div id="examples-list" class="space-y-5">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tab: Health Idioms -->
+        <section id="tab-idioms" class="animate-fade-in hidden">
+            <div class="bg-white p-6 sm:p-8 rounded-3xl shadow-sm border border-emerald-100 mb-8">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-800">Health & Illness Idioms</h2>
+                        <p class="text-gray-500 mt-1">Phrasal verbs and idioms describing feeling unwell.</p>
+                    </div>
+                    <div class="relative w-full sm:w-64">
+                        <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                        <input type="text" onkeyup="filterIdioms(this.value)" placeholder="Search idioms..." class="w-full pl-9 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" id="idioms-grid">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Tab: Flashcards -->
+        <section id="tab-flashcards" class="animate-fade-in hidden">
+            <div class="max-w-3xl mx-auto text-center space-y-6">
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-emerald-100">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-2">Study Mode</h2>
+                    <p class="text-gray-500 mb-8">Click the card to flip it and reveal the meaning.</p>
+                    
+                    <!-- Flashcard Container -->
+                    <div id="flashcard-container" class="relative w-full h-64 cursor-pointer group perspective-1000 mx-auto" onclick="flipCard()">
+                        <div id="flashcard-inner" class="w-full h-full transition-all duration-500 transform-style-3d">
+                            
+                            <!-- Front -->
+                            <div class="absolute inset-0 backface-hidden bg-gradient-to-br from-emerald-500 to-teal-600 text-white border-2 border-emerald-400 rounded-2xl shadow-lg flex flex-col items-center justify-center p-6 text-center">
+                                <i data-lucide="refresh-cw" class="w-6 h-6 absolute top-4 right-4 text-white/50 opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                                <h3 id="card-front-text" class="text-3xl md:text-4xl font-bold"></h3>
+                                <p class="text-emerald-100 mt-4 text-sm uppercase tracking-widest font-semibold">Tap to reveal</p>
+                            </div>
+
+                            <!-- Back -->
+                            <div class="absolute inset-0 backface-hidden rotate-y-180 bg-white text-gray-800 border-2 border-emerald-200 rounded-2xl shadow-lg flex flex-col items-center justify-center p-6 text-center">
+                                <p id="card-back-en" class="text-lg text-gray-500 font-medium italic mb-2"></p>
+                                <p id="card-back-vi" class="text-2xl font-bold text-emerald-700"></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Controls -->
+                    <div class="flex justify-center items-center gap-6 mt-8">
+                        <button onclick="prevCard()" class="p-3 rounded-full bg-gray-100 text-gray-600 hover:bg-emerald-100 hover:text-emerald-600 transition-colors">
+                            <i data-lucide="chevron-left" class="w-6 h-6"></i>
+                        </button>
+                        <span id="card-counter" class="font-bold text-gray-500 text-lg min-w-[4rem]">1 / 10</span>
+                        <button onclick="nextCard()" class="p-3 rounded-full bg-gray-100 text-gray-600 hover:bg-emerald-100 hover:text-emerald-600 transition-colors">
+                            <i data-lucide="chevron-right" class="w-6 h-6"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Data & Logic -->
+    <script>
+        // --- DATA ---
+        const covidVocabData = [
+            { en: "the COVID-19 pandemic", vi: "đại dịch COVID-19" },
+            { en: "to be fully vaccinated", vi: "được tiêm chủng đầy đủ" },
+            { en: "confirmed COVID-19 cases", vi: "các trường hợp mắc Covid 19 đã được ghi nhận" },
+            { en: "to present an unprecedented challenge to ...", vi: "đặt ra thách thức chưa từng có đối với" },
+            { en: "to be at risk of falling into extreme poverty", vi: "có nguy cơ rơi vào cảnh nghèo khó cùng cực" },
+            { en: "to face an existential threat", vi: "đối mặt với một mối đe dọa tới sự tồn tại của con người" },
+            { en: "to earn an income during lockdowns", vi: "kiếm thu nhập trong thời gian phong tỏa" },
+            { en: "a lack of hospital beds", vi: "thiếu giường bệnh" },
+            { en: "to experience financial hardship", vi: "gặp khó khăn về tài chính" },
+            { en: "The Delta variant", vi: "Biến thể Delta" },
+            { en: "to be life-threatening", vi: "đe dọa tính mạng" },
+            { en: "to spread rapidly around the world", vi: "lây lan nhanh chóng trên toàn thế giới" },
+            { en: "to develop severe breathing problems", vi: "tiến triển các vấn đề về hô hấp nghiêm trọng" },
+            { en: "underlying medical conditions", vi: "bệnh nền" },
+            { en: "to cause a wide range of illnesses", vi: "gây ra nhiều loại bệnh" },
+            { en: "a global health crisis", vi: "một cuộc khủng hoảng sức khỏe toàn cầu" },
+            { en: "to halt the spread of the virus", vi: "ngăn chặn sự lây lan của vi rút" },
+            { en: "to impose tighter restrictions on movement", vi: "áp đặt những hạn chế chặt chẽ hơn đối với việc di chuyển/đi lại" }
+        ];
+
+        const impactVocabData = [
+            { en: "to tip... back into extreme poverty", vi: "đưa ... trở về sự nghèo khó cùng cực" },
+            { en: "loss of trade and tourism", vi: "tổn thất thương mại và du lịch" },
+            { en: "to negatively affect global economic growth", vi: "ảnh hưởng tiêu cực đến tăng trưởng kinh tế toàn cầu" },
+            { en: "significant disruptions to education", vi: "gián đoạn đáng kể đối với giáo dục" }
+        ];
+
+        const idiomsData = [
+            { idiom: "to be under the weather", engDef: "feel slightly ill", viDef: "cảm thấy không được khỏe" },
+            { idiom: "on your last legs", engDef: "very tired or near to death", viDef: "suy yếu cùng cực" },
+            { idiom: "to be out of sorts", engDef: "to be slightly ill", viDef: "cảm thấy khó chịu trong người" },
+            { idiom: "not your usual/normal self", engDef: "not looking or behaving as you usually do", viDef: "không bình thường như mọi ngày" },
+            { idiom: "off-colour", engDef: "looking or feeling ill", viDef: "có vẻ ốm yếu" },
+            { idiom: "feel/look like death warmed up", engDef: "feel or look very ill or tired", viDef: "nhìn rất mệt mỏi, nhợt nhạt" },
+            { idiom: "throw up", engDef: "vomit", viDef: "nôn mửa" },
+            { idiom: "keel over", engDef: "fall over, especially when you feel ill", viDef: "ngất đi" },
+            { idiom: "pass out", engDef: "faint; lost consciousness for a short time", viDef: "đột ngột bất tỉnh" },
+            { idiom: "wear off", engDef: "(of a pain, feeling, or effect) gradually disappear or stop", viDef: "cơn đau... dần tan biến" },
+            { idiom: "come/go down with something", engDef: "get one of the common illnesses", viDef: "bị bệnh gì" },
+            { idiom: "go round", engDef: "spread from person to person", viDef: "lây lan" },
+            { idiom: "pick something up", engDef: "catch an infectious illness", viDef: "nhiễm bệnh ..." },
+            { idiom: "take things/it easy", engDef: "relax and avoid working hard or doing too much", viDef: "nghỉ ngơi" }
+        ];
+
+        const examplesData = [
+            { en: "Worldwide, over 13% of the population have been fully vaccinated against COVID-19, according to the data compiled by Google.", vi: "Trên toàn thế giới, hơn 13% dân số đã được tiêm phòng đầy đủ COVID-19, theo dữ liệu do Google tổng hợp." },
+            { en: "Without the means to earn an income during lockdowns, many were unable to feed themselves and their families.", vi: "Không có phương tiện để kiếm thu nhập trong thời gian phong tỏa, nhiều người đã không thể nuôi sống bản thân và gia đình của họ." },
+            { en: "Malaysian authorities imposed tighter restrictions on movement to try to halt the spread of the coronavirus.", vi: "Các nhà chức trách Malaysia đã áp đặt các hạn chế chặt chẽ hơn đối với việc đi lại để cố gắng ngăn chặn sự lây lan của coronavirus." },
+            { en: "The virus spread rapidly around the world, and the World Health Organization (WHO) declared a pandemic in March in 2020.", vi: "Virus lây lan nhanh chóng trên khắp thế giới và Tổ chức Y tế Thế giới (WHO) đã tuyên bố đây là một đại dịch vào tháng 3 năm 2020." },
+            { en: "The COVID-19 pandemic has led to a dramatic loss of human life worldwide and presents an unprecedented challenge to public health, food systems and the world of work.", vi: "Đại dịch COVID-19 đã dẫn đến thiệt hại nghiêm trọng về nhân mạng trên toàn thế giới và đặt ra thách thức chưa từng có đối với sức khỏe cộng đồng, hệ thống thực phẩm và thế giới việc làm." }
+        ];
+
+        let flashcardDeck = [];
+        let currentCardIndex = 0;
+        let isCardFlipped = false;
+
+        // --- RENDERING FUNCTIONS ---
+
+        function renderSimpleList(containerId, data) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = data.map(item => `
+                <li class="p-4 bg-gray-50 hover:bg-emerald-50 border border-gray-100 hover:border-emerald-200 rounded-xl transition-all duration-200 group list-item-vocab">
+                    <div class="font-bold text-lg text-gray-800 group-hover:text-emerald-700 term">${item.en}</div>
+                    <div class="text-[15px] font-medium text-gray-600 mt-1 translation">${item.vi}</div>
+                </li>
+            `).join('');
+        }
+
+        function renderExamples(containerId, data) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = data.map(ex => `
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-teal-100 relative group hover:shadow-md transition-shadow">
+                    <p class="font-medium text-gray-800 text-sm md:text-base leading-relaxed relative z-10">${ex.en}</p>
+                    <p class="text-sm text-teal-700/90 mt-3 pt-3 border-t border-teal-50 relative z-10 font-medium">${ex.vi}</p>
+                </div>
+            `).join('');
+        }
+
+        function renderIdiomsGrid() {
+            const container = document.getElementById('idioms-grid');
+            container.innerHTML = idiomsData.map(item => `
+                <div class="idiom-card bg-white p-5 rounded-xl border border-gray-200 hover:border-emerald-300 shadow-sm hover:shadow transition-all group flex flex-col h-full">
+                    <h3 class="text-lg font-bold text-emerald-800 mb-2 group-hover:text-emerald-600 idiom-title">${item.idiom}</h3>
+                    <p class="text-sm text-gray-500 italic mb-4 idiom-eng">${item.engDef}</p>
+                    <div class="mt-auto pt-3 border-t border-gray-100">
+                        <p class="font-semibold text-gray-800 idiom-vi">${item.viDef}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // --- FLASHCARD LOGIC ---
+        
+        function initFlashcards() {
+            // Combine all vocab for flashcards
+            flashcardDeck = [
+                ...covidVocabData.map(i => ({ front: i.en, backEn: "", backVi: i.vi })),
+                ...impactVocabData.map(i => ({ front: i.en, backEn: "", backVi: i.vi })),
+                ...idiomsData.map(i => ({ front: i.idiom, backEn: i.engDef, backVi: i.viDef }))
+            ];
+            // Shuffle
+            flashcardDeck.sort(() => Math.random() - 0.5);
+            currentCardIndex = 0;
+            updateFlashcardView();
+        }
+
+        function updateFlashcardView() {
+            const card = flashcardDeck[currentCardIndex];
+            document.getElementById('card-front-text').innerText = card.front;
+            document.getElementById('card-back-en').innerText = card.backEn;
+            document.getElementById('card-back-vi').innerText = card.backVi;
+            document.getElementById('card-counter').innerText = `${currentCardIndex + 1} / ${flashcardDeck.length}`;
+            
+            // Ensure card is face up
+            if (isCardFlipped) {
+                document.getElementById('flashcard-inner').classList.remove('rotate-y-180');
+                isCardFlipped = false;
+            }
+        }
+
+        function flipCard() {
+            document.getElementById('flashcard-inner').classList.toggle('rotate-y-180');
+            isCardFlipped = !isCardFlipped;
+        }
+
+        function nextCard() {
+            if (currentCardIndex < flashcardDeck.length - 1) {
+                currentCardIndex++;
+                updateFlashcardView();
+            }
+        }
+
+        function prevCard() {
+            if (currentCardIndex > 0) {
+                currentCardIndex--;
+                updateFlashcardView();
+            }
+        }
+
+        // --- INTERACTIVITY LOGIC ---
+
+        function switchTab(tabId) {
+            // Hide all tabs
+            const tabs = ['covid', 'idioms', 'flashcards'];
+            tabs.forEach(id => {
+                document.getElementById(`tab-${id}`).classList.add('hidden');
+                document.getElementById(`tab-${id}`).classList.remove('block');
+                
+                // Reset tab button styles
+                const btn = document.getElementById(`tab-btn-${id}`);
+                btn.className = "whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-gray-500 border-b-2 border-transparent hover:text-gray-800 transition-colors flex items-center gap-2";
+            });
+
+            // Show active tab
+            document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+            document.getElementById(`tab-${tabId}`).classList.add('block');
+            
+            // Set active tab button style
+            const activeBtn = document.getElementById(`tab-btn-${tabId}`);
+            activeBtn.className = "whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-emerald-600 border-b-2 border-emerald-600 transition-colors flex items-center gap-2";
+        }
+
+        function filterList(listId, query) {
+            const list = document.getElementById(listId);
+            const items = list.getElementsByClassName('list-item-vocab');
+            const lowerQuery = query.toLowerCase();
+
+            for (let i = 0; i < items.length; i++) {
+                // Only filter items within the targeted list
+                if (items[i].parentElement.id !== listId) continue;
+                
+                const text = items[i].innerText.toLowerCase();
+                if (text.includes(lowerQuery)) {
+                    items[i].style.display = "";
+                } else {
+                    items[i].style.display = "none";
+                }
+            }
+        }
+
+        function filterIdioms(query) {
+            const cards = document.getElementsByClassName('idiom-card');
+            const lowerQuery = query.toLowerCase();
+
+            for (let i = 0; i < cards.length; i++) {
+                const text = cards[i].innerText.toLowerCase();
+                if (text.includes(lowerQuery)) {
+                    cards[i].style.display = "";
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+        }
+
+        // --- INITIALIZATION ---
+        document.addEventListener('DOMContentLoaded', () => {
+            renderSimpleList('covid-list', covidVocabData);
+            renderSimpleList('impact-list', impactVocabData);
+            renderExamples('examples-list', examplesData);
+            renderIdiomsGrid();
+            initFlashcards();
+            
+            // Initialize Lucide icons
+            lucide.createIcons();
+        });
+    </script>
+</body>
+</html>

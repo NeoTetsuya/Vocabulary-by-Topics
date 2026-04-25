@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IELTS Vocab: Genetically Modified Food</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .animate-fade-in { animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        @keyframes fadeIn { 
+            from { opacity: 0; transform: translateY(10px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+        
+        /* Custom scrollbar for lists */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #bef264; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #84cc16; }
+
+        /* 3D Flip Card Styles */
+        .perspective-1000 { perspective: 1000px; }
+        .transform-style-3d { transform-style: preserve-3d; }
+        .backface-hidden { backface-visibility: hidden; }
+        .rotate-y-180 { transform: rotateY(180deg); }
+        
+        /* Highlight specific words in text */
+        .highlight-vocab {
+            background-color: #ecfccb;
+            color: #4d7c0f;
+            font-weight: 600;
+            padding: 0 4px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .highlight-vocab:hover {
+            background-color: #d9f99d;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-lime-50/40 text-gray-800 font-sans pb-12">
+
+    <!-- Header -->
+    <header class="bg-white border-b border-lime-100 sticky top-0 z-10 shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
+                <div class="flex items-center gap-4">
+                    <div class="p-3 bg-lime-600 text-white rounded-xl shadow-md shadow-lime-200">
+                        <i data-lucide="leaf" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl sm:text-3xl font-extrabold text-gray-900">IELTS Vocabulary</h1>
+                        <p class="text-sm text-lime-600 font-medium mt-1">Topic: Genetically Modified Foods (GMOs)</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tabs -->
+            <div class="flex overflow-x-auto mt-6 border-b border-gray-100 hide-scrollbar gap-2 sm:gap-6">
+                <button onclick="switchTab('vocab')" id="tab-btn-vocab" class="whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-lime-700 border-b-2 border-lime-700 transition-colors flex items-center gap-2">
+                    <i data-lucide="list" class="w-4 h-4"></i> Core Vocab
+                </button>
+                <button onclick="switchTab('pros-cons')" id="tab-btn-pros-cons" class="whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-gray-500 border-b-2 border-transparent hover:text-gray-800 transition-colors flex items-center gap-2">
+                    <i data-lucide="scale" class="w-4 h-4"></i> Pros & Cons
+                </button>
+                <button onclick="switchTab('reading')" id="tab-btn-reading" class="whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-gray-500 border-b-2 border-transparent hover:text-gray-800 transition-colors flex items-center gap-2">
+                    <i data-lucide="book-text" class="w-4 h-4"></i> Reading Practice
+                </button>
+                <button onclick="switchTab('flashcards')" id="tab-btn-flashcards" class="whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-gray-500 border-b-2 border-transparent hover:text-gray-800 transition-colors flex items-center gap-2">
+                    <i data-lucide="layers" class="w-4 h-4"></i> Flashcards
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+        
+        <!-- Tab: Core Vocab -->
+        <section id="tab-vocab" class="animate-fade-in block">
+            <div class="bg-white p-6 sm:p-8 rounded-3xl shadow-sm border border-lime-100 mb-8">
+                <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-6">
+                    <h2 class="text-2xl font-bold text-gray-800 flex items-center gap-2">
+                        <i data-lucide="test-tubes" class="w-6 h-6 text-lime-500"></i> General GMO Vocabulary
+                    </h2>
+                    <div class="relative w-full sm:w-64">
+                        <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                        <input type="text" onkeyup="filterList('vocab-list', this.value)" placeholder="Search vocabulary..." class="w-full pl-9 pr-4 py-2 bg-lime-50/50 border border-lime-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-lime-500 transition-all">
+                    </div>
+                </div>
+                
+                <ul id="vocab-list" class="grid grid-cols-1 md:grid-cols-2 gap-4 max-h-[700px] overflow-y-auto pr-2">
+                    <!-- Populated by JS -->
+                </ul>
+            </div>
+        </section>
+
+        <!-- Tab: Pros & Cons -->
+        <section id="tab-pros-cons" class="animate-fade-in hidden">
+            <div class="bg-white rounded-3xl shadow-sm border border-lime-100 overflow-hidden mb-8">
+                <div class="bg-slate-800 p-8 text-center text-white">
+                    <i data-lucide="scale" class="w-12 h-12 mx-auto mb-4 text-lime-400"></i>
+                    <h2 class="text-3xl font-bold tracking-wide mb-2">Genetically Modified Foods</h2>
+                    <p class="text-lime-200">Analyzing the advantages and disadvantages</p>
+                </div>
+
+                <div class="flex flex-col md:flex-row">
+                    <!-- Pros -->
+                    <div class="w-full md:w-1/2 p-6 sm:p-8 border-r border-gray-100 bg-emerald-50/30">
+                        <h3 class="text-xl font-bold text-emerald-700 mb-6 flex items-center gap-2">
+                            <i data-lucide="thumbs-up" class="w-5 h-5"></i> Advantages (Pros)
+                        </h3>
+                        <div id="gmo-pros" class="space-y-4">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+
+                    <!-- Cons -->
+                    <div class="w-full md:w-1/2 p-6 sm:p-8 bg-rose-50/30">
+                        <h3 class="text-xl font-bold text-rose-700 mb-6 flex items-center gap-2">
+                            <i data-lucide="thumbs-down" class="w-5 h-5"></i> Disadvantages (Cons)
+                        </h3>
+                        <div id="gmo-cons" class="space-y-4">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tab: Reading Practice -->
+        <section id="tab-reading" class="animate-fade-in hidden">
+            <div class="bg-white p-6 sm:p-8 rounded-3xl shadow-sm border border-lime-100 mb-8">
+                <div class="flex items-center gap-3 mb-6 pb-6 border-b border-lime-100">
+                    <div class="bg-amber-100 text-amber-600 p-2 rounded-lg">
+                        <i data-lucide="calendar-days" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-800">30-Day Reading Challenge</h2>
+                        <p class="text-gray-500 text-sm">GMO Article Snippet</p>
+                    </div>
+                </div>
+
+                <div class="flex flex-col md:flex-row gap-8">
+                    <!-- Article Text -->
+                    <div class="flex-1 space-y-6 text-gray-700 text-lg leading-relaxed">
+                        <p>
+                            Engineers design plants using genetically modified organisms, or GMOs, to be tougher, more nutritious, or taste better. However, people have concerns over their safety, and there is much debate about the <span class="highlight-vocab" title="lợi ích và bất lợi">pros and cons</span> of using GMOs.
+                        </p>
+                        
+                        <h3 class="text-xl font-bold text-lime-800 mt-6 mb-2">Pros</h3>
+                        <p>
+                            Manufacturers use <span class="highlight-vocab" title="phương pháp biến đổi gen">genetic modification</span> to give foods <span class="highlight-vocab" title="các đặc tính, đặc điểm mong muốn">desirable traits</span>.
+                        </p>
+                        <p>
+                            Crop protection is the main rationale behind this type of genetic modification. Plants that are more resistant to diseases spread by insects or viruses result in higher <span class="highlight-vocab" title="năng suất">yields</span> for farmers and a more attractive product.
+                        </p>
+
+                        <h3 class="text-xl font-bold text-rose-800 mt-6 mb-2">Cons</h3>
+                        <p>
+                            <strong>Allergic reactions:</strong> Some people believe that GMO foods have more potential to trigger allergic reactions. This is because they may contain <span class="highlight-vocab" title="gen">genes</span> from an allergen - a food that prompts an allergic reaction.
+                        </p>
+                        <p>
+                            <strong>Antibacterial resistance:</strong> There is concern that genetic modification, which can <span class="highlight-vocab" title="tăng cường, thúc đẩy">boost</span> a crop's <span class="highlight-vocab" title="kháng lại ...">resistance to</span> disease or make it more <span class="highlight-vocab" title="có khả năng chống chịu ...">tolerant</span> to <span class="highlight-vocab" title="thuốc diệt cỏ">herbicides</span>, could affect the ability of people <span class="highlight-vocab" title="chống lại ...">to defend against</span> illness.
+                        </p>
+                    </div>
+
+                    <!-- Article Vocab Notes -->
+                    <div class="md:w-1/3 bg-slate-50 p-6 rounded-2xl border border-slate-200 h-fit sticky top-24">
+                        <h3 class="font-bold text-slate-800 mb-4 flex items-center gap-2">
+                            <i data-lucide="notebook-pen" class="w-5 h-5 text-slate-500"></i> Reading Notes
+                        </h3>
+                        <div id="reading-vocab-list" class="space-y-4">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Tab: Flashcards -->
+        <section id="tab-flashcards" class="animate-fade-in hidden">
+            <div class="max-w-3xl mx-auto text-center space-y-6">
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-lime-100">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-2">Study Mode</h2>
+                    <p class="text-gray-500 mb-8">Click the card to flip it and reveal the meaning.</p>
+                    
+                    <!-- Flashcard Container -->
+                    <div id="flashcard-container" class="relative w-full h-64 cursor-pointer group perspective-1000 mx-auto" onclick="flipCard()">
+                        <div id="flashcard-inner" class="w-full h-full transition-all duration-500 transform-style-3d">
+                            
+                            <!-- Front -->
+                            <div class="absolute inset-0 backface-hidden bg-gradient-to-br from-lime-500 to-green-600 text-white border-2 border-lime-400 rounded-2xl shadow-lg flex flex-col items-center justify-center p-6 text-center">
+                                <i data-lucide="refresh-cw" class="w-6 h-6 absolute top-4 right-4 text-white/50 opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                                <h3 id="card-front-text" class="text-2xl md:text-3xl font-bold px-4"></h3>
+                                <p class="text-lime-100 mt-6 text-sm uppercase tracking-widest font-semibold">Tap to reveal</p>
+                            </div>
+
+                            <!-- Back -->
+                            <div class="absolute inset-0 backface-hidden rotate-y-180 bg-white text-gray-800 border-2 border-lime-200 rounded-2xl shadow-lg flex flex-col items-center justify-center p-6 text-center">
+                                <p id="card-back-en" class="text-base text-gray-500 font-medium italic mb-3 px-4"></p>
+                                <p id="card-back-vi" class="text-xl font-bold text-lime-700 px-4"></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Controls -->
+                    <div class="flex justify-center items-center gap-6 mt-8">
+                        <button onclick="prevCard()" class="p-3 rounded-full bg-gray-100 text-gray-600 hover:bg-lime-100 hover:text-lime-700 transition-colors">
+                            <i data-lucide="chevron-left" class="w-6 h-6"></i>
+                        </button>
+                        <span id="card-counter" class="font-bold text-gray-500 text-lg min-w-[4rem]">1 / 10</span>
+                        <button onclick="nextCard()" class="p-3 rounded-full bg-gray-100 text-gray-600 hover:bg-lime-100 hover:text-lime-700 transition-colors">
+                            <i data-lucide="chevron-right" class="w-6 h-6"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Data & Logic -->
+    <script>
+        // --- DATA ---
+        
+        // Tab 1: Core Vocab
+        const generalVocabData = [
+            { en: "genetically modified foods/crops/products ~ engineered plants", vi: "thực phẩm/ cây trồng / sản phẩm biến đổi gen" },
+            { en: "tomatoes and broccoli bursting with cancer-fighting chemicals", vi: "cà chua và bông cải xanh chứa chất chống ung thư" },
+            { en: "vitamin-enhanced crops of rice, sweet potatoes", vi: "lúa, khoai lang được tăng cường thêm vitamin" },
+            { en: "wheat, soy and peanuts free of allergens / allergen-free peanuts", vi: "lúa mì, đậu nành và đậu phộng không có chất gây dị ứng" },
+            { en: "bananas that deliver vaccines", vi: "chuối cung cấp vắc-xin" },
+            { en: "vegetable oils loaded with therapeutic ingredients", vi: "dầu thực vật chứa các thành phần điều trị" },
+            { en: "have become subjects of intense debate", vi: "đã trở thành chủ đề tranh luận gay gắt" },
+            { en: "the Earth's burgeoning population", vi: "dân số Trái đất ngày càng tăng" },
+            { en: "to create new crop variants using irradiation and mutagenic chemicals", vi: "tạo ra các biến thể cây trồng mới bằng hóa chất chiếu xạ và gây đột biến" },
+            { en: "to do rigorous testing / be subjected to rigorous safety assessments", vi: "kiểm tra nghiêm ngặt / trải qua quy trình đánh giá an toàn nghiêm ngặt" },
+            { en: "to cause allergic reactions in humans", vi: "gây ra phản ứng dị ứng ở người" },
+            { en: "to raise the possibility of unanticipated health effects", vi: "nâng cao khả năng xảy ra các ảnh hưởng sức khỏe không lường trước được" },
+            { en: "to enhance safety for human and animal consumption", vi: "tăng cường an toàn cho việc tiêu thụ ở người và động vật" },
+            { en: "to enhance soil fertility and crop biodiversity", vi: "tăng cường độ phì nhiêu của đất và đa dạng sinh học cây trồng" },
+            { en: "to be selectively bred over generations to have certain desired traits", vi: "được lai tạo có chọn lọc qua các thế hệ để có những đặc điểm mong muốn" }
+        ];
+
+        // Tab 2: Pros & Cons
+        const prosData = [
+            { en: "to address the urgent problems of food shortage and hunger", vi: "giải quyết các vấn đề cấp bách của tình trạng thiếu lương thực" },
+            { en: "genetic engineering → increase crop yields, offer crop varieties that resist pests and disease", vi: "kỹ thuật di truyền → tăng năng suất cây trồng, cung cấp giống kháng sâu bệnh" },
+            { en: "to reduce the use of pesticides", vi: "giảm sử dụng thuốc trừ sâu" },
+            { en: "to help solve some of the world's most vexing nutrition problems, like preventable blindness (e.g., Golden rice)", vi: "giúp giải quyết vấn đề dinh dưỡng đáng lo ngại (vd: gạo vàng ngừa thiếu vitamin A)" },
+            { en: "to be able to grow in places where non-GM crops die", vi: "có thể phát triển ở những nơi cây trồng không biến đổi gen không phát triển được" },
+            { en: "to have a longer shelf life", vi: "có thời hạn sử dụng lâu hơn" }
+        ];
+
+        const consData = [
+            { en: "the possibility to negatively affect human health", vi: "khả năng ảnh hưởng tiêu cực đến sức khỏe con người" },
+            { en: "differences in nutritional content, allergic response, undesired side effects (toxicity, organ damage, or gene transfer)", vi: "sự khác biệt về dinh dưỡng, phản ứng dị ứng, tác dụng phụ không mong muốn" },
+            { en: "to insert genes into an organism from an entirely different organism → raise the potential risk of unexpected allergic reactions", vi: "chèn gen từ sinh vật khác → tăng nguy cơ phản ứng dị ứng không lường trước" },
+            { en: "the potential development of herbicide-resistant weeds", vi: "tiềm năng phát triển của cỏ dại kháng thuốc diệt cỏ" }
+        ];
+
+        // Tab 3: Reading Vocab
+        const readingVocabData = [
+            { en: "pros and cons", type: "", phonetic: "", def: "advantages and disadvantages: lợi ích và bất lợi" },
+            { en: "genetic modification", type: "", phonetic: "", def: "the process of altering the genetic makeup of an organism: phương pháp biến đổi gen" },
+            { en: "desirable traits", type: "", phonetic: "", def: "các đặc tính, đặc điểm mong muốn" },
+            { en: "yield", type: "(n)", phonetic: "/ji:ld/", def: "the total amount of crops, profits, etc. that are produced: năng suất" },
+            { en: "gene", type: "(n)", phonetic: "/dʒi:n/", def: "a unit inside a cell that controls a particular quality: gen" },
+            { en: "to boost something", type: "(v)", phonetic: "/bu:st/", def: "to make something increase, or become better: tăng cường, thúc đẩy" },
+            { en: "resistance to something", type: "(n)", phonetic: "/rɪˈzɪstəns/", def: "the act of fighting against something that is attacking you: kháng lại ..." },
+            { en: "tolerant", type: "(adj)", phonetic: "/ˈtɑːlərənt/", def: "able to survive or operate in difficult conditions: có khả năng chống chịu ..." },
+            { en: "herbicide", type: "(n)", phonetic: "/ˈhɜːrbɪsaɪd/", def: "a chemical that is poisonous to plants: thuốc diệt cỏ" },
+            { en: "to defend against something", type: "", phonetic: "", def: "to protect against something: chống lại ..." }
+        ];
+
+        let flashcardDeck = [];
+        let currentCardIndex = 0;
+        let isCardFlipped = false;
+
+        // --- RENDERING FUNCTIONS ---
+
+        function renderVocabList() {
+            const container = document.getElementById('vocab-list');
+            container.innerHTML = generalVocabData.map(item => `
+                <li class="p-4 bg-gray-50 hover:bg-lime-50 border border-gray-100 hover:border-lime-200 rounded-xl transition-all duration-200 group list-item-vocab">
+                    <div class="font-bold text-[16px] text-gray-800 group-hover:text-lime-700 term leading-snug">${item.en}</div>
+                    <div class="text-[14px] font-medium text-gray-600 mt-2 translation">${item.vi}</div>
+                </li>
+            `).join('');
+        }
+
+        function renderProsCons() {
+            const prosContainer = document.getElementById('gmo-pros');
+            prosContainer.innerHTML = prosData.map(item => `
+                <div class="bg-white p-4 rounded-xl border border-emerald-100 shadow-sm relative pl-10">
+                    <i data-lucide="plus-circle" class="absolute left-3 top-4 w-5 h-5 text-emerald-500"></i>
+                    <p class="font-medium text-gray-800 text-sm leading-relaxed">${item.en}</p>
+                    <p class="text-sm text-gray-500 mt-2 pt-2 border-t border-gray-50">${item.vi}</p>
+                </div>
+            `).join('');
+
+            const consContainer = document.getElementById('gmo-cons');
+            consContainer.innerHTML = consData.map(item => `
+                <div class="bg-white p-4 rounded-xl border border-rose-100 shadow-sm relative pl-10">
+                    <i data-lucide="minus-circle" class="absolute left-3 top-4 w-5 h-5 text-rose-500"></i>
+                    <p class="font-medium text-gray-800 text-sm leading-relaxed">${item.en}</p>
+                    <p class="text-sm text-gray-500 mt-2 pt-2 border-t border-gray-50">${item.vi}</p>
+                </div>
+            `).join('');
+        }
+
+        function renderReadingVocab() {
+            const container = document.getElementById('reading-vocab-list');
+            container.innerHTML = readingVocabData.map(item => `
+                <div class="bg-white p-3 rounded-lg border border-slate-100 shadow-sm">
+                    <div class="font-bold text-lime-800 text-sm mb-1 flex flex-wrap items-baseline gap-1">
+                        <span>${item.en}</span>
+                        ${item.type ? `<span class="text-xs text-gray-400 font-normal">${item.type}</span>` : ''}
+                        ${item.phonetic ? `<span class="text-xs text-slate-400 font-normal ml-1">${item.phonetic}</span>` : ''}
+                    </div>
+                    <div class="text-xs text-gray-600 leading-relaxed">${item.def}</div>
+                </div>
+            `).join('');
+        }
+
+
+        // --- FLASHCARD LOGIC ---
+        
+        function initFlashcards() {
+            // Combine vocab for flashcards
+            flashcardDeck = [
+                ...generalVocabData.map(i => ({ front: i.en, backEn: "", backVi: i.vi })),
+                ...prosData.map(i => ({ front: i.en, backEn: "", backVi: i.vi })),
+                ...consData.map(i => ({ front: i.en, backEn: "", backVi: i.vi })),
+                ...readingVocabData.map(i => ({ front: i.en, backEn: i.def, backVi: "" }))
+            ];
+            // Shuffle
+            flashcardDeck.sort(() => Math.random() - 0.5);
+            currentCardIndex = 0;
+            updateFlashcardView();
+        }
+
+        function updateFlashcardView() {
+            const card = flashcardDeck[currentCardIndex];
+            document.getElementById('card-front-text').innerText = card.front;
+            document.getElementById('card-back-en').innerText = card.backEn;
+            document.getElementById('card-back-vi').innerText = card.backVi;
+            
+            if(!card.backEn) {
+                document.getElementById('card-back-en').classList.add('hidden');
+            } else {
+                document.getElementById('card-back-en').classList.remove('hidden');
+            }
+
+            if(!card.backVi) {
+                document.getElementById('card-back-vi').classList.add('hidden');
+            } else {
+                document.getElementById('card-back-vi').classList.remove('hidden');
+            }
+
+            document.getElementById('card-counter').innerText = `${currentCardIndex + 1} / ${flashcardDeck.length}`;
+            
+            if (isCardFlipped) {
+                document.getElementById('flashcard-inner').classList.remove('rotate-y-180');
+                isCardFlipped = false;
+            }
+        }
+
+        function flipCard() {
+            document.getElementById('flashcard-inner').classList.toggle('rotate-y-180');
+            isCardFlipped = !isCardFlipped;
+        }
+
+        function nextCard() {
+            if (currentCardIndex < flashcardDeck.length - 1) {
+                currentCardIndex++;
+                updateFlashcardView();
+            }
+        }
+
+        function prevCard() {
+            if (currentCardIndex > 0) {
+                currentCardIndex--;
+                updateFlashcardView();
+            }
+        }
+
+        // --- INTERACTIVITY LOGIC ---
+
+        function switchTab(tabId) {
+            // Hide all tabs
+            const tabs = ['vocab', 'pros-cons', 'reading', 'flashcards'];
+            tabs.forEach(id => {
+                document.getElementById(`tab-${id}`).classList.add('hidden');
+                document.getElementById(`tab-${id}`).classList.remove('block');
+                
+                // Reset tab button styles
+                const btn = document.getElementById(`tab-btn-${id}`);
+                btn.className = "whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-gray-500 border-b-2 border-transparent hover:text-gray-800 transition-colors flex items-center gap-2";
+            });
+
+            // Show active tab
+            document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+            document.getElementById(`tab-${tabId}`).classList.add('block');
+            
+            // Set active tab button style
+            const activeBtn = document.getElementById(`tab-btn-${tabId}`);
+            activeBtn.className = "whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-lime-700 border-b-2 border-lime-700 transition-colors flex items-center gap-2";
+        }
+
+        function filterList(listId, query) {
+            const list = document.getElementById(listId);
+            const items = list.getElementsByClassName('list-item-vocab');
+            const lowerQuery = query.toLowerCase();
+
+            for (let i = 0; i < items.length; i++) {
+                const text = items[i].innerText.toLowerCase();
+                if (text.includes(lowerQuery)) {
+                    items[i].style.display = "";
+                } else {
+                    items[i].style.display = "none";
+                }
+            }
+        }
+
+        // --- INITIALIZATION ---
+        document.addEventListener('DOMContentLoaded', () => {
+            renderVocabList();
+            renderProsCons();
+            renderReadingVocab();
+            initFlashcards();
+            
+            // Initialize Lucide icons
+            lucide.createIcons();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IELTS Vocab: Crime & Law</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .animate-fade-in { animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        @keyframes fadeIn { 
+            from { opacity: 0; transform: translateY(10px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+        
+        /* Custom scrollbar for lists */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #94a3b8; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #64748b; }
+
+        /* 3D Flip Card Styles */
+        .perspective-1000 { perspective: 1000px; }
+        .transform-style-3d { transform-style: preserve-3d; }
+        .backface-hidden { backface-visibility: hidden; }
+        .rotate-y-180 { transform: rotateY(180deg); }
+    </style>
+</head>
+<body class="min-h-screen bg-slate-50 text-slate-800 font-sans pb-12">
+
+    <!-- Header -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-10 shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
+                <div class="flex items-center gap-4">
+                    <div class="p-3 bg-slate-800 text-white rounded-xl shadow-md shadow-slate-300">
+                        <i data-lucide="gavel" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900">IELTS Vocabulary</h1>
+                        <p class="text-sm text-indigo-600 font-medium mt-1">Topic: Crime & Law (Tội phạm)</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tabs -->
+            <div class="flex overflow-x-auto mt-6 border-b border-slate-200 hide-scrollbar gap-2 sm:gap-8">
+                <button onclick="switchTab('vocab')" id="tab-btn-vocab" class="whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-indigo-700 border-b-2 border-indigo-700 transition-colors flex items-center gap-2">
+                    <i data-lucide="shield-alert" class="w-4 h-4"></i> Core Vocabulary
+                </button>
+                <button onclick="switchTab('idioms')" id="tab-btn-idioms" class="whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-slate-500 border-b-2 border-transparent hover:text-slate-800 transition-colors flex items-center gap-2">
+                    <i data-lucide="lock" class="w-4 h-4"></i> Crime Idioms
+                </button>
+                <button onclick="switchTab('flashcards')" id="tab-btn-flashcards" class="whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-slate-500 border-b-2 border-transparent hover:text-slate-800 transition-colors flex items-center gap-2">
+                    <i data-lucide="layers" class="w-4 h-4"></i> Practice Flashcards
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+        
+        <!-- Tab: Core Vocabulary -->
+        <section id="tab-vocab" class="animate-fade-in block">
+            <div class="flex flex-col lg:flex-row gap-6">
+                <!-- Vocab List -->
+                <div class="flex-1 space-y-6">
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                        <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-6">
+                            <h2 class="text-xl font-bold text-slate-800 flex items-center gap-2">
+                                <i data-lucide="list" class="w-5 h-5 text-indigo-500"></i> Crime Lexicon
+                            </h2>
+                            <div class="relative w-full sm:w-64">
+                                <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400"></i>
+                                <input type="text" onkeyup="filterList('vocab-list', this.value)" placeholder="Search vocabulary..." class="w-full pl-9 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all">
+                            </div>
+                        </div>
+                        <ul id="vocab-list" class="space-y-3 max-h-[600px] overflow-y-auto pr-2">
+                            <!-- Populated by JS -->
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Examples Panel -->
+                <div class="lg:w-1/3 bg-gradient-to-b from-indigo-50 to-slate-100 p-6 rounded-2xl border border-indigo-100 h-fit lg:sticky lg:top-48 shadow-inner">
+                    <h2 class="text-xl font-bold text-indigo-900 mb-6 flex items-center gap-2">
+                        <i data-lucide="book-open" class="w-5 h-5 text-indigo-600"></i> Contextual Examples
+                    </h2>
+                    <div id="examples-list" class="space-y-5">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tab: Idioms -->
+        <section id="tab-idioms" class="animate-fade-in hidden">
+            <div class="bg-white p-6 sm:p-8 rounded-3xl shadow-sm border border-slate-200 mb-8">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
+                    <div>
+                        <h2 class="text-2xl font-bold text-slate-800">Crime & Law Idioms</h2>
+                        <p class="text-slate-500 mt-1">Common expressions used in legal and criminal contexts.</p>
+                    </div>
+                    <div class="relative w-full sm:w-64">
+                        <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400"></i>
+                        <input type="text" onkeyup="filterIdioms(this.value)" placeholder="Search idioms..." class="w-full pl-9 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" id="idioms-grid">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Tab: Flashcards -->
+        <section id="tab-flashcards" class="animate-fade-in hidden">
+            <div class="max-w-3xl mx-auto text-center space-y-6">
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-200">
+                    <h2 class="text-2xl font-bold text-slate-800 mb-2">Study Mode</h2>
+                    <p class="text-slate-500 mb-8">Click the card to flip it and reveal the meaning.</p>
+                    
+                    <!-- Flashcard Container -->
+                    <div id="flashcard-container" class="relative w-full h-64 cursor-pointer group perspective-1000 mx-auto" onclick="flipCard()">
+                        <div id="flashcard-inner" class="w-full h-full transition-all duration-500 transform-style-3d">
+                            
+                            <!-- Front -->
+                            <div class="absolute inset-0 backface-hidden bg-gradient-to-br from-slate-800 to-indigo-900 text-white border-2 border-slate-700 rounded-2xl shadow-lg flex flex-col items-center justify-center p-6 text-center">
+                                <i data-lucide="refresh-cw" class="w-6 h-6 absolute top-4 right-4 text-white/50 opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                                <h3 id="card-front-text" class="text-2xl md:text-3xl font-bold px-4"></h3>
+                                <p class="text-indigo-200 mt-6 text-sm uppercase tracking-widest font-semibold">Tap to reveal</p>
+                            </div>
+
+                            <!-- Back -->
+                            <div class="absolute inset-0 backface-hidden rotate-y-180 bg-white text-slate-800 border-2 border-indigo-200 rounded-2xl shadow-lg flex flex-col items-center justify-center p-6 text-center">
+                                <p id="card-back-en" class="text-base text-slate-500 font-medium italic mb-3 px-4"></p>
+                                <p id="card-back-vi" class="text-xl font-bold text-indigo-700 px-4"></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Controls -->
+                    <div class="flex justify-center items-center gap-6 mt-8">
+                        <button onclick="prevCard()" class="p-3 rounded-full bg-slate-100 text-slate-600 hover:bg-indigo-100 hover:text-indigo-700 transition-colors">
+                            <i data-lucide="chevron-left" class="w-6 h-6"></i>
+                        </button>
+                        <span id="card-counter" class="font-bold text-slate-500 text-lg min-w-[4rem]">1 / 10</span>
+                        <button onclick="nextCard()" class="p-3 rounded-full bg-slate-100 text-slate-600 hover:bg-indigo-100 hover:text-indigo-700 transition-colors">
+                            <i data-lucide="chevron-right" class="w-6 h-6"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Data & Logic -->
+    <script>
+        // --- DATA ---
+        const vocabData = [
+            { en: "to commit a crime = to commit an offence = break the law", vi: "thực hiện hành vi phạm tội" },
+            { en: "to reoffend = to commit crimes again", vi: "tái phạm" },
+            { en: "criminals = offenders = lawbreakers = people who commit crimes", vi: "kẻ phạm tội" },
+            { en: "to engage in criminal activities = to take part in unlawful acts", vi: "tham gia vào các hoạt động phạm pháp" },
+            { en: "minor crimes such as shoplifting or pickpocketing", vi: "các tội nhẹ như ăn trộm vặt tại các cửa hàng hay móc túi" },
+            { en: "serious crimes such as robbery or murder", vi: "các tội nặng như cướp hay giết người" },
+            { en: "to receive capital punishment = to receive the death penalty", vi: "nhận án tử hình" },
+            { en: "to receive prison sentences = to be sent to prison", vi: "nhận án tù/ bị bỏ tù" },
+            { en: "life imprisonment", vi: "tù chung thân" },
+            { en: "to impose stricter/more severe punishments on...", vi: "áp đặt những hình phạt nặng nề hơn lên..." },
+            { en: "to provide education and vocational training", vi: "cung cấp giáo dục và đào tạo nghề" },
+            { en: "to commit crimes as a way of making a living", vi: "phạm tội như 1 cách để kiếm sống" },
+            { en: "to be released from prison", vi: "được thả/ ra tù" },
+            { en: "rehabilitation programmes", vi: "những chương trình cải tạo" },
+            { en: "to pose a serious threat to society", vi: "gây ra mối đe dọa nghiêm trọng cho xã hội" },
+            { en: "to act/serve as a deterrent", vi: "đóng vai trò như 1 sự cảnh báo/ngăn chặn" },
+            { en: "security cameras and home surveillance equipment", vi: "thiết bị giám sát tại nhà và camera an ninh" },
+            { en: "crime prevention programmes", vi: "những chương trình phòng chống tội phạm" },
+            { en: "juvenile crimes = youth crimes = crimes among young adults", vi: "tội phạm vị thành niên/ ở giới trẻ" },
+            { en: "innocent people", vi: "những người vô tội" },
+            { en: "to be wrongly convicted and executed", vi: "bị kết tội và xử oan" },
+            { en: "to create a violent culture", vi: "tạo ra 1 nền văn hóa bạo lực" },
+            { en: "potential criminals", vi: "những người có khả năng cao trở thành tội phạm" },
+            { en: "a sense of safety and security", vi: "một cảm giác an toàn và an ninh" }
+        ];
+
+        const idiomsData = [
+            { idiom: "to cover your tracks", engDef: "to hide or destroy the things that show where you have been or what you have been doing", viDef: "che giấu những vết tích hay những việc mình đã làm" },
+            { idiom: "to be behind bars", engDef: "to be in prison", viDef: "ngồi tù" },
+            { idiom: "to catch somebody red handed", engDef: "to discover someone while they are doing something bad or illegal", viDef: "bắt quả tang" },
+            { idiom: "to keep your nose clean", engDef: "to avoid getting into trouble", viDef: "giữ cho mình tránh khỏi gặp rắc rối" },
+            { idiom: "to do something by the book", engDef: "to do something exactly as the rules tell you", viDef: "làm theo sách vở, đúng quy tắc, luật lệ" },
+            { idiom: "to come clean", engDef: "to tell the truth about something that you have been keeping secret", viDef: "thú thật điều gì mà trước đây mình muốn giấu kín" },
+            { idiom: "to turn somebody in", engDef: "to take a criminal to the police, or to go to them yourself to admit a crime", viDef: "giao nộp ai đó cho cảnh sát" },
+            { idiom: "to get away with murder", engDef: "to be allowed to do things that other people would be punished or criticized for", viDef: "làm điều sai trái mà không bị trừng phạt" },
+            { idiom: "to turn a blind eye", engDef: "to ignore something that you know is wrong", viDef: "nhắm mắt làm ngơ, nhắm mắt cho qua" },
+            { idiom: "to bail someone out", engDef: "to help a person or organization that is in difficulty, usually by giving or lending them money", viDef: "bảo lãnh" }
+        ];
+
+        const examplesData = [
+            { en: "Widespread surveillance in public areas would greatly contribute to crime reduction by deterring potential criminals from engaging in unlawful activities, when they know that security cameras are recording their every move.", vi: "Giám sát rộng rãi ở các khu vực công cộng sẽ góp phần rất lớn trong việc giảm tội phạm bằng cách ngăn chặn tội phạm tiềm năng tham gia vào các hoạt động bất hợp pháp, khi họ biết rằng các camera an ninh đang ghi lại mọi hành động của họ." },
+            { en: "This helps protect society from any threat and provides people with a sense of safety and security.", vi: "Điều này giúp bảo vệ xã hội khỏi mọi mối đe dọa và mang lại cho mọi người cảm giác an toàn và an ninh." },
+            { en: "Imposing more severe punishments on those who commit driving offences can somehow help increase road safety.", vi: "Việc áp đặt những hình phạt nặng nề hơn lên những người phạm luật giao thông có thể một phần nào đó giúp tăng sự an toàn đường bộ." }
+        ];
+
+        let flashcardDeck = [];
+        let currentCardIndex = 0;
+        let isCardFlipped = false;
+
+        // --- RENDERING FUNCTIONS ---
+
+        function renderSimpleList(containerId, data) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = data.map(item => `
+                <li class="p-4 bg-slate-50 hover:bg-indigo-50 border border-slate-100 hover:border-indigo-200 rounded-xl transition-all duration-200 group list-item-vocab">
+                    <div class="font-bold text-[17px] text-slate-800 group-hover:text-indigo-800 term leading-snug">${item.en}</div>
+                    <div class="text-[15px] font-medium text-slate-600 mt-2 translation">${item.vi}</div>
+                </li>
+            `).join('');
+        }
+
+        function renderExamples(containerId, data) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = data.map(ex => `
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-indigo-100 relative group hover:shadow-md transition-shadow">
+                    <i data-lucide="quote" class="w-8 h-8 text-indigo-50 absolute top-3 right-3 z-0"></i>
+                    <p class="font-medium text-slate-800 text-sm md:text-base leading-relaxed relative z-10">${ex.en}</p>
+                    <p class="text-sm text-indigo-700/90 mt-3 pt-3 border-t border-indigo-50 relative z-10 font-medium">${ex.vi}</p>
+                </div>
+            `).join('');
+        }
+
+        function renderIdiomsGrid() {
+            const container = document.getElementById('idioms-grid');
+            container.innerHTML = idiomsData.map(item => `
+                <div class="idiom-card bg-white p-5 rounded-xl border border-slate-200 hover:border-indigo-300 shadow-sm hover:shadow transition-all group flex flex-col h-full">
+                    <h3 class="text-lg font-bold text-slate-800 mb-2 group-hover:text-indigo-700 idiom-title">${item.idiom}</h3>
+                    <p class="text-sm text-slate-500 italic mb-4 idiom-eng">${item.engDef}</p>
+                    <div class="mt-auto pt-3 border-t border-slate-100">
+                        <p class="font-semibold text-slate-800 idiom-vi">${item.viDef}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // --- FLASHCARD LOGIC ---
+        
+        function initFlashcards() {
+            // Combine all vocab for flashcards
+            flashcardDeck = [
+                ...vocabData.map(i => ({ front: i.en, backEn: "", backVi: i.vi })),
+                ...idiomsData.map(i => ({ front: i.idiom, backEn: i.engDef, backVi: i.viDef }))
+            ];
+            // Shuffle
+            flashcardDeck.sort(() => Math.random() - 0.5);
+            currentCardIndex = 0;
+            updateFlashcardView();
+        }
+
+        function updateFlashcardView() {
+            const card = flashcardDeck[currentCardIndex];
+            document.getElementById('card-front-text').innerText = card.front;
+            document.getElementById('card-back-en').innerText = card.backEn;
+            document.getElementById('card-back-vi').innerText = card.backVi;
+            
+            // Adjust styling if no english definition exists
+            if(card.backEn === "") {
+                document.getElementById('card-back-en').classList.add('hidden');
+            } else {
+                document.getElementById('card-back-en').classList.remove('hidden');
+            }
+
+            document.getElementById('card-counter').innerText = `${currentCardIndex + 1} / ${flashcardDeck.length}`;
+            
+            // Ensure card is face up
+            if (isCardFlipped) {
+                document.getElementById('flashcard-inner').classList.remove('rotate-y-180');
+                isCardFlipped = false;
+            }
+        }
+
+        function flipCard() {
+            document.getElementById('flashcard-inner').classList.toggle('rotate-y-180');
+            isCardFlipped = !isCardFlipped;
+        }
+
+        function nextCard() {
+            if (currentCardIndex < flashcardDeck.length - 1) {
+                currentCardIndex++;
+                updateFlashcardView();
+            }
+        }
+
+        function prevCard() {
+            if (currentCardIndex > 0) {
+                currentCardIndex--;
+                updateFlashcardView();
+            }
+        }
+
+        // --- INTERACTIVITY LOGIC ---
+
+        function switchTab(tabId) {
+            // Hide all tabs
+            const tabs = ['vocab', 'idioms', 'flashcards'];
+            tabs.forEach(id => {
+                document.getElementById(`tab-${id}`).classList.add('hidden');
+                document.getElementById(`tab-${id}`).classList.remove('block');
+                
+                // Reset tab button styles
+                const btn = document.getElementById(`tab-btn-${id}`);
+                btn.className = "whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-slate-500 border-b-2 border-transparent hover:text-slate-800 transition-colors flex items-center gap-2";
+            });
+
+            // Show active tab
+            document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+            document.getElementById(`tab-${tabId}`).classList.add('block');
+            
+            // Set active tab button style
+            const activeBtn = document.getElementById(`tab-btn-${tabId}`);
+            activeBtn.className = "whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-indigo-700 border-b-2 border-indigo-700 transition-colors flex items-center gap-2";
+        }
+
+        function filterList(listId, query) {
+            const list = document.getElementById(listId);
+            const items = list.getElementsByClassName('list-item-vocab');
+            const lowerQuery = query.toLowerCase();
+
+            for (let i = 0; i < items.length; i++) {
+                if (items[i].parentElement.id !== listId) continue;
+                
+                const text = items[i].innerText.toLowerCase();
+                if (text.includes(lowerQuery)) {
+                    items[i].style.display = "";
+                } else {
+                    items[i].style.display = "none";
+                }
+            }
+        }
+
+        function filterIdioms(query) {
+            const cards = document.getElementsByClassName('idiom-card');
+            const lowerQuery = query.toLowerCase();
+
+            for (let i = 0; i < cards.length; i++) {
+                const text = cards[i].innerText.toLowerCase();
+                if (text.includes(lowerQuery)) {
+                    cards[i].style.display = "";
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+        }
+
+        // --- INITIALIZATION ---
+        document.addEventListener('DOMContentLoaded', () => {
+            renderSimpleList('vocab-list', vocabData);
+            renderExamples('examples-list', examplesData);
+            renderIdiomsGrid();
+            initFlashcards();
+            
+            // Initialize Lucide icons
+            lucide.createIcons();
+        });
+    </script>
+</body>
+</html>

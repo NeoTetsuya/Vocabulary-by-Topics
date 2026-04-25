@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IELTS Vocab: Education</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .animate-fade-in { animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        @keyframes fadeIn { 
+            from { opacity: 0; transform: translateY(10px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+        
+        /* Custom scrollbar for lists */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #a5b4fc; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #818cf8; }
+
+        /* 3D Flip Card Styles */
+        .perspective-1000 { perspective: 1000px; }
+        .transform-style-3d { transform-style: preserve-3d; }
+        .backface-hidden { backface-visibility: hidden; }
+        .rotate-y-180 { transform: rotateY(180deg); }
+        
+        /* Essay Highlights */
+        .highlight-phrase {
+            background-color: #e0e7ff;
+            color: #4338ca;
+            padding: 2px 4px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-indigo-50/40 text-gray-800 font-sans pb-12">
+
+    <!-- Header -->
+    <header class="bg-white border-b border-indigo-100 sticky top-0 z-10 shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
+                <div class="flex items-center gap-4">
+                    <div class="p-3 bg-indigo-600 text-white rounded-xl shadow-md shadow-indigo-200">
+                        <i data-lucide="graduation-cap" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl sm:text-3xl font-extrabold text-gray-900">IELTS Vocabulary</h1>
+                        <p class="text-sm text-indigo-600 font-medium mt-1">Topic: Education & Study Abroad</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tabs -->
+            <div class="flex overflow-x-auto mt-6 border-b border-gray-100 hide-scrollbar gap-2 sm:gap-6">
+                <button onclick="switchTab('vocab')" id="tab-btn-vocab" class="whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-indigo-700 border-b-2 border-indigo-700 transition-colors flex items-center gap-2">
+                    <i data-lucide="book-open" class="w-4 h-4"></i> Core Vocab
+                </button>
+                <button onclick="switchTab('idioms')" id="tab-btn-idioms" class="whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-gray-500 border-b-2 border-transparent hover:text-gray-800 transition-colors flex items-center gap-2">
+                    <i data-lucide="message-circle" class="w-4 h-4"></i> Idioms
+                </button>
+                <button onclick="switchTab('abroad')" id="tab-btn-abroad" class="whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-gray-500 border-b-2 border-transparent hover:text-gray-800 transition-colors flex items-center gap-2">
+                    <i data-lucide="globe" class="w-4 h-4"></i> Study Abroad
+                </button>
+                <button onclick="switchTab('writing')" id="tab-btn-writing" class="whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-gray-500 border-b-2 border-transparent hover:text-gray-800 transition-colors flex items-center gap-2">
+                    <i data-lucide="pen-tool" class="w-4 h-4"></i> Writing Task 2
+                </button>
+                <button onclick="switchTab('flashcards')" id="tab-btn-flashcards" class="whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-gray-500 border-b-2 border-transparent hover:text-gray-800 transition-colors flex items-center gap-2">
+                    <i data-lucide="layers" class="w-4 h-4"></i> Flashcards
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+        
+        <!-- Tab: Core Vocab -->
+        <section id="tab-vocab" class="animate-fade-in block">
+            <div class="flex flex-col lg:flex-row gap-6">
+                <!-- Vocab List -->
+                <div class="flex-1 space-y-6">
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-indigo-100">
+                        <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-6">
+                            <h2 class="text-xl font-bold text-gray-800 flex items-center gap-2">
+                                <i data-lucide="list" class="w-5 h-5 text-indigo-500"></i> General Education
+                            </h2>
+                            <div class="relative w-full sm:w-64">
+                                <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                                <input type="text" onkeyup="filterList('vocab-list', this.value)" placeholder="Search vocabulary..." class="w-full pl-9 pr-4 py-2 bg-indigo-50/50 border border-indigo-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all">
+                            </div>
+                        </div>
+                        
+                        <ul id="vocab-list" class="space-y-3 max-h-[600px] overflow-y-auto pr-2">
+                            <!-- Populated by JS -->
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Education Levels Panel -->
+                <div class="lg:w-1/3 bg-gradient-to-b from-violet-50 to-indigo-50 p-6 rounded-2xl border border-violet-100 h-fit lg:sticky lg:top-48 shadow-inner">
+                    <h2 class="text-xl font-bold text-violet-900 mb-6 flex items-center gap-2">
+                        <i data-lucide="bar-chart" class="w-5 h-5 text-violet-600"></i> Education Levels
+                    </h2>
+                    <div id="levels-list" class="space-y-4">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tab: Idioms -->
+        <section id="tab-idioms" class="animate-fade-in hidden">
+            <div class="bg-white p-6 sm:p-8 rounded-3xl shadow-sm border border-indigo-100 mb-8">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-800">Idioms & Phrasal Verbs</h2>
+                        <p class="text-gray-500 mt-1">Expressions related to studying and learning.</p>
+                    </div>
+                    <div class="relative w-full sm:w-64">
+                        <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                        <input type="text" onkeyup="filterIdioms(this.value)" placeholder="Search idioms..." class="w-full pl-9 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" id="idioms-grid">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Tab: Study Abroad -->
+        <section id="tab-abroad" class="animate-fade-in hidden">
+            <div class="bg-white rounded-3xl shadow-sm border border-indigo-100 overflow-hidden mb-8">
+                <div class="bg-indigo-800 p-8 text-center text-white">
+                    <i data-lucide="plane-takeoff" class="w-12 h-12 mx-auto mb-4 text-indigo-300"></i>
+                    <h2 class="text-3xl font-bold tracking-wide mb-2">Studying Abroad</h2>
+                    <p class="text-indigo-200">The benefits and challenges of overseas education</p>
+                </div>
+
+                <div class="flex flex-col md:flex-row">
+                    <!-- Pros -->
+                    <div class="w-full md:w-1/2 p-6 sm:p-8 border-r border-gray-100 bg-emerald-50/30">
+                        <h3 class="text-xl font-bold text-emerald-700 mb-6 flex items-center gap-2">
+                            <i data-lucide="thumbs-up" class="w-5 h-5"></i> Lợi ích (Pros)
+                        </h3>
+                        <div id="abroad-pros" class="space-y-6">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+
+                    <!-- Cons -->
+                    <div class="w-full md:w-1/2 p-6 sm:p-8 bg-rose-50/30">
+                        <h3 class="text-xl font-bold text-rose-700 mb-6 flex items-center gap-2">
+                            <i data-lucide="thumbs-down" class="w-5 h-5"></i> Khó khăn (Cons)
+                        </h3>
+                        <div id="abroad-cons" class="space-y-6">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Tab: Writing Task 2 -->
+        <section id="tab-writing" class="animate-fade-in hidden">
+            <div class="bg-white p-6 sm:p-8 rounded-3xl shadow-sm border border-indigo-100 mb-8 max-w-4xl mx-auto">
+                <div class="mb-8 border-b border-gray-200 pb-6">
+                    <span class="bg-indigo-100 text-indigo-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">Sample Essay</span>
+                    <h2 class="text-2xl font-bold text-gray-800 mt-4 mb-2">Single-sex vs. Mixed schools</h2>
+                    <p class="text-gray-600 italic">"Some people think that it is better to educate boys and girls in separate schools. Others, however, believe that boys and girls benefit more from attending mixed schools. Discuss both these views and give your own opinion."</p>
+                </div>
+
+                <div class="space-y-6 text-gray-700 leading-relaxed text-lg font-serif" id="essay-content">
+                    <p><span class="highlight-phrase" title="Có người lập luận rằng...">It is argued by some that</span> students would benefit more when they <span class="highlight-phrase" title="Học trường đơn giới">attend single-sex schools</span>. In my opinion, however, it would be better for them to enter <span class="highlight-phrase" title="Giáo dục nam nữ học chung">mixed-gender education</span>.</p>
+                    
+                    <p>On the one hand, the primary reason why some people support single-gender education would be students' <span class="highlight-phrase" title="Kết quả học tập tốt hơn">better academic results</span>. When boys and girls are taught separately, there is little chance for early relationships. This is considered as one of the most <span class="highlight-phrase" title="Vấn đề gây xao nhãng">distracting problems</span> for teenage and adolescent students. Without worrying about these distractions, students might be able to <span class="highlight-phrase" title="Tập trung hơn vào việc học">concentrate more on their study</span>, and therefore, might get higher grades than those at <span class="highlight-phrase" title="Trường nam nữ học chung">co-ed schools</span>. Despite this being true to some extent, having <span class="highlight-phrase" title="Không có sự tương tác với người khác giới">no interaction with the opposite sex</span> will cause these students a lot of troubles later in life, especially in their careers.</p>
+
+                    <p>On the other hand, I would argue that mixed-sex education is a better option because students are better prepared for their future jobs. Nowadays, it is almost impossible to find a company where there is only male or female staff. Therefore, those who graduate from single-sex schools, despite their higher academic results, might find it hard to <span class="highlight-phrase" title="Làm việc hợp tác">work collaboratively</span> with their <span class="highlight-phrase" title="Đồng nghiệp khác giới">colleagues of the opposite sex</span>. By contrast, people from mixed schools might easily cooperate with their opposite-gender partners since they have learned how to <span class="highlight-phrase" title="Giao tiếp và tương tác hiệu quả">communicate and interact effectively</span> with opposite-sex classmates during their time at school.</p>
+
+                    <p>In conclusion, although some people think that it is more beneficial to send students to single-sex schools, I personally believe that mixed-gender education brings more benefits for students.</p>
+                </div>
+                <div class="mt-8 pt-4 border-t border-gray-100 flex justify-between text-sm text-gray-400">
+                    <span>Hover over highlighted phrases for translation.</span>
+                    <span>257 words</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tab: Flashcards -->
+        <section id="tab-flashcards" class="animate-fade-in hidden">
+            <div class="max-w-3xl mx-auto text-center space-y-6">
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-indigo-100">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-2">Study Mode</h2>
+                    <p class="text-gray-500 mb-8">Click the card to flip it and reveal the meaning.</p>
+                    
+                    <!-- Flashcard Container -->
+                    <div id="flashcard-container" class="relative w-full h-64 cursor-pointer group perspective-1000 mx-auto" onclick="flipCard()">
+                        <div id="flashcard-inner" class="w-full h-full transition-all duration-500 transform-style-3d">
+                            
+                            <!-- Front -->
+                            <div class="absolute inset-0 backface-hidden bg-gradient-to-br from-indigo-600 to-violet-700 text-white border-2 border-indigo-400 rounded-2xl shadow-lg flex flex-col items-center justify-center p-6 text-center">
+                                <i data-lucide="refresh-cw" class="w-6 h-6 absolute top-4 right-4 text-white/50 opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                                <h3 id="card-front-text" class="text-2xl md:text-3xl font-bold px-4"></h3>
+                                <p class="text-indigo-200 mt-6 text-sm uppercase tracking-widest font-semibold">Tap to reveal</p>
+                            </div>
+
+                            <!-- Back -->
+                            <div class="absolute inset-0 backface-hidden rotate-y-180 bg-white text-gray-800 border-2 border-indigo-200 rounded-2xl shadow-lg flex flex-col items-center justify-center p-6 text-center">
+                                <p id="card-back-en" class="text-base text-gray-500 font-medium italic mb-3 px-4"></p>
+                                <p id="card-back-vi" class="text-xl font-bold text-indigo-700 px-4"></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Controls -->
+                    <div class="flex justify-center items-center gap-6 mt-8">
+                        <button onclick="prevCard()" class="p-3 rounded-full bg-gray-100 text-gray-600 hover:bg-indigo-100 hover:text-indigo-700 transition-colors">
+                            <i data-lucide="chevron-left" class="w-6 h-6"></i>
+                        </button>
+                        <span id="card-counter" class="font-bold text-gray-500 text-lg min-w-[4rem]">1 / 10</span>
+                        <button onclick="nextCard()" class="p-3 rounded-full bg-gray-100 text-gray-600 hover:bg-indigo-100 hover:text-indigo-700 transition-colors">
+                            <i data-lucide="chevron-right" class="w-6 h-6"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Data & Logic -->
+    <script>
+        // --- DATA ---
+        
+        // Tab 1: Vocab
+        const generalVocabData = [
+            { en: "to get higher academic results", vi: "đạt được kết quả học tập cao" },
+            { en: "to study abroad = to study in a different country", vi: "du học" },
+            { en: "to drop out of school", vi: "bỏ học" },
+            { en: "to gain international qualifications", vi: "có được bằng cấp quốc tế" },
+            { en: "to improve educational outcomes", vi: "nâng cao đầu ra của giáo dục" },
+            { en: "to top international educational league tables", vi: "xếp đầu bảng giáo dục quốc tế" },
+            { en: "to encourage independent learning", vi: "thúc đẩy việc tự học" },
+            { en: "to pass/fail the exam", vi: "đậu/ rớt kỳ thi" },
+            { en: "to gain in-depth knowledge", vi: "có được kiến thức sâu sắc" },
+            { en: "core subjects such as science, English and maths", vi: "những môn học nòng cốt như khoa học, tiếng Anh và toán" },
+            { en: "to have the opportunity to ...", vi: "có cơ hội làm gì" },
+            { en: "to interact and take part in group work activities", vi: "tương tác và tham gia vào các hoạt động nhóm" },
+            { en: "opposite-sex classmates", vi: "bạn khác giới" },
+            { en: "to learn a wide range of skills", vi: "học được các kỹ năng khác nhau" },
+            { en: "communication or teamwork skills", vi: "kỹ năng giao tiếp hay làm việc nhóm" },
+            { en: "co-existence and gender equality", vi: "sự cùng tồn tại và sự bình đẳng giới" }
+        ];
+
+        const levelsData = [
+            { term: "kindergarten (n)", vi: "mẫu giáo", desc: "A school or class to prepare children aged 2-5 for school." },
+            { term: "primary school (n)", vi: "tiểu học", desc: "A school for primary education of children who are 4 to 11 years of age." },
+            { term: "secondary school (n)", vi: "trung học", desc: "A school for young people between the ages of 11 and 16 or 18." },
+            { term: "university (n)", vi: "đại học", desc: "An institution at the highest level of education where you can study for a degree or do research." }
+        ];
+
+        // Tab 2: Idioms
+        const idiomsData = [
+            { idiom: "to learn something by heart", engDef: "to learn something so well that it can be written or recited without any effort", viDef: "học thuộc lòng" },
+            { idiom: "bookworm", engDef: "a person who reads a lot", viDef: "mọt sách" },
+            { idiom: "teacher's pet", engDef: "a student who is liked best by the teacher and treated better than others", viDef: "học sinh cưng của giáo viên" },
+            { idiom: "to draw a blank", engDef: "to fail to get an answer or a result", viDef: "không tìm thấy hay nhớ ra điều gì" },
+            { idiom: "copycat", engDef: "someone who has few ideas of their own and copies someone else", viDef: "người bắt chước ý tưởng của người khác" },
+            { idiom: "get the hang of something", engDef: "to learn how to do something, esp. when it is not simple", viDef: "hiểu cách làm gì, học cách làm gì đó" },
+            { idiom: "to burn the midnight oil", engDef: "to study/work late into the night", viDef: "thức khuya để học/làm việc" },
+            { idiom: "to pass with flying colours", engDef: "to do something very successfully (like pass an exam)", viDef: "đỗ đậu ... 1 cách dễ dàng" },
+            { idiom: "to go back to basis", engDef: "to return to teaching/paying attention to the most important aspects", viDef: "quay lại những điều cốt lõi" },
+            { idiom: "to cover a lot of ground", engDef: "to review a large amount of information or discuss many topics", viDef: "xem lại thật nhiều tài liệu/thông tin" }
+        ];
+
+        // Tab 3: Study Abroad
+        const abroadProsData = [
+            { en: "It gives you the opportunity to experience a different way of living/ make new friends.", vi: "Nó mang đến cho bạn cơ hội trải nghiệm một cách sống khác / kết bạn mới." },
+            { en: "Living on your own makes you more independent because you have to learn to cook, clean, pay bills and take care of yourself.", vi: "Sống một mình làm bạn trở nên tự lập hơn vì bạn phải học cách nấu ăn, dọn dẹp, chi trả hóa đơn và tự chăm sóc bản thân." },
+            { en: "You can learn invaluable life lessons and practical skills such as stress management, communication or problem-solving skills which are very important for your future career.", vi: "Bạn có thể học các bài học cuộc sống vô giá và các kỹ năng thực hành quản lý căng thẳng, giao tiếp hoặc kỹ năng giải quyết vấn đề." },
+            { en: "It gives you the chance to improve your speaking skills.", vi: "Nó mang lại cho bạn cơ hội để cải thiện kỹ năng nói của bạn." },
+            { en: "Recruiters tend to favour candidates graduating from an international university over those who don't.", vi: "Các nhà tuyển dụng có khuynh hướng ưu ái các ứng cử viên tốt nghiệp từ một trường đại học quốc tế hơn." }
+        ];
+
+        const abroadConsData = [
+            { en: "You might encounter culture shock and other culture-related problems.", vi: "Bạn có thể gặp phải cú sốc văn hóa và các vấn đề liên quan đến văn hóa khác." },
+            { en: "Living costs in some countries are very high. Many overseas students have to do a part-time job to pay for their bills. This can affect their studies.", vi: "Chi phí sinh hoạt ở một số nước rất cao. Sinh viên phải làm công việc bán thời gian để trả hóa đơn, có thể ảnh hưởng đến việc học." },
+            { en: "You might experience feelings of frustration, loneliness and homesickness.", vi: "Bạn có thể cảm thấy thất vọng, cô đơn và nhớ nhà." },
+            { en: "If you are struggling with the language of the country you are hoping to study in, you will face lots of problems.", vi: "Nếu bạn đang gặp khó khăn với ngôn ngữ của đất nước đó, bạn sẽ gặp rất nhiều vấn đề." }
+        ];
+
+
+        let flashcardDeck = [];
+        let currentCardIndex = 0;
+        let isCardFlipped = false;
+
+        // --- RENDERING FUNCTIONS ---
+
+        function renderGeneralVocab() {
+            const container = document.getElementById('vocab-list');
+            container.innerHTML = generalVocabData.map(item => `
+                <li class="p-4 bg-gray-50 hover:bg-indigo-50 border border-gray-100 hover:border-indigo-200 rounded-xl transition-all duration-200 group list-item-vocab">
+                    <div class="font-bold text-[16px] text-gray-800 group-hover:text-indigo-800 term leading-snug">${item.en}</div>
+                    <div class="text-[14px] font-medium text-gray-600 mt-2 translation">${item.vi}</div>
+                </li>
+            `).join('');
+        }
+
+        function renderLevels() {
+            const container = document.getElementById('levels-list');
+            container.innerHTML = levelsData.map(item => `
+                <div class="bg-white p-4 rounded-xl shadow-sm border border-violet-100">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="font-bold text-violet-800 text-lg">${item.term}</h3>
+                        <span class="bg-violet-100 text-violet-600 text-xs px-2 py-1 rounded font-bold">${item.vi}</span>
+                    </div>
+                    <p class="text-sm text-gray-600 italic leading-relaxed">${item.desc}</p>
+                </div>
+            `).join('');
+        }
+
+        function renderIdiomsGrid() {
+            const container = document.getElementById('idioms-grid');
+            container.innerHTML = idiomsData.map(item => `
+                <div class="idiom-card bg-white p-5 rounded-xl border border-gray-200 hover:border-indigo-300 shadow-sm hover:shadow transition-all group flex flex-col h-full">
+                    <h3 class="text-lg font-bold text-gray-800 mb-2 group-hover:text-indigo-600 idiom-title">${item.idiom}</h3>
+                    <p class="text-sm text-gray-500 italic mb-4 idiom-eng">${item.engDef}</p>
+                    <div class="mt-auto pt-3 border-t border-gray-100">
+                        <p class="font-semibold text-gray-800 idiom-vi">${item.viDef}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderAbroadSections() {
+            const prosContainer = document.getElementById('abroad-pros');
+            prosContainer.innerHTML = abroadProsData.map(item => `
+                <div class="bg-white p-4 rounded-xl border border-emerald-100 shadow-sm relative pl-10">
+                    <i data-lucide="check-circle" class="absolute left-3 top-4 w-5 h-5 text-emerald-500"></i>
+                    <p class="font-medium text-gray-800 text-sm md:text-base leading-relaxed">${item.en}</p>
+                    <p class="text-sm text-gray-500 mt-2 pt-2 border-t border-gray-50">${item.vi}</p>
+                </div>
+            `).join('');
+
+            const consContainer = document.getElementById('abroad-cons');
+            consContainer.innerHTML = abroadConsData.map(item => `
+                <div class="bg-white p-4 rounded-xl border border-rose-100 shadow-sm relative pl-10">
+                    <i data-lucide="alert-circle" class="absolute left-3 top-4 w-5 h-5 text-rose-500"></i>
+                    <p class="font-medium text-gray-800 text-sm md:text-base leading-relaxed">${item.en}</p>
+                    <p class="text-sm text-gray-500 mt-2 pt-2 border-t border-gray-50">${item.vi}</p>
+                </div>
+            `).join('');
+        }
+
+        // --- FLASHCARD LOGIC ---
+        
+        function initFlashcards() {
+            // Combine vocab for flashcards
+            flashcardDeck = [
+                ...generalVocabData.map(i => ({ front: i.en, backEn: "", backVi: i.vi })),
+                ...levelsData.map(i => ({ front: i.term, backEn: i.desc, backVi: i.vi })),
+                ...idiomsData.map(i => ({ front: i.idiom, backEn: i.engDef, backVi: i.viDef }))
+            ];
+            // Shuffle
+            flashcardDeck.sort(() => Math.random() - 0.5);
+            currentCardIndex = 0;
+            updateFlashcardView();
+        }
+
+        function updateFlashcardView() {
+            const card = flashcardDeck[currentCardIndex];
+            document.getElementById('card-front-text').innerText = card.front;
+            document.getElementById('card-back-en').innerText = card.backEn;
+            document.getElementById('card-back-vi').innerText = card.backVi;
+            
+            if(card.backEn === "") {
+                document.getElementById('card-back-en').classList.add('hidden');
+            } else {
+                document.getElementById('card-back-en').classList.remove('hidden');
+            }
+
+            document.getElementById('card-counter').innerText = `${currentCardIndex + 1} / ${flashcardDeck.length}`;
+            
+            if (isCardFlipped) {
+                document.getElementById('flashcard-inner').classList.remove('rotate-y-180');
+                isCardFlipped = false;
+            }
+        }
+
+        function flipCard() {
+            document.getElementById('flashcard-inner').classList.toggle('rotate-y-180');
+            isCardFlipped = !isCardFlipped;
+        }
+
+        function nextCard() {
+            if (currentCardIndex < flashcardDeck.length - 1) {
+                currentCardIndex++;
+                updateFlashcardView();
+            }
+        }
+
+        function prevCard() {
+            if (currentCardIndex > 0) {
+                currentCardIndex--;
+                updateFlashcardView();
+            }
+        }
+
+        // --- INTERACTIVITY LOGIC ---
+
+        function switchTab(tabId) {
+            // Hide all tabs
+            const tabs = ['vocab', 'idioms', 'abroad', 'writing', 'flashcards'];
+            tabs.forEach(id => {
+                document.getElementById(`tab-${id}`).classList.add('hidden');
+                document.getElementById(`tab-${id}`).classList.remove('block');
+                
+                // Reset tab button styles
+                const btn = document.getElementById(`tab-btn-${id}`);
+                btn.className = "whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-gray-500 border-b-2 border-transparent hover:text-gray-800 transition-colors flex items-center gap-2";
+            });
+
+            // Show active tab
+            document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+            document.getElementById(`tab-${tabId}`).classList.add('block');
+            
+            // Set active tab button style
+            const activeBtn = document.getElementById(`tab-btn-${tabId}`);
+            activeBtn.className = "whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-indigo-700 border-b-2 border-indigo-700 transition-colors flex items-center gap-2";
+        }
+
+        function filterList(listId, query) {
+            const list = document.getElementById(listId);
+            const items = list.getElementsByClassName('list-item-vocab');
+            const lowerQuery = query.toLowerCase();
+
+            for (let i = 0; i < items.length; i++) {
+                const text = items[i].innerText.toLowerCase();
+                if (text.includes(lowerQuery)) {
+                    items[i].style.display = "";
+                } else {
+                    items[i].style.display = "none";
+                }
+            }
+        }
+
+        function filterIdioms(query) {
+            const cards = document.getElementsByClassName('idiom-card');
+            const lowerQuery = query.toLowerCase();
+
+            for (let i = 0; i < cards.length; i++) {
+                const text = cards[i].innerText.toLowerCase();
+                if (text.includes(lowerQuery)) {
+                    cards[i].style.display = "";
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+        }
+
+        // --- INITIALIZATION ---
+        document.addEventListener('DOMContentLoaded', () => {
+            renderGeneralVocab();
+            renderLevels();
+            renderIdiomsGrid();
+            renderAbroadSections();
+            initFlashcards();
+            
+            // Initialize Lucide icons
+            lucide.createIcons();
+        });
+    </script>
+</body>
+</html>

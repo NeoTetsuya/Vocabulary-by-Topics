@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Affixes Master</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .perspective-1000 { perspective: 1000px; }
+        .transform-style-3d { transform-style: preserve-3d; }
+        .backface-hidden { backface-visibility: hidden; }
+        .rotate-y-180 { transform: rotateY(180deg); }
+        .animate-fade-in { animation: fadeIn 0.4s ease-in-out; }
+        @keyframes fadeIn { 
+            from { opacity: 0; transform: translateY(10px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+        
+        /* Hide scrollbar for cleaner look */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
+</head>
+<body class="min-h-screen bg-slate-50 text-gray-800 font-sans p-4 sm:p-8">
+
+    <div class="max-w-5xl mx-auto">
+        
+        <!-- Header -->
+        <header class="mb-8 text-center space-y-4">
+            <div class="inline-flex items-center justify-center p-3 bg-indigo-600 text-white rounded-2xl mb-2 shadow-lg">
+                <i data-lucide="book-a" class="w-8 h-8"></i>
+            </div>
+            <h1 class="text-3xl sm:text-4xl font-extrabold text-gray-900 tracking-tight">
+                English Affixes Master
+            </h1>
+            <p class="text-gray-500 max-w-xl mx-auto text-sm sm:text-base">
+                Master English prefixes and suffixes to dramatically expand your vocabulary and reading comprehension.
+            </p>
+            
+            <!-- Quizlet Placeholder -->
+            <div class="pt-4">
+                <a href="#" target="_blank" class="inline-flex items-center gap-2 px-5 py-2.5 bg-yellow-100 hover:bg-yellow-200 text-yellow-800 rounded-xl font-semibold transition-colors shadow-sm border border-yellow-200">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                    Practice on Quizlet (Placeholder Link)
+                </a>
+            </div>
+        </header>
+
+        <!-- Main Navigation -->
+        <div class="flex justify-center mb-10">
+            <div class="bg-white p-1 rounded-2xl shadow-sm border border-gray-100 flex gap-1">
+                <button id="tab-study" onclick="switchTab('study')" class="flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all bg-indigo-50 text-indigo-700 shadow-sm">
+                    <i data-lucide="book-open" class="w-4 h-4"></i>
+                    Study Cards
+                </button>
+                <button id="tab-quiz" onclick="switchTab('quiz')" class="flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all text-gray-500 hover:text-gray-900 hover:bg-gray-50">
+                    <i data-lucide="brain-circuit" class="w-4 h-4"></i>
+                    Practice Quiz
+                </button>
+            </div>
+        </div>
+
+        <!-- Content Area -->
+        <div class="animate-fade-in" id="content-container">
+            
+            <!-- Study Section -->
+            <div id="study-section">
+                <!-- Category Toggle -->
+                <div class="flex justify-center gap-4 mb-8">
+                    <button id="btn-prefixes" onclick="setCategory('prefixes')" class="px-5 py-2 rounded-full text-sm font-bold border-2 transition-colors border-indigo-600 bg-indigo-600 text-white">
+                        Prefixes (Tiền tố)
+                    </button>
+                    <button id="btn-suffixes" onclick="setCategory('suffixes')" class="px-5 py-2 rounded-full text-sm font-bold border-2 transition-colors border-gray-200 text-gray-500 hover:border-indigo-300">
+                        Suffixes (Hậu tố)
+                    </button>
+                </div>
+
+                <!-- Flashcards Grid -->
+                <div id="cards-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Cards will be injected here via JS -->
+                </div>
+            </div>
+
+            <!-- Quiz Section -->
+            <div id="quiz-section" class="hidden max-w-2xl mx-auto">
+                
+                <!-- Quiz Active State -->
+                <div id="quiz-active">
+                    <div class="flex justify-between items-center mb-6 text-sm font-medium text-gray-500">
+                        <span id="quiz-progress">Question 1 of 10</span>
+                        <span class="bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full" id="quiz-score">Score: 0</span>
+                    </div>
+
+                    <div class="bg-white p-6 sm:p-8 rounded-3xl shadow-lg border border-gray-100 mb-6">
+                        <h2 id="quiz-question" class="text-xl sm:text-2xl font-bold text-gray-800 mb-6"></h2>
+                        
+                        <div id="quiz-options" class="space-y-3">
+                            <!-- Options injected here -->
+                        </div>
+
+                        <div id="quiz-explanation" class="mt-6 p-4 bg-indigo-50 border border-indigo-100 rounded-xl text-sm animate-fade-in hidden">
+                            <p class="font-semibold text-indigo-900 mb-1">Examples:</p>
+                            <div id="quiz-examples" class="text-indigo-700 space-y-1">
+                                <!-- Examples injected here -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <button id="quiz-next-btn" onclick="handleNextQuestion()" class="hidden w-full py-4 bg-gray-900 hover:bg-black text-white rounded-xl font-bold transition flex items-center justify-center gap-2">
+                        <span id="quiz-next-text">Next Question</span>
+                        <i data-lucide="arrow-right" class="w-5 h-5 text-white"></i>
+                    </button>
+                </div>
+
+                <!-- Quiz Results State -->
+                <div id="quiz-results" class="hidden bg-white p-8 rounded-3xl shadow-xl text-center max-w-lg mx-auto border border-gray-100">
+                    <div class="w-24 h-24 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i data-lucide="check-circle-2" class="text-indigo-600 w-12 h-12"></i>
+                    </div>
+                    <h2 class="text-3xl font-bold text-gray-800 mb-2">Quiz Completed!</h2>
+                    <p class="text-gray-500 mb-6">You successfully reviewed the prefixes and suffixes.</p>
+                    
+                    <div class="bg-indigo-50 rounded-2xl p-6 mb-8">
+                        <div class="text-5xl font-black text-indigo-600 mb-2">
+                            <span id="final-score-num">0</span> <span class="text-2xl text-indigo-300">/ 10</span>
+                        </div>
+                        <p id="final-score-text" class="text-indigo-800 font-medium"></p>
+                    </div>
+                    
+                    <button onclick="startQuiz()" class="w-full py-4 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-bold transition flex items-center justify-center gap-2">
+                        <i data-lucide="rotate-ccw" class="w-5 h-5 text-white"></i>
+                        Retake Quiz
+                    </button>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Application Logic -->
+    <script>
+        // --- DATA ---
+        const prefixes = [
+            { affix: "anti-", meaning: "against (chống/kháng lại)", examples: "antivirus (kháng virut)\nantibiotic (kháng sinh)" },
+            { affix: "auto-", meaning: "self (tự thân, tự phát)", examples: "autopilot (chế độ bay tự động)\nautofocus (chế độ lấy nét tự động)" },
+            { affix: "re-", meaning: "again or back (lại, 1 lần nữa)", examples: "rewrite (viết lại)\nresend (gửi lại)" },
+            { affix: "over-", meaning: "too much (quá, vượt mức, trên ...)", examples: "overreact (phản ứng thái quá)\noverweight (thừa cân)" },
+            { affix: "mis-", meaning: "badly or wrongly (sai)", examples: "misunderstand (hiểu sai)\nmislead (dẫn dắt ai đó tin vào 1 điều không đúng)" },
+            { affix: "out-", meaning: "more or better than others (quá ..., hơn ...)", examples: "outrun (chạy nhanh hơn)\noutnumber (có số lượng nhiều hơn)" },
+            { affix: "co-", meaning: "together (cùng nhau)", examples: "co-exist (cùng tồn tại)\nco-operate (hợp tác, cùng làm việc)" },
+            { affix: "de-", meaning: "go down or make less (giảm, làm ít đi)", examples: "devalue (mất giá)\ndegenerate (thoái hóa)" },
+            { affix: "fore-", meaning: "earlier, before (trước, sớm)", examples: "foresee (nhìn thấy trước)\nforeleg (chân trước)" },
+            { affix: "pre-", meaning: "before (trước)", examples: "prejudge (vội phán xét)\npretest (thử, kiểm tra trước)" },
+            { affix: "sub-", meaning: "under/below (dưới)", examples: "substandard (dưới mức tiêu chuẩn)\nsubway (tàu điện ngầm)" },
+            { affix: "super-", meaning: "above, over, beyond (siêu, vượt trên ...)", examples: "supermarket (siêu thị)\nsuperman (siêu nhân)" },
+            { affix: "under-", meaning: "not enough (không đủ)", examples: "underfunded (cấp không đủ vốn)\nunderdeveloped (kém phát triển)" },
+            { affix: "dis-", meaning: "reverses the meaning (đối nghịch, trái ngược)", examples: "disappear (biến mất)\ndishonest (không trung thực)" },
+        ];
+
+        const suffixes = [
+            { affix: "-acy", meaning: "state or quality (trạng thái, tính chất)", examples: "democracy (dân chủ)\naccuracy (tính chính xác)" },
+            { affix: "-al", meaning: "act or process of (hành động, quá trình)", examples: "survival (sự sống)\nrefusal (sự từ chối)" },
+            { affix: "-dom", meaning: "place or state of being (nơi chốn hoặc trạng thái)", examples: "kingdom (vương quốc)\nfreedom (sự tự do)" },
+            { affix: "-er, -or", meaning: "someone/something that performs an action (người/vật thực hiện hành động)", examples: "professor (giáo sư)\nheater (máy sưởi)" },
+            { affix: "-ism", meaning: "doctrine, belief (giáo điều, niềm tin, đảng phái)", examples: "terrorism (chủ nghĩa khủng bố)\ncommunism (chủ nghĩa cộng sản)" },
+            { affix: "-ity, -ty", meaning: "quality of (trạng thái hay chất lượng)", examples: "inactivity (trạng thái không hoạt động)\nbrutality (sự tàn bạo)" },
+            { affix: "-ment", meaning: "condition of (tình trạng, điều kiện)", examples: "argument (sự tranh luận)\nachievement (thành tựu)" },
+            { affix: "-ness", meaning: "state of being (trạng thái tồn tại)", examples: "sadness (sự buồn bã)\ntiredness (sự mệt mỏi)" },
+            { affix: "-ship", meaning: "position held (vị trí, mối quan hệ)", examples: "ownership (sự sở hữu)\nfriendship (tình bạn)" },
+            { affix: "-able, -ible", meaning: "capable of being (khả năng có thể làm gì)", examples: "edible (có thể ăn được)\ndrinkable (có thể uống được)" },
+            { affix: "-ful", meaning: "full of, characterized by (đầy, đặc trưng bởi)", examples: "careful (cẩn thận)\ncolourful (đầy màu sắc)" },
+            { affix: "-ish", meaning: "having the quality of (có tính chất của)", examples: "childish (như trẻ con)\nsnobbish (trịch thượng)" },
+            { affix: "-ious, -ous", meaning: "characterized by (đặc trưng bởi)", examples: "nutritious (giàu dinh dưỡng)\ndangerous (nguy hiểm)" },
+            { affix: "-less", meaning: "without (không có)", examples: "colourless (không màu)\neffortless (không cần nỗ lực)" },
+        ];
+
+        // --- SVGs for Quiz ---
+        const checkIconSvg = `<svg class="text-green-500 w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>`;
+        const xIconSvg = `<svg class="text-red-500 w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>`;
+
+        // --- STATE ---
+        let studyCategory = 'prefixes';
+        let quizQuestions = [];
+        let currentQIndex = 0;
+        let score = 0;
+        let selectedAnswer = null;
+
+        // --- INITIALIZATION ---
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+            renderCards();
+            startQuiz(); // pre-generate
+        });
+
+        // --- NAVIGATION LOGIC ---
+        function switchTab(tab) {
+            const studySection = document.getElementById('study-section');
+            const quizSection = document.getElementById('quiz-section');
+            const tabStudy = document.getElementById('tab-study');
+            const tabQuiz = document.getElementById('tab-quiz');
+            
+            // Trigger fade animation
+            const container = document.getElementById('content-container');
+            container.classList.remove('animate-fade-in');
+            void container.offsetWidth; // trigger reflow
+            container.classList.add('animate-fade-in');
+
+            if (tab === 'study') {
+                studySection.classList.remove('hidden');
+                quizSection.classList.add('hidden');
+                
+                tabStudy.className = "flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all bg-indigo-50 text-indigo-700 shadow-sm";
+                tabQuiz.className = "flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all text-gray-500 hover:text-gray-900 hover:bg-gray-50";
+            } else {
+                studySection.classList.add('hidden');
+                quizSection.classList.remove('hidden');
+                
+                tabQuiz.className = "flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all bg-indigo-50 text-indigo-700 shadow-sm";
+                tabStudy.className = "flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all text-gray-500 hover:text-gray-900 hover:bg-gray-50";
+            }
+        }
+
+        function setCategory(category) {
+            studyCategory = category;
+            
+            const btnPref = document.getElementById('btn-prefixes');
+            const btnSuff = document.getElementById('btn-suffixes');
+
+            if (category === 'prefixes') {
+                btnPref.className = "px-5 py-2 rounded-full text-sm font-bold border-2 transition-colors border-indigo-600 bg-indigo-600 text-white";
+                btnSuff.className = "px-5 py-2 rounded-full text-sm font-bold border-2 transition-colors border-gray-200 text-gray-500 hover:border-indigo-300";
+            } else {
+                btnSuff.className = "px-5 py-2 rounded-full text-sm font-bold border-2 transition-colors border-indigo-600 bg-indigo-600 text-white";
+                btnPref.className = "px-5 py-2 rounded-full text-sm font-bold border-2 transition-colors border-gray-200 text-gray-500 hover:border-indigo-300";
+            }
+            renderCards();
+        }
+
+        // --- STUDY MODE LOGIC ---
+        function renderCards() {
+            const grid = document.getElementById('cards-grid');
+            grid.innerHTML = '';
+            const data = studyCategory === 'prefixes' ? prefixes : suffixes;
+
+            data.forEach((item) => {
+                const examplesHtml = item.examples.split('\n').map(ex => `<p class="italic">${ex}</p>`).join('');
+                
+                const card = `
+                <div class="relative w-full h-48 sm:h-56 cursor-pointer group perspective-1000" onclick="this.querySelector('.transform-style-3d').classList.toggle('rotate-y-180')">
+                    <div class="w-full h-full transition-all duration-500 transform-style-3d">
+                        <!-- Front -->
+                        <div class="absolute inset-0 backface-hidden bg-white border-2 border-indigo-100 rounded-2xl shadow-sm hover:shadow-md flex flex-col items-center justify-center p-6 text-center">
+                            <span class="text-sm font-semibold text-indigo-400 uppercase tracking-wider mb-2">Tap to flip</span>
+                            <h3 class="text-3xl sm:text-4xl font-bold text-indigo-900">${item.affix}</h3>
+                        </div>
+                        <!-- Back -->
+                        <div class="absolute inset-0 backface-hidden rotate-y-180 bg-indigo-600 text-white rounded-2xl shadow-lg flex flex-col items-center justify-center p-6 text-center overflow-hidden">
+                            <p class="text-sm sm:text-base font-medium mb-4 pb-3 border-b border-indigo-400 w-full">${item.meaning}</p>
+                            <div class="text-xs sm:text-sm text-indigo-100 space-y-1">
+                                ${examplesHtml}
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+                grid.insertAdjacentHTML('beforeend', card);
+            });
+        }
+
+        // --- QUIZ LOGIC ---
+        function startQuiz() {
+            const allData = [...prefixes, ...suffixes];
+            quizQuestions = [];
+            
+            // Select 10 random items
+            const shuffledData = [...allData].sort(() => 0.5 - Math.random()).slice(0, 10);
+            
+            shuffledData.forEach(item => {
+                const wrongOptions = allData
+                    .filter(d => d.affix !== item.affix)
+                    .sort(() => 0.5 - Math.random())
+                    .slice(0, 3)
+                    .map(d => d.meaning);
+                    
+                const options = [item.meaning, ...wrongOptions].sort(() => 0.5 - Math.random());
+                
+                quizQuestions.push({
+                    question: `What is the meaning of the affix "${item.affix}"?`,
+                    options: options,
+                    correctAnswer: item.meaning,
+                    examples: item.examples
+                });
+            });
+            
+            currentQIndex = 0;
+            score = 0;
+            selectedAnswer = null;
+
+            document.getElementById('quiz-results').classList.add('hidden');
+            document.getElementById('quiz-active').classList.remove('hidden');
+            
+            renderQuizQuestion();
+        }
+
+        function renderQuizQuestion() {
+            const q = quizQuestions[currentQIndex];
+            selectedAnswer = null;
+            
+            document.getElementById('quiz-progress').innerText = `Question ${currentQIndex + 1} of ${quizQuestions.length}`;
+            document.getElementById('quiz-score').innerText = `Score: ${score}`;
+            document.getElementById('quiz-question').innerText = q.question;
+            
+            const optionsContainer = document.getElementById('quiz-options');
+            optionsContainer.innerHTML = '';
+            
+            q.options.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = "w-full text-left p-4 rounded-xl border-2 transition-all duration-200 flex justify-between items-center border-gray-100 hover:border-indigo-300 hover:bg-indigo-50 text-gray-700";
+                btn.innerHTML = `<span>${opt}</span><span class="icon-placeholder"></span>`;
+                btn.onclick = () => handleAnswerClick(opt, btn);
+                optionsContainer.appendChild(btn);
+            });
+
+            document.getElementById('quiz-explanation').classList.add('hidden');
+            document.getElementById('quiz-next-btn').classList.add('hidden');
+            
+            if (currentQIndex < quizQuestions.length - 1) {
+                document.getElementById('quiz-next-text').innerText = "Next Question";
+            } else {
+                document.getElementById('quiz-next-text').innerText = "View Results";
+            }
+        }
+
+        function handleAnswerClick(selectedOpt, btnElement) {
+            if (selectedAnswer !== null) return; // Prevent multiple clicks
+            
+            selectedAnswer = selectedOpt;
+            const q = quizQuestions[currentQIndex];
+            const buttons = document.getElementById('quiz-options').children;
+
+            // Highlight all options appropriately
+            Array.from(buttons).forEach(btn => {
+                btn.disabled = true;
+                const optText = btn.querySelector('span').innerText;
+                const iconSpan = btn.querySelector('.icon-placeholder');
+                
+                if (optText === q.correctAnswer) {
+                    btn.className = "w-full text-left p-4 rounded-xl border-2 transition-all duration-200 flex justify-between items-center border-green-500 bg-green-50 text-green-800 font-medium";
+                    iconSpan.innerHTML = checkIconSvg;
+                } else if (optText === selectedAnswer) {
+                    btn.className = "w-full text-left p-4 rounded-xl border-2 transition-all duration-200 flex justify-between items-center border-red-500 bg-red-50 text-red-800";
+                    iconSpan.innerHTML = xIconSvg;
+                } else {
+                    btn.className = "w-full text-left p-4 rounded-xl border-2 transition-all duration-200 flex justify-between items-center border-gray-100 opacity-50";
+                }
+            });
+
+            if (selectedAnswer === q.correctAnswer) {
+                score++;
+                document.getElementById('quiz-score').innerText = `Score: ${score}`;
+            }
+
+            // Show explanation
+            const explContainer = document.getElementById('quiz-explanation');
+            const explExamples = document.getElementById('quiz-examples');
+            explExamples.innerHTML = q.examples.split('\n').map(ex => `<p>• ${ex}</p>`).join('');
+            explContainer.classList.remove('hidden');
+
+            // Show next button
+            document.getElementById('quiz-next-btn').classList.remove('hidden');
+            lucide.createIcons(); // refresh icons inside the next button just in case
+        }
+
+        function handleNextQuestion() {
+            if (currentQIndex < quizQuestions.length - 1) {
+                currentQIndex++;
+                renderQuizQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            document.getElementById('quiz-active').classList.add('hidden');
+            document.getElementById('quiz-results').classList.remove('hidden');
+            
+            document.getElementById('final-score-num').innerText = score;
+            
+            let feedback = "";
+            if (score >= 8) feedback = "Excellent job!";
+            else if (score >= 5) feedback = "Good effort! Keep practicing.";
+            else feedback = "Needs more practice.";
+            
+            document.getElementById('final-score-text').innerText = feedback;
+        }
+
+    </script>
+</body>
+</html>

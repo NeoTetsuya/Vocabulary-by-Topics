@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IELTS Vocab: Poverty</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .animate-fade-in { animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        @keyframes fadeIn { 
+            from { opacity: 0; transform: translateY(10px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+        
+        /* Custom scrollbar for lists */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #fdba74; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #fb923c; }
+
+        /* 3D Flip Card Styles */
+        .perspective-1000 { perspective: 1000px; }
+        .transform-style-3d { transform-style: preserve-3d; }
+        .backface-hidden { backface-visibility: hidden; }
+        .rotate-y-180 { transform: rotateY(180deg); }
+        
+        /* Highlight specific words in text */
+        .highlight-vocab {
+            background-color: #ffedd5;
+            color: #9a3412;
+            font-weight: 600;
+            padding: 0 4px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .highlight-vocab:hover {
+            background-color: #fed7aa;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-orange-50/40 text-gray-800 font-sans pb-12">
+
+    <!-- Header -->
+    <header class="bg-white border-b border-orange-100 sticky top-0 z-10 shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
+                <div class="flex items-center gap-4">
+                    <div class="p-3 bg-orange-600 text-white rounded-xl shadow-md shadow-orange-200">
+                        <i data-lucide="trending-down" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl sm:text-3xl font-extrabold text-gray-900">IELTS Vocabulary</h1>
+                        <p class="text-sm text-orange-600 font-medium mt-1">Topic: Poverty & Social Inequality</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tabs -->
+            <div class="flex overflow-x-auto mt-6 border-b border-gray-100 hide-scrollbar gap-2 sm:gap-6">
+                <button onclick="switchTab('vocab')" id="tab-btn-vocab" class="whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-orange-700 border-b-2 border-orange-700 transition-colors flex items-center gap-2">
+                    <i data-lucide="list" class="w-4 h-4"></i> Core Vocab
+                </button>
+                <button onclick="switchTab('idioms')" id="tab-btn-idioms" class="whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-gray-500 border-b-2 border-transparent hover:text-gray-800 transition-colors flex items-center gap-2">
+                    <i data-lucide="banknote" class="w-4 h-4"></i> Idioms & Phrases
+                </button>
+                <button onclick="switchTab('reading')" id="tab-btn-reading" class="whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-gray-500 border-b-2 border-transparent hover:text-gray-800 transition-colors flex items-center gap-2">
+                    <i data-lucide="book-open" class="w-4 h-4"></i> Reading Practice
+                </button>
+                <button onclick="switchTab('flashcards')" id="tab-btn-flashcards" class="whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-gray-500 border-b-2 border-transparent hover:text-gray-800 transition-colors flex items-center gap-2">
+                    <i data-lucide="layers" class="w-4 h-4"></i> Flashcards
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+        
+        <!-- Tab: Core Vocab -->
+        <section id="tab-vocab" class="animate-fade-in block">
+            <div class="flex flex-col lg:flex-row gap-6">
+                <!-- Vocab List -->
+                <div class="flex-1 space-y-6">
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-orange-100">
+                        <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-6">
+                            <h2 class="text-xl font-bold text-gray-800 flex items-center gap-2">
+                                <i data-lucide="alert-circle" class="w-5 h-5 text-orange-500"></i> Poverty Terminology
+                            </h2>
+                            <div class="relative w-full sm:w-64">
+                                <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                                <input type="text" onkeyup="filterList('vocab-list', this.value)" placeholder="Search vocabulary..." class="w-full pl-9 pr-4 py-2 bg-orange-50/50 border border-orange-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all">
+                            </div>
+                        </div>
+                        
+                        <ul id="vocab-list" class="space-y-3 max-h-[650px] overflow-y-auto pr-2">
+                            <!-- Populated by JS -->
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Examples Panel -->
+                <div class="lg:w-1/3 bg-gradient-to-b from-orange-50 to-amber-50 p-6 rounded-2xl border border-orange-100 h-fit lg:sticky lg:top-48 shadow-inner">
+                    <h2 class="text-xl font-bold text-orange-900 mb-6 flex items-center gap-2">
+                        <i data-lucide="quote" class="w-5 h-5 text-orange-600"></i> Contextual Examples
+                    </h2>
+                    <div id="examples-list" class="space-y-5">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tab: Idioms -->
+        <section id="tab-idioms" class="animate-fade-in hidden">
+            <div class="bg-white p-6 sm:p-8 rounded-3xl shadow-sm border border-orange-100 mb-8">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-800">Slang & Phrasal Verbs</h2>
+                        <p class="text-gray-500 mt-1">Expressions related to financial struggle and wealth status.</p>
+                    </div>
+                    <div class="relative w-full sm:w-64">
+                        <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                        <input type="text" onkeyup="filterIdioms(this.value)" placeholder="Search idioms..." class="w-full pl-9 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" id="idioms-grid">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Tab: Reading Practice -->
+        <section id="tab-reading" class="animate-fade-in hidden">
+            <div class="bg-white p-6 sm:p-8 rounded-3xl shadow-sm border border-orange-100 mb-8">
+                <div class="flex items-center gap-3 mb-6 pb-6 border-b border-orange-100">
+                    <div class="bg-amber-100 text-amber-600 p-2 rounded-lg">
+                        <i data-lucide="newspaper" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-800">30-Day Reading Challenge</h2>
+                        <p class="text-gray-500 text-sm">Article Snippet: Understanding Poverty</p>
+                    </div>
+                </div>
+
+                <div class="flex flex-col md:flex-row gap-8">
+                    <!-- Article Text -->
+                    <div class="flex-1 space-y-6 text-gray-700 text-lg leading-relaxed font-serif">
+                        <p>
+                            Since 1990, more than 1.2 billion people have risen out of extreme poverty. But the COVID-19 pandemic threatens to reverse years of progress <span class="highlight-vocab" title="trong cuộc chiến chống lại thứ gì">in the fight against</span> global poverty and income inequalities, and it <span class="highlight-vocab" title="gây nguy hiểm cho...">jeopardizes</span> the future of a generation of children.
+                        </p>
+                        <p>
+                            Children living in poverty often lack access to quality education. Sometimes it's because there aren't enough quality schools, their parents cannot <span class="highlight-vocab" title="đủ khả năng chi trả">afford</span> school fees, or because <span class="highlight-vocab" title="rất nghèo">impoverished</span> families need their children to work.
+                        </p>
+                        <p>
+                            Living in poverty also means not being able to afford a doctor or <span class="highlight-vocab" title="điều trị y tế">medical treatment</span>. It means no electricity, limited <span class="highlight-vocab" title="chỗ ở">shelter</span>, and often little to no food on the table.
+                        </p>
+                        <h3 class="text-xl font-bold text-orange-800">What causes poverty?</h3>
+                        <p>
+                            The <span class="highlight-vocab" title="nguyên nhân gốc rễ/chính yếu">root causes</span> of poverty aren't only a lack of access to basic <span class="highlight-vocab" title="thứ thiết yếu">necessities</span> of life like water, food, shelter, education, or healthcare. Inequities including gender or ethnic <span class="highlight-vocab" title="sự đối xử phân biệt">discrimination</span>, poor governance, conflict, exploitation, and domestic violence also cause poverty. These inequities not only <span class="highlight-vocab" title="đưa ai đó vào cảnh nghèo khó">lead somebody into poverty</span> but can also restrict access to social services.
+                        </p>
+                    </div>
+
+                    <!-- Article Vocab Notes -->
+                    <div class="md:w-1/3 bg-orange-50/50 p-6 rounded-2xl border border-orange-200 h-fit sticky top-24">
+                        <h3 class="font-bold text-orange-800 mb-4 flex items-center gap-2">
+                            <i data-lucide="notebook-pen" class="w-5 h-5 text-orange-600"></i> Reading Glossary
+                        </h3>
+                        <div id="reading-vocab-list" class="space-y-4">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Tab: Flashcards -->
+        <section id="tab-flashcards" class="animate-fade-in hidden">
+            <div class="max-w-3xl mx-auto text-center space-y-6">
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-orange-100">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-2">Study Mode</h2>
+                    <p class="text-gray-500 mb-8">Click the card to flip it and reveal the meaning.</p>
+                    
+                    <!-- Flashcard Container -->
+                    <div id="flashcard-container" class="relative w-full h-64 cursor-pointer group perspective-1000 mx-auto" onclick="flipCard()">
+                        <div id="flashcard-inner" class="w-full h-full transition-all duration-500 transform-style-3d">
+                            
+                            <!-- Front -->
+                            <div class="absolute inset-0 backface-hidden bg-gradient-to-br from-orange-500 to-amber-600 text-white border-2 border-orange-400 rounded-2xl shadow-lg flex flex-col items-center justify-center p-6 text-center">
+                                <i data-lucide="refresh-cw" class="w-6 h-6 absolute top-4 right-4 text-white/50 opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                                <h3 id="card-front-text" class="text-2xl md:text-3xl font-bold px-4"></h3>
+                                <p class="text-orange-100 mt-6 text-sm uppercase tracking-widest font-semibold">Tap to reveal</p>
+                            </div>
+
+                            <!-- Back -->
+                            <div class="absolute inset-0 backface-hidden rotate-y-180 bg-white text-gray-800 border-2 border-orange-200 rounded-2xl shadow-lg flex flex-col items-center justify-center p-6 text-center">
+                                <p id="card-back-en" class="text-base text-gray-500 font-medium italic mb-3 px-4"></p>
+                                <p id="card-back-vi" class="text-xl font-bold text-orange-700 px-4"></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Controls -->
+                    <div class="flex justify-center items-center gap-6 mt-8">
+                        <button onclick="prevCard()" class="p-3 rounded-full bg-gray-100 text-gray-600 hover:bg-orange-100 hover:text-orange-700 transition-colors">
+                            <i data-lucide="chevron-left" class="w-6 h-6"></i>
+                        </button>
+                        <span id="card-counter" class="font-bold text-gray-500 text-lg min-w-[4rem]">1 / 10</span>
+                        <button onclick="nextCard()" class="p-3 rounded-full bg-gray-100 text-gray-600 hover:bg-orange-100 hover:text-orange-700 transition-colors">
+                            <i data-lucide="chevron-right" class="w-6 h-6"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Data & Logic -->
+    <script>
+        // --- DATA ---
+        
+        // Tab 1: Core Vocab
+        const generalVocabData = [
+            { en: "to live on less than $2 a day", vi: "sống với ít hơn $2 một ngày" },
+            { en: "to live in extreme poverty", vi: "sống trong cảnh nghèo đói cùng cực" },
+            { en: "to live below the poverty line", vi: "sống dưới mức nghèo" },
+            { en: "the vicious cycle of poverty", vi: "vòng luẩn quẩn của sự nghèo khó" },
+            { en: "lack of education", vi: "thiếu giáo dục" },
+            { en: "to live paycheck to paycheck", vi: "kiếm đồng nào tiêu đồng nấy" },
+            { en: "to be lifted out of extreme poverty", vi: "thoát khỏi cảnh nghèo cùng cực" },
+            { en: "to rely on farming to earn a living", vi: "dựa vào việc làm nông để kiếm sống" },
+            { en: "to have fewer opportunities to move ahead in life", vi: "có ít cơ hội để tiến lên phía trước trong cuộc sống" },
+            { en: "to work multiple jobs", vi: "làm nhiều công việc" },
+            { en: "to struggle to put food on the table", vi: "khó khăn trong việc trang trải cuộc sống" },
+            { en: "to go to bed hungry", vi: "không có gì ăn/lót bụng vào buổi tối" },
+            { en: "to slow poverty reduction progress", vi: "làm chậm tiến độ giảm tỷ lệ nghèo" },
+            { en: "to suffer from hunger and malnutrition", vi: "bị đói và suy dinh dưỡng" },
+            { en: "to face acute food shortages", vi: "đối mặt với tình trạng thiếu lương thực trầm trọng" },
+            { en: "to be unable to buy enough food to feed their families", vi: "không đủ khả năng mua đủ thực phẩm để nuôi gia đình" }
+        ];
+
+        const examplesData = [
+            { en: "Countries impacted by crises and violence account for more than 40% of people living in extreme poverty.", vi: "Các quốc gia bị ảnh hưởng bởi khủng hoảng và bạo lực chiếm hơn 40% số người sống trong cảnh nghèo khổ cùng cực." },
+            { en: "Of the 49.3 million Americans working part time, 11.4% live below the poverty line.", vi: "Trong số 49,3 triệu người Mỹ làm việc bán thời gian, có 11,4% sống dưới mức nghèo khổ." },
+            { en: "A growing number of families are struggling to put food on the table during the coronavirus lockdown.", vi: "Ngày càng có nhiều gia đình đang phải vật lộn để trang trải cuộc sống trong quá trình phong tỏa." },
+            { en: "In the long term, people cannot break out of the vicious cycle of poverty without being granted the basic right to nutritious food.", vi: "Về lâu dài, mọi người không thể thoát ra khỏi vòng luẩn quẩn đói nghèo nếu không được tiếp cận nguồn thực phẩm dinh dưỡng." },
+            { en: "About 265 million people around the world are forecast to be facing acute food insecurity by the end of this year.", vi: "Khoảng 265 triệu người trên thế giới dự báo sẽ phải đối mặt với tình trạng mất an ninh lương thực nghiêm trọng." }
+        ];
+
+        // Tab 2: Idioms & Phrases
+        const idiomsData = [
+            { term: "to scrape by", engDef: "have enough money only for basic things", viDef: "sống qua ngày" },
+            { term: "to be short of cash", engDef: "not having enough money", viDef: "thiếu tiền" },
+            { term: "to be broke", engDef: "without money", viDef: "không có tiền" },
+            { term: "to live on the breadline", engDef: "to be extremely poor", viDef: "cực nghèo" },
+            { term: "to be on the dole", engDef: "get money from government when unemployed", viDef: "sống nhờ vào trợ cấp thất nghiệp" },
+            { term: "from rags to riches", engDef: "from being poor to being wealthy", viDef: "phất lên, ăn nên làm ra (từ nghèo → giàu)" },
+            { term: "to be in debt", engDef: "you owe money", viDef: "nợ tiền" },
+            { term: "to be out of debt", engDef: "you succeed in paying all the money that you owe", viDef: "trả hết nợ" }
+        ];
+
+        // Tab 3: Reading Vocab
+        const readingVocabData = [
+            { term: "in the fight against", type: "phrase", phonetic: "", def: "trong cuộc chiến chống lại thứ gì" },
+            { term: "jeopardize", type: "(v)", phonetic: "/ˈdʒepərdaɪz/", def: "risk harming or destroying something/somebody: gây nguy hiểm cho..." },
+            { term: "afford", type: "(v)", phonetic: "/əˈfɔːrd/", def: "to have enough money to be able to buy or do something: đủ khả năng chi trả" },
+            { term: "impoverished", type: "(adj)", phonetic: "/ɪmˈpɑːvərɪʃt/", def: "very poor: rất nghèo" },
+            { term: "medical treatment", type: "(n)", phonetic: "", def: "the management and care of a patient: điều trị y tế" },
+            { term: "shelter", type: "(n)", phonetic: "/ˈʃeltər/", def: "a place to live or stay, considered as a basic human need: chỗ ở" },
+            { term: "root causes", type: "(n)", phonetic: "", def: "the fundamental reason for the occurrence of a problem: nguyên nhân gốc rễ/chính yếu" },
+            { term: "necessity", type: "(n)", phonetic: "/nəˈsesəti/", def: "a thing that you must have and cannot manage without: thứ thiết yếu" },
+            { term: "discrimination", type: "(n)", phonetic: "/dɪˌskrɪmɪˈneɪʃn/", def: "treating somebody or a group less fairly than others: sự đối xử phân biệt" },
+            { term: "lead somebody into poverty", type: "phrase", phonetic: "", def: "đưa ai đó vào cảnh nghèo khó" }
+        ];
+
+        let flashcardDeck = [];
+        let currentCardIndex = 0;
+        let isCardFlipped = false;
+
+        // --- RENDERING FUNCTIONS ---
+
+        function renderVocabList() {
+            const container = document.getElementById('vocab-list');
+            container.innerHTML = generalVocabData.map(item => `
+                <li class="p-4 bg-gray-50 hover:bg-orange-50 border border-gray-100 hover:border-orange-200 rounded-xl transition-all duration-200 group list-item-vocab">
+                    <div class="font-bold text-[16px] text-gray-800 group-hover:text-orange-700 term leading-snug">${item.en}</div>
+                    <div class="text-[14px] font-medium text-gray-600 mt-2 translation">${item.vi}</div>
+                </li>
+            `).join('');
+        }
+
+        function renderExamples() {
+            const container = document.getElementById('examples-list');
+            container.innerHTML = examplesData.map(ex => `
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-orange-100 relative group hover:shadow-md transition-shadow">
+                    <i data-lucide="quote" class="w-8 h-8 text-orange-50 absolute top-3 right-3 z-0"></i>
+                    <p class="font-medium text-gray-800 text-sm md:text-base leading-relaxed relative z-10">${ex.en}</p>
+                    <p class="text-sm text-orange-700/90 mt-3 pt-3 border-t border-orange-50 relative z-10 font-medium">${ex.vi}</p>
+                </div>
+            `).join('');
+        }
+
+        function renderIdiomsGrid() {
+            const container = document.getElementById('idioms-grid');
+            container.innerHTML = idiomsData.map(item => `
+                <div class="idiom-card bg-white p-5 rounded-xl border border-gray-200 hover:border-orange-300 shadow-sm hover:shadow transition-all group flex flex-col h-full">
+                    <h3 class="text-lg font-bold text-gray-800 mb-2 group-hover:text-orange-600 idiom-title">${item.term}</h3>
+                    <p class="text-sm text-gray-500 italic mb-4 idiom-eng">${item.engDef}</p>
+                    <div class="mt-auto pt-3 border-t border-gray-100">
+                        <p class="font-semibold text-orange-700 idiom-vi">${item.viDef}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderReadingVocab() {
+            const container = document.getElementById('reading-vocab-list');
+            container.innerHTML = readingVocabData.map(item => `
+                <div class="bg-white p-4 rounded-xl border border-slate-100 shadow-sm">
+                    <div class="font-bold text-orange-800 text-[15px] mb-1 flex flex-wrap items-baseline gap-1">
+                        <span>${item.term}</span>
+                        ${item.type ? `<span class="text-xs text-gray-400 font-normal">${item.type}</span>` : ''}
+                        ${item.phonetic ? `<span class="text-xs text-orange-600/70 font-normal ml-1">${item.phonetic}</span>` : ''}
+                    </div>
+                    <div class="text-[13px] text-gray-600 leading-relaxed">${item.def}</div>
+                </div>
+            `).join('');
+        }
+
+        // --- FLASHCARD LOGIC ---
+        
+        function initFlashcards() {
+            // Combine vocab for flashcards
+            flashcardDeck = [
+                ...generalVocabData.map(i => ({ front: i.en, backEn: "", backVi: i.vi })),
+                ...idiomsData.map(i => ({ front: i.term, backEn: i.engDef, backVi: i.viDef })),
+                ...readingVocabData.map(i => ({ front: i.term, backEn: i.def, backVi: "" }))
+            ];
+            // Shuffle
+            flashcardDeck.sort(() => Math.random() - 0.5);
+            currentCardIndex = 0;
+            updateFlashcardView();
+        }
+
+        function updateFlashcardView() {
+            const card = flashcardDeck[currentCardIndex];
+            document.getElementById('card-front-text').innerText = card.front;
+            document.getElementById('card-back-en').innerText = card.backEn;
+            document.getElementById('card-back-vi').innerText = card.backVi;
+            
+            if(!card.backEn) {
+                document.getElementById('card-back-en').classList.add('hidden');
+            } else {
+                document.getElementById('card-back-en').classList.remove('hidden');
+            }
+
+            if(!card.backVi) {
+                document.getElementById('card-back-vi').classList.add('hidden');
+            } else {
+                document.getElementById('card-back-vi').classList.remove('hidden');
+            }
+
+            document.getElementById('card-counter').innerText = `${currentCardIndex + 1} / ${flashcardDeck.length}`;
+            
+            if (isCardFlipped) {
+                document.getElementById('flashcard-inner').classList.remove('rotate-y-180');
+                isCardFlipped = false;
+            }
+        }
+
+        function flipCard() {
+            document.getElementById('flashcard-inner').classList.toggle('rotate-y-180');
+            isCardFlipped = !isCardFlipped;
+        }
+
+        function nextCard() {
+            if (currentCardIndex < flashcardDeck.length - 1) {
+                currentCardIndex++;
+                updateFlashcardView();
+            }
+        }
+
+        function prevCard() {
+            if (currentCardIndex > 0) {
+                currentCardIndex--;
+                updateFlashcardView();
+            }
+        }
+
+        // --- INTERACTIVITY LOGIC ---
+
+        function switchTab(tabId) {
+            // Hide all tabs
+            const tabs = ['vocab', 'idioms', 'reading', 'flashcards'];
+            tabs.forEach(id => {
+                document.getElementById(`tab-${id}`).classList.add('hidden');
+                document.getElementById(`tab-${id}`).classList.remove('block');
+                
+                // Reset tab button styles
+                const btn = document.getElementById(`tab-btn-${id}`);
+                btn.className = "whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-gray-500 border-b-2 border-transparent hover:text-gray-800 transition-colors flex items-center gap-2";
+            });
+
+            // Show active tab
+            document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+            document.getElementById(`tab-${tabId}`).classList.add('block');
+            
+            // Set active tab button style
+            const activeBtn = document.getElementById(`tab-btn-${tabId}`);
+            activeBtn.className = "whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-orange-700 border-b-2 border-orange-700 transition-colors flex items-center gap-2";
+        }
+
+        function filterList(listId, query) {
+            const list = document.getElementById(listId);
+            let items;
+            
+            if(listId === 'vocab-list') {
+                 items = list.getElementsByClassName('list-item-vocab');
+            }
+
+            const lowerQuery = query.toLowerCase();
+
+            for (let i = 0; i < items.length; i++) {
+                const text = items[i].innerText.toLowerCase();
+                if (text.includes(lowerQuery)) {
+                    items[i].style.display = "";
+                } else {
+                    items[i].style.display = "none";
+                }
+            }
+        }
+
+        function filterIdioms(query) {
+            const cards = document.getElementsByClassName('idiom-card');
+            const lowerQuery = query.toLowerCase();
+
+            for (let i = 0; i < cards.length; i++) {
+                const text = cards[i].innerText.toLowerCase();
+                if (text.includes(lowerQuery)) {
+                    cards[i].style.display = "";
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+        }
+
+        // --- INITIALIZATION ---
+        document.addEventListener('DOMContentLoaded', () => {
+            renderVocabList();
+            renderReadingVocab();
+            renderIdiomsGrid();
+            renderExamples();
+            initFlashcards();
+            
+            // Initialize Lucide icons
+            lucide.createIcons();
+        });
+    </script>
+</body>
+</html>

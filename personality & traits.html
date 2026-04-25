@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IELTS Vocab: Appearance & Character</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .animate-fade-in { animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        @keyframes fadeIn { 
+            from { opacity: 0; transform: translateY(10px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+        
+        /* Custom scrollbar for lists */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #fda4af; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #fb7185; }
+
+        /* Mind map line drawing utility */
+        .mind-map-line {
+            position: absolute;
+            z-index: 0;
+            background-color: #fecdd3;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-rose-50/30 text-gray-800 font-sans pb-12">
+
+    <!-- Header -->
+    <header class="bg-white border-b border-rose-100 sticky top-0 z-10 shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div class="flex items-center gap-4">
+                <div class="p-3 bg-rose-500 text-white rounded-xl shadow-md shadow-rose-200">
+                    <i data-lucide="user-circle" class="w-6 h-6"></i>
+                </div>
+                <div>
+                    <h1 class="text-2xl sm:text-3xl font-extrabold text-gray-900">IELTS Vocabulary</h1>
+                    <p class="text-sm text-rose-600 font-medium mt-1">Appearance & Character Traits</p>
+                </div>
+            </div>
+            
+            <!-- Tabs -->
+            <div class="flex overflow-x-auto mt-6 border-b border-gray-100 hide-scrollbar gap-2 sm:gap-8">
+                <button onclick="switchTab('appearance')" id="tab-btn-appearance" class="whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-rose-600 border-b-2 border-rose-600 transition-colors flex items-center gap-2">
+                    <i data-lucide="eye" class="w-4 h-4"></i> Appearance
+                </button>
+                <button onclick="switchTab('character')" id="tab-btn-character" class="whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-gray-500 border-b-2 border-transparent hover:text-gray-800 transition-colors flex items-center gap-2">
+                    <i data-lucide="heart" class="w-4 h-4"></i> Character
+                </button>
+                <button onclick="switchTab('mindmap')" id="tab-btn-mindmap" class="whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-gray-500 border-b-2 border-transparent hover:text-gray-800 transition-colors flex items-center gap-2">
+                    <i data-lucide="network" class="w-4 h-4"></i> Concepts & Mind Map
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+        
+        <!-- Tab: Appearance -->
+        <section id="tab-appearance" class="animate-fade-in block">
+            <div class="flex flex-col lg:flex-row gap-6">
+                <!-- Vocab List -->
+                <div class="flex-1 bg-white p-6 rounded-2xl shadow-sm border border-rose-100">
+                    <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-6">
+                        <h2 class="text-xl font-bold text-gray-800 flex items-center gap-2">
+                            <i data-lucide="list" class="w-5 h-5 text-rose-500"></i> Ngoại hình (Appearance)
+                        </h2>
+                        <div class="relative w-full sm:w-64">
+                            <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                            <input type="text" onkeyup="filterList('appearance-list', this.value)" placeholder="Search vocabulary..." class="w-full pl-9 pr-4 py-2 bg-rose-50/50 border border-rose-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-rose-500 transition-all">
+                        </div>
+                    </div>
+                    <ul id="appearance-list" class="space-y-3 max-h-[600px] overflow-y-auto pr-2">
+                        <!-- Populated by JS -->
+                    </ul>
+                </div>
+
+                <!-- Examples Panel -->
+                <div class="lg:w-1/3 bg-gradient-to-b from-rose-50 to-pink-50 p-6 rounded-2xl border border-rose-100 h-fit lg:sticky lg:top-48 shadow-inner">
+                    <h2 class="text-xl font-bold text-rose-900 mb-6 flex items-center gap-2">
+                        <i data-lucide="message-square-quote" class="w-5 h-5 text-rose-600"></i> Ví dụ (Examples)
+                    </h2>
+                    <div id="appearance-examples" class="space-y-5">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tab: Character -->
+        <section id="tab-character" class="animate-fade-in hidden">
+            <div class="flex flex-col lg:flex-row gap-6">
+                <!-- Vocab List -->
+                <div class="flex-1 bg-white p-6 rounded-2xl shadow-sm border border-rose-100">
+                    <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-6">
+                        <h2 class="text-xl font-bold text-gray-800 flex items-center gap-2">
+                            <i data-lucide="list" class="w-5 h-5 text-rose-500"></i> Tính cách (Character Traits)
+                        </h2>
+                        <div class="relative w-full sm:w-64">
+                            <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                            <input type="text" onkeyup="filterList('character-list', this.value)" placeholder="Search vocabulary..." class="w-full pl-9 pr-4 py-2 bg-rose-50/50 border border-rose-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-rose-500 transition-all">
+                        </div>
+                    </div>
+                    <ul id="character-list" class="space-y-3 max-h-[600px] overflow-y-auto pr-2">
+                        <!-- Populated by JS -->
+                    </ul>
+                </div>
+
+                <!-- Examples Panel -->
+                <div class="lg:w-1/3 bg-gradient-to-b from-rose-50 to-pink-50 p-6 rounded-2xl border border-rose-100 h-fit lg:sticky lg:top-48 shadow-inner">
+                    <h2 class="text-xl font-bold text-rose-900 mb-6 flex items-center gap-2">
+                        <i data-lucide="message-square-quote" class="w-5 h-5 text-rose-600"></i> Ví dụ (Examples)
+                    </h2>
+                    <div id="character-examples" class="space-y-5">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tab: Concepts & Mind Map -->
+        <section id="tab-mindmap" class="animate-fade-in hidden space-y-8">
+            
+            <!-- Character vs Personality Box -->
+            <div class="bg-white p-6 sm:p-8 rounded-3xl shadow-sm border border-rose-100">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">Character vs. Personality</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-indigo-50 border border-indigo-100 p-6 rounded-2xl relative overflow-hidden">
+                        <div class="absolute top-0 right-0 p-4 opacity-10"><i data-lucide="gem" class="w-16 h-16 text-indigo-900"></i></div>
+                        <h3 class="text-xl font-bold text-indigo-900 mb-3 relative z-10">Character</h3>
+                        <p class="text-indigo-800 font-medium mb-3 relative z-10">A combination of qualities that make someone different from other people.</p>
+                        <ul class="space-y-2 text-sm text-indigo-700 relative z-10">
+                            <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 mt-0.5"></i> Bản chất, phẩm chất bên trong.</li>
+                            <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 mt-0.5"></i> Cần một thời gian tiếp xúc tìm hiểu mới thấy được.</li>
+                        </ul>
+                        <div class="mt-4 pt-4 border-t border-indigo-200 relative z-10">
+                            <span class="font-semibold text-indigo-900">Ví dụ:</span> honest (thật thà), kind (tử tế)
+                        </div>
+                    </div>
+
+                    <div class="bg-rose-50 border border-rose-100 p-6 rounded-2xl relative overflow-hidden">
+                        <div class="absolute top-0 right-0 p-4 opacity-10"><i data-lucide="smile" class="w-16 h-16 text-rose-900"></i></div>
+                        <h3 class="text-xl font-bold text-rose-900 mb-3 relative z-10">Personality</h3>
+                        <p class="text-rose-800 font-medium mb-3 relative z-10">The way you behave, feel and think, especially socially.</p>
+                        <ul class="space-y-2 text-sm text-rose-700 relative z-10">
+                            <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 mt-0.5"></i> Tính cách, bề ngoài, dễ nhìn thấy được.</li>
+                            <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 mt-0.5"></i> Tiếp xúc vài lần là có thể nhận thấy được.</li>
+                        </ul>
+                        <div class="mt-4 pt-4 border-t border-rose-200 relative z-10">
+                            <span class="font-semibold text-rose-900">Ví dụ:</span> bubbly (sôi nổi), extroverted (hướng ngoại)
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mind Map Builder -->
+            <div class="bg-gray-900 p-6 sm:p-10 rounded-3xl shadow-lg border border-gray-800 relative overflow-hidden">
+                <div class="text-center mb-10 relative z-10">
+                    <h2 class="text-2xl font-bold text-white">Describe a person you admire</h2>
+                    <p class="text-gray-400 mt-2">Mind Map Study Method (Grandfather)</p>
+                </div>
+
+                <!-- Desktop Mind Map Layout -->
+                <div class="hidden md:flex flex-col items-center relative z-10 py-10">
+                    
+                    <!-- Center Node -->
+                    <div class="bg-rose-500 text-white px-8 py-4 rounded-full font-bold text-xl shadow-[0_0_20px_rgba(244,63,94,0.4)] z-20 mb-16 relative">
+                        My Grandfather
+                        <!-- Connecting Lines -->
+                        <div class="absolute w-0.5 h-16 bg-gray-600 left-1/2 -bottom-16"></div>
+                        <div class="absolute w-48 h-0.5 bg-gray-600 top-1/2 -left-48"></div>
+                        <div class="absolute w-48 h-0.5 bg-gray-600 top-1/2 -right-48"></div>
+                    </div>
+
+                    <!-- Branches container -->
+                    <div class="w-full flex justify-between absolute top-0 px-10 h-full pointer-events-none">
+                        
+                        <!-- Left Branch -->
+                        <div class="flex flex-col justify-center h-full gap-8 pointer-events-auto mt-20">
+                            <div class="bg-gray-800 border border-gray-700 p-5 rounded-2xl w-64 shadow-xl">
+                                <h4 class="text-rose-400 font-bold mb-2 flex items-center gap-2"><i data-lucide="book-open" class="w-4 h-4"></i> Knowledgable</h4>
+                                <ul class="text-gray-300 text-sm space-y-2">
+                                    <li>• Travelled a lot (younger)</li>
+                                    <li>• Lots of experience & life lessons</li>
+                                    <li>• Pass on to children & grandchildren</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Right Branch -->
+                        <div class="flex flex-col justify-center h-full gap-8 pointer-events-auto mt-20">
+                            <div class="bg-gray-800 border border-gray-700 p-5 rounded-2xl w-64 shadow-xl">
+                                <h4 class="text-green-400 font-bold mb-2 flex items-center gap-2"><i data-lucide="heart-handshake" class="w-4 h-4"></i> Caring</h4>
+                                <ul class="text-gray-300 text-sm space-y-2">
+                                    <li>• Parents busy -> stayed at home with grandpa</li>
+                                    <li>• Naughty/cried -> gave me what I wanted</li>
+                                    <li>• Took good care of me</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bottom Branch -->
+                    <div class="bg-gray-800 border border-gray-700 p-5 rounded-2xl w-80 shadow-xl z-20 mt-4 text-center">
+                        <h4 class="text-yellow-400 font-bold mb-2 flex justify-center items-center gap-2"><i data-lucide="gift" class="w-4 h-4"></i> Kind & Generous</h4>
+                        <ul class="text-gray-300 text-sm text-left inline-block space-y-2">
+                            <li>• Voluntary activities</li>
+                            <li>• Example: local environmental programmes</li>
+                        </ul>
+                    </div>
+
+                    <!-- Additional Traits Row -->
+                    <div class="flex gap-6 mt-12 w-full justify-center">
+                        <div class="bg-gray-800 border border-gray-700 p-4 rounded-xl text-center w-48 border-t-4 border-t-purple-500">
+                            <h4 class="text-white font-bold text-sm mb-1">Thick-skinned</h4>
+                            <p class="text-xs text-gray-400">Don't let people or problems affect them too much.</p>
+                        </div>
+                        <div class="bg-gray-800 border border-gray-700 p-4 rounded-xl text-center w-48 border-t-4 border-t-blue-500">
+                            <h4 class="text-white font-bold text-sm mb-1">Fair-minded</h4>
+                            <p class="text-xs text-gray-400">Less likely to overreact to situations.</p>
+                        </div>
+                        <div class="bg-gray-800 border border-gray-700 p-4 rounded-xl text-center w-48 border-t-4 border-t-orange-500">
+                            <h4 class="text-white font-bold text-sm mb-1">Respectful</h4>
+                            <p class="text-xs text-gray-400">Treating someone well and politely.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mobile List Layout (Fallback for small screens) -->
+                <div class="md:hidden space-y-4">
+                    <div class="bg-rose-500 text-white p-4 rounded-xl font-bold text-center mb-6">
+                        My Grandfather
+                    </div>
+                    
+                    <div class="bg-gray-800 border-l-4 border-rose-400 p-4 rounded-r-xl">
+                        <h4 class="text-white font-bold mb-1">Knowledgable</h4>
+                        <p class="text-sm text-gray-400">Travelled a lot, lots of experience, pass on to children.</p>
+                    </div>
+                    
+                    <div class="bg-gray-800 border-l-4 border-green-400 p-4 rounded-r-xl">
+                        <h4 class="text-white font-bold mb-1">Caring</h4>
+                        <p class="text-sm text-gray-400">Parents busy, stayed with grandpa. Took good care of me.</p>
+                    </div>
+                    
+                    <div class="bg-gray-800 border-l-4 border-yellow-400 p-4 rounded-r-xl">
+                        <h4 class="text-white font-bold mb-1">Kind & Generous</h4>
+                        <p class="text-sm text-gray-400">Voluntary activities like local environmental programmes.</p>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-2 mt-6">
+                        <div class="bg-gray-800 p-3 rounded-lg text-center"><span class="text-purple-400 font-bold text-sm">Thick-skinned</span></div>
+                        <div class="bg-gray-800 p-3 rounded-lg text-center"><span class="text-blue-400 font-bold text-sm">Fair-minded</span></div>
+                        <div class="bg-gray-800 p-3 rounded-lg text-center"><span class="text-orange-400 font-bold text-sm">Respectful</span></div>
+                        <div class="bg-gray-800 p-3 rounded-lg text-center"><span class="text-red-400 font-bold text-sm">Quick-tempered</span></div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Data & Logic -->
+    <script>
+        // --- DATA ---
+        
+        const appearanceData = {
+            vocab: [
+                { en: "a round face >< a pointed face", vi: "mặt tròn >< mặt nhọn" },
+                { en: "short/long/shoulder-length/fair hair", vi: "tóc ngắn/dài/ngang vai/vàng hoe" },
+                { en: "tall/short/medium height", vi: "cao/thấp/ có chiều cao trung bình" },
+                { en: "to look young for your age", vi: "nhìn trẻ hơn tuổi thật (to look younger than you are)" },
+                { en: "to look your age", vi: "nhìn đúng với tuổi thật (not younger or older)" },
+                { en: "to be getting on a bit", vi: "đang già đi (to be getting old)" },
+                { en: "middle-aged (adj)", vi: "trung niên (approximately between 45 and 65)" },
+                { en: "lean", vi: "cơ thể săn chắc (thin and healthy)" },
+                { en: "slender", vi: "thon thả, mảnh mai (thin in an attractive way)" },
+                { en: "well-built", vi: "lực lưỡng, cường tráng (muscular)" },
+                { en: "double chin", vi: "cằm ngấn mỡ, nọng cằm (fat around the chin)" },
+                { en: "never a hair out of place", vi: "gọn gàng, chỉn chu (always well-dressed, neat and smart looking)" },
+                { en: "cropped hair", vi: "tóc cắt cực ngắn (very short hair)" },
+                { en: "to be fair-skinned", vi: "có làn da trắng/sáng màu (light skinned)" },
+                { en: "slim figure", vi: "dáng người thon gọn, hấp dẫn (attractively thin)" },
+                { en: "youthful appearance", vi: "vẻ ngoài trẻ trung" },
+                { en: "to be overweight", vi: "thừa cân" },
+                { en: "wiry", vi: "gầy nhưng khỏe mạnh, rắn rỏi (thin but strong)" }
+            ],
+            examples: [
+                { en: "First thing I noticed was he put on weight (he used to be so lean) and he's got a double chin.", vi: "Điều đầu tiên tôi nhận thấy là anh ấy tăng cân (trước đây anh ấy rất săn chắc) và anh ấy có nọng cằm nữa." },
+                { en: "His sister was always the opposite - never a hair out of place.", vi: "Em gái anh ấy luôn ngược lại - luôn chỉn chu, ngăn nắp." },
+                { en: "She doesn't look her age; I thought she was ten years younger.", vi: "Cô ấy trông không đúng với tuổi của mình; tôi nghĩ rằng cô ấy trông trẻ hơn mười tuổi." },
+                { en: "He's getting on a bit - he'll be 76 next birthday.", vi: "Ông ấy đang già đi - sinh nhật tới ông ấy sẽ 76 tuổi." },
+                { en: "My father's getting on a bit... he's in his 60s but he looks very young for his age.. he still does lots of exercise and is quite well-built.", vi: "Bố tôi cũng đang có tuổi... ông ấy đã độ tuổi 60 nhưng trông rất trẻ so với tuổi.. ông ấy vẫn tập thể dục nhiều và khá tráng kiện." }
+            ]
+        };
+
+        const characterData = {
+            vocab: [
+                { en: "introverted >< extroverted", vi: "hướng nội >< hướng ngoại (inward looking and quiet >< outward looking and sociable)" },
+                { en: "outgoing (adj)", vi: "dễ hòa đồng (energetic and friendly/find it easy to be with others)" },
+                { en: "painfully shy", vi: "rất nhút nhát (extremely shy)" },
+                { en: "reserved (adj)", vi: "kín đáo, dè dặt (shy, not immediately sociable)" },
+                { en: "to be the life and soul of the party", vi: "người là trung tâm/linh hồn của buổi tiệc (a fun person)" },
+                { en: "bubbly (adj)", vi: "vui vẻ, sôi nổi (always cheerful, friendly and enthusiastic)" },
+                { en: "to lose one's temper", vi: "mất bình tĩnh, nổi nóng (to suddenly become angry)" },
+                { en: "easy-going (adj)", vi: "vô tư, ung dung (relaxed and happy to accept things)" },
+                { en: "good sense of humour", vi: "có khiếu hài hước (the ability to understand what is funny)" },
+                { en: "patient (adj)", vi: "kiên nhẫn (able to wait for a long time without becoming angry)" },
+                { en: "respectful (adj)", vi: "thể hiện sự tôn trọng (treating someone well and politely)" },
+                { en: "thick-skinned", vi: "mặt dày / chai lì (don't let people or problems affect them too much)" },
+                { en: "fair-minded", vi: "công bằng (less likely to overreact to situations)" },
+                { en: "quick-tempered", vi: "nóng tính, dễ nổi cáu" }
+            ],
+            examples: [
+                { en: "She's always the life and soul of the party because she has such a bubbly personality.", vi: "Cô ấy luôn là linh hồn của bữa tiệc bởi vì cô ấy có một tính cách sôi nổi." },
+                { en: "She lost her temper with a customer and shouted at him.", vi: "Cô ấy đã mất bình tĩnh với một khách hàng và hét vào mặt anh ta." },
+                { en: "Joe is always so polite and respectful. I wish he would be more informal and just treat me as his equal.", vi: "Joe luôn lịch sự và thể hiện sự tôn trọng. Tôi ước anh ấy sẽ thân mật hơn và coi tôi ngang hàng với anh ấy." },
+                { en: "I seem to be attracted to introverts... not people who are painfully shy but most of my friends are a little reserved.", vi: "Tôi dường như bị thu hút bởi những người hướng nội... không phải những người quá rụt rè nhút nhát nhưng hầu hết bạn bè của tôi đều hơi dè dặt." }
+            ]
+        };
+
+        // --- RENDERING FUNCTIONS ---
+
+        function renderVocabList(containerId, dataObj) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = dataObj.vocab.map(item => {
+                // Split standard definition and parenthesis extra notes
+                let viText = item.vi;
+                let subText = "";
+                if(item.vi.includes("(")) {
+                    const parts = item.vi.split("(");
+                    viText = parts[0].trim();
+                    subText = "(" + parts[1];
+                }
+
+                return `
+                <li class="p-4 bg-gray-50 hover:bg-rose-50 border border-gray-100 hover:border-rose-200 rounded-xl transition-all duration-200 group">
+                    <div class="font-bold text-lg text-gray-800 group-hover:text-rose-700">${item.en}</div>
+                    <div class="text-[15px] font-medium text-gray-700 mt-1">${viText}</div>
+                    ${subText ? `<div class="text-sm text-gray-400 mt-1 italic">${subText}</div>` : ''}
+                </li>
+            `}).join('');
+        }
+
+        function renderExamples(containerId, dataObj) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = dataObj.examples.map(ex => `
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-rose-100 relative group hover:shadow-md transition-shadow">
+                    <i data-lucide="quote" class="w-8 h-8 text-rose-100 absolute top-3 right-3 z-0"></i>
+                    <p class="font-medium text-gray-800 text-sm md:text-base leading-relaxed relative z-10">${ex.en}</p>
+                    <p class="text-sm text-rose-600/90 mt-3 pt-3 border-t border-rose-50 relative z-10 font-medium">${ex.vi}</p>
+                </div>
+            `).join('');
+        }
+
+        // --- INTERACTIVITY LOGIC ---
+
+        function switchTab(tabId) {
+            // Hide all tabs
+            const tabs = ['appearance', 'character', 'mindmap'];
+            tabs.forEach(id => {
+                document.getElementById(`tab-${id}`).classList.add('hidden');
+                document.getElementById(`tab-${id}`).classList.remove('block');
+                
+                // Reset tab button styles
+                const btn = document.getElementById(`tab-btn-${id}`);
+                btn.className = "whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-gray-500 border-b-2 border-transparent hover:text-gray-800 transition-colors flex items-center gap-2";
+            });
+
+            // Show active tab
+            document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+            document.getElementById(`tab-${tabId}`).classList.add('block');
+            
+            // Set active tab button style
+            const activeBtn = document.getElementById(`tab-btn-${tabId}`);
+            activeBtn.className = "whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-rose-600 border-b-2 border-rose-600 transition-colors flex items-center gap-2";
+        }
+
+        function filterList(listId, query) {
+            const list = document.getElementById(listId);
+            const items = list.getElementsByTagName('li');
+            const lowerQuery = query.toLowerCase();
+
+            for (let i = 0; i < items.length; i++) {
+                const text = items[i].innerText.toLowerCase();
+                if (text.includes(lowerQuery)) {
+                    items[i].style.display = "";
+                } else {
+                    items[i].style.display = "none";
+                }
+            }
+        }
+
+        // --- INITIALIZATION ---
+        document.addEventListener('DOMContentLoaded', () => {
+            renderVocabList('appearance-list', appearanceData);
+            renderExamples('appearance-examples', appearanceData);
+            
+            renderVocabList('character-list', characterData);
+            renderExamples('character-examples', characterData);
+            
+            // Initialize Lucide icons
+            lucide.createIcons();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IELTS Writing Task 1 Vocabulary</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .animate-fade-in { animation: fadeIn 0.3s ease-in-out; }
+        @keyframes fadeIn { 
+            from { opacity: 0; transform: translateY(5px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        
+        /* Custom styles for syntax highlighting in formulas */
+        .formula-highlight { color: #0ea5e9; font-weight: 600; }
+    </style>
+</head>
+<body class="min-h-screen bg-slate-50 text-gray-800 font-sans pb-12">
+
+    <!-- Header -->
+    <header class="bg-white border-b border-gray-200 sticky top-0 z-10">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div class="flex items-center gap-4">
+                <div class="p-3 bg-teal-600 text-white rounded-xl shadow-md">
+                    <i data-lucide="pen-tool" class="w-6 h-6"></i>
+                </div>
+                <div>
+                    <h1 class="text-2xl sm:text-3xl font-extrabold text-gray-900">IELTS Writing Task 1</h1>
+                    <p class="text-sm text-gray-500 font-medium mt-1">Comprehensive Vocabulary & Structures</p>
+                </div>
+            </div>
+            
+            <!-- Tabs -->
+            <div class="flex overflow-x-auto mt-6 border-b border-gray-200 hide-scrollbar gap-2 sm:gap-6">
+                <button onclick="switchTab('man-made')" id="tab-btn-man-made" class="whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-teal-600 border-b-2 border-teal-600 transition-colors flex items-center gap-2">
+                    <i data-lucide="factory" class="w-4 h-4"></i> Man-made Process
+                </button>
+                <button onclick="switchTab('natural')" id="tab-btn-natural" class="whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-gray-500 border-b-2 border-transparent hover:text-gray-700 transition-colors flex items-center gap-2">
+                    <i data-lucide="leaf" class="w-4 h-4"></i> Natural Process
+                </button>
+                <button onclick="switchTab('synonyms')" id="tab-btn-synonyms" class="whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-gray-500 border-b-2 border-transparent hover:text-gray-700 transition-colors flex items-center gap-2">
+                    <i data-lucide="git-compare" class="w-4 h-4"></i> Synonyms
+                </button>
+                <button onclick="switchTab('maps')" id="tab-btn-maps" class="whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-gray-500 border-b-2 border-transparent hover:text-gray-700 transition-colors flex items-center gap-2">
+                    <i data-lucide="map" class="w-4 h-4"></i> Map Structures
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+        
+        <!-- Tab: Man-made Process -->
+        <section id="tab-man-made" class="animate-fade-in block">
+            <div class="flex flex-col md:flex-row gap-6">
+                <div class="flex-1 bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-xl font-bold text-gray-800 flex items-center gap-2">
+                            <i data-lucide="list" class="w-5 h-5 text-teal-500"></i> Vocabulary
+                        </h2>
+                        <div class="relative">
+                            <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                            <input type="text" onkeyup="filterList('man-made-list', this.value)" placeholder="Search words..." class="pl-9 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 transition-all">
+                        </div>
+                    </div>
+                    <ul id="man-made-list" class="space-y-3 max-h-[600px] overflow-y-auto pr-2">
+                        <!-- Populated by JS -->
+                    </ul>
+                </div>
+                <div class="md:w-1/3 bg-teal-50 p-6 rounded-2xl border border-teal-100 h-fit sticky top-48">
+                    <h2 class="text-xl font-bold text-teal-900 mb-6 flex items-center gap-2">
+                        <i data-lucide="message-square" class="w-5 h-5 text-teal-600"></i> Examples
+                    </h2>
+                    <div id="man-made-examples" class="space-y-6">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tab: Natural Process -->
+        <section id="tab-natural" class="animate-fade-in hidden">
+            <div class="flex flex-col md:flex-row gap-6">
+                <div class="flex-1 bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-xl font-bold text-gray-800 flex items-center gap-2">
+                            <i data-lucide="list" class="w-5 h-5 text-teal-500"></i> Vocabulary
+                        </h2>
+                        <div class="relative">
+                            <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                            <input type="text" onkeyup="filterList('natural-list', this.value)" placeholder="Search words..." class="pl-9 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 transition-all">
+                        </div>
+                    </div>
+                    <ul id="natural-list" class="space-y-3 max-h-[600px] overflow-y-auto pr-2">
+                        <!-- Populated by JS -->
+                    </ul>
+                </div>
+                <div class="md:w-1/3 bg-teal-50 p-6 rounded-2xl border border-teal-100 h-fit sticky top-48">
+                    <h2 class="text-xl font-bold text-teal-900 mb-6 flex items-center gap-2">
+                        <i data-lucide="message-square" class="w-5 h-5 text-teal-600"></i> Examples
+                    </h2>
+                    <div id="natural-examples" class="space-y-6">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tab: Synonyms -->
+        <section id="tab-synonyms" class="animate-fade-in hidden">
+            <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-gray-100">
+                <div class="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <h2 class="text-xl font-bold text-gray-800">Common Synonyms & Paraphrases</h2>
+                    <div class="relative w-full sm:w-64">
+                        <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                        <input type="text" onkeyup="filterSynonyms(this.value)" placeholder="Search synonyms..." class="w-full pl-9 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 transition-all">
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="synonyms-grid">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Tab: Maps -->
+        <section id="tab-maps" class="animate-fade-in hidden">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6" id="maps-grid">
+                <!-- Populated by JS -->
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Data & Logic -->
+    <script>
+        // --- DATA OBJECTS ---
+        
+        const manMadeData = {
+            vocab: [
+                { en: "to be dug out of the ground", vi: "được đào lên khỏi mặt đất" },
+                { en: "to be placed onto a metal grid", vi: "được đặt lên 1 vỉ kim loại" },
+                { en: "to be put through a roller", vi: "được đưa qua băng chuyền" },
+                { en: "to break it into small chunks", vi: "đập nó thành những mảnh nhỏ" },
+                { en: "to be mixed with ...", vi: "được trộn với ..." },
+                { en: "to be either put in a mould or cut by a wire cutter", vi: "hoặc được đưa vào 1 cái khuôn hoặc được cắt bởi 1 cái máy cắt gạch" },
+                { en: "well-shaped (adj)", vi: "có hình dạng đẹp" },
+                { en: "to be laid in a drying oven", vi: "được đặt vào 1 cái lò nung" },
+                { en: "to be then heated in a kiln", vi: "được đun nóng trong 1 cái buồng" },
+                { en: "moderate temperature", vi: "nhiệt độ vừa phải" },
+                { en: "to be cooled", vi: "được làm nguội" },
+                { en: "to be packaged", vi: "được đóng gói" },
+                { en: "to be transported to... / to be delivered to ...", vi: "được vận chuyển tới ..." },
+                { en: "to be picked by hand", vi: "được hái bằng tay" },
+                { en: "to be dried in the sun", vi: "được phơi khô dưới ánh nắng mặt trời" },
+                { en: "to be sold to ...", vi: "được bán cho ..." },
+                { en: "to be harvested", vi: "được thu hoạch" }
+            ],
+            examples: [
+                { en: "In the first stage of the process, clay is dug out of the ground.", vi: "Trong giai đoạn đầu tiên của quá trình, đất sét được đào lên khỏi mặt đất." },
+                { en: "After that, the clay is mixed with sand and water, and the resulting mixture is either put in a mould or cut by a wire cutter to make well-shaped bricks.", vi: "Sau đó, đất sét được trộn với cát và nước, và hỗn hợp thu được được đặt trong khuôn hoặc cắt bằng máy cắt gạch để tạo ra những viên gạch có hình dạng đẹp." },
+                { en: "At the first stage of the process, coffee beans are picked by hand before being dried in the sun.", vi: "Ở giai đoạn đầu tiên của quy trình, hạt cà phê được hái bằng tay trước khi được phơi khô dưới ánh nắng mặt trời." },
+                { en: "These coffee jars are delivered to shops and supermarkets, ready to be sold to consumers.", vi: "Những hộp cà phê này được chuyển đến các cửa hàng và siêu thị, sẵn sàng để bán cho người tiêu dùng." },
+                { en: "At the first stage in the corn ethanol making process, corn is harvested and then put in a suitable place to ensure safe storage.", vi: "Ở giai đoạn đầu tiên trong quy trình sản xuất ethanol, ngô được thu hoạch và sau đó được đặt ở một nơi thích hợp để đảm bảo lưu trữ an toàn." }
+            ]
+        };
+
+        const naturalData = {
+            vocab: [
+                { en: "to experience/undergo significant changes", vi: "trải qua những thay đổi đáng kể" },
+                { en: "to pass through three distinct physical stages", vi: "trải qua ba giai đoạn vật lý khác nhau" },
+                { en: "to lay a couple of / a massive number of eggs", vi: "đẻ một vài / một số lượng lớn trứng" },
+                { en: "to begin life as eggs", vi: "bắt đầu cuộc sống là những trái trứng" },
+                { en: "to hatch within 3 to 5 days", vi: "nở trong vòng 3 đến 5 ngày" },
+                { en: "to hatch into ...", vi: "nở thành con gì" },
+                { en: "the hatching process", vi: "quá trình nở" },
+                { en: "to be ... cm in length / to be ... cm long", vi: "dài ... cm" },
+                { en: "to vary in size/colours/shapes", vi: "đa dạng về kích thước / màu sắc / hình dạng" },
+                { en: "to be termed ... / to be commonly called ...", vi: "được gọi chung là ..." },
+                { en: "to grow to adult size/maturity / turn into an adult / become fully-grown adults", vi: "tăng trưởng thành kích thước trưởng thành / tới giai đoạn trưởng thành" },
+                { en: "to make it to the adult stage", vi: "đạt tới giai đoạn trưởng thành" },
+                { en: "to emerge/appear", vi: "xuất hiện" },
+                { en: "feeding grounds", vi: "khu vực kiếm ăn" },
+                { en: "to feed on...", vi: "ăn cái gì" },
+                { en: "external gills / internal gills", vi: "cái mang bên ngoài / cái mang bên trong" },
+                { en: "to grow the hind legs / the front legs", vi: "mọc chân sau / chân trước" },
+                { en: "to grow quickly in size / double in size", vi: "phát triển nhanh chóng về kích thước / kích thước gấp đôi" },
+                { en: "to shed their old skin / shed their outer layer", vi: "thay da cũ / thay lớp ngoài của chúng" },
+                { en: "to moult several times", vi: "thay lông vài lần" },
+                { en: "to breathe underwater", vi: "hít thở dưới nước" },
+                { en: "to make mass migration across long distances", vi: "thực hiện di cư hàng loạt với khoảng cách dài" },
+                { en: "the cycle repeats itself / starts again", vi: "chu kỳ lặp lại/ bắt đầu lại" },
+                { en: "the life cycle takes/lasts ... days/weeks/...", vi: "vòng đời kéo dài .... ngày / tuần / ..." },
+                { en: "after ... days/weeks of development", vi: "sau... ngày / tuần phát triển" },
+                { en: "to normally live for ... to ... weeks/months/years", vi: "thường sống từ... đến ... tuần / tháng / năm" },
+                { en: "over the course of ... days/weeks", vi: "trong bao nhiêu ngày / tuần" },
+                { en: "to be covered with ...", vi: "được che phủ, bao phủ bởi ..." },
+                { en: "to build their nests in trees / on the ground", vi: "xây dựng tổ của chúng trên cây / trên mặt đất" },
+                { en: "under optimal conditions", vi: "trong điều kiện tối ưu" },
+                { en: "in adverse circumstances", vi: "trong các trường hợp bất lợi" }
+            ],
+            examples: [
+                { en: "Overall, there are eight stages in the life cycle of the salmon, starting with eggs and continuing until they become fully-grown adults.", vi: "Nhìn chung, có tám giai đoạn trong vòng đời của cá hồi, bắt đầu từ trứng và tiếp tục cho đến khi chúng trở thành các con cá trưởng thành." },
+                { en: "At the first stage of the life cycle, the female salmon chooses the best spot in rivers and lays a massive number of eggs, which are then incubated before developing into tiny fish.", vi: "Ở giai đoạn đầu tiên của vòng đời, cá hồi cái chọn vị trí tốt nhất trên sông và đẻ một số lượng lớn trứng, sau đó trứng được ấp trước khi phát triển thành cá nhỏ." },
+                { en: "In the next stage, the fish grow quickly in size and move downstream to freshwater areas.", vi: "Trong giai đoạn tiếp theo, cá phát triển nhanh chóng về kích thước và di chuyển xuống hạ lưu đến vùng nước ngọt." },
+                { en: "At the following stage of the life cycle, the young fish become much bigger and begin their journey to the ocean where they develop into mature adult salmon.", vi: "Ở giai đoạn tiếp theo của vòng đời, cá con trở nên to lớn hơn nhiều và bắt đầu hành trình ra đại dương nơi chúng phát triển thành những con cá trưởng thành." }
+            ]
+        };
+
+        const synonymsData = [
+            { id: 1, base: "the 0 to 14 age group", syn: "children aged 14 or under = the youngest group", vi: "nhóm tuổi từ 0 tới 14" },
+            { id: 2, base: "the 30 to 50 age group", syn: "people aged 30 to 50 = people between the ages of 30 and 50", vi: "nhóm tuổi từ 30 tới 50" },
+            { id: 3, base: "the populations of ...", syn: "the demographics of ...", vi: "dân số của" },
+            { id: 4, base: "the chart", syn: "the line graph / the pie chart / the bar chart / the table / the process / ...", vi: "biểu đồ ..." },
+            { id: 5, base: "to show", syn: "to compare / illustrate / give information on / show key data on ...", vi: "thể hiện/ so sánh" },
+            { id: 6, base: "to rise rapidly", syn: "to experience a rapid increase", vi: "tăng nhanh" },
+            { id: 7, base: "to decrease slowly", syn: "to see a slow decline", vi: "giảm chậm" },
+            { id: 8, base: "By contrast, ...", syn: "... illustrate a different pattern", vi: "Ngược lại, ... / ... thể hiện xu hướng trái ngược" },
+            { id: 9, base: "Similarly, ...", syn: "... show a similar pattern", vi: "Tương tự vậy, ... / ... thể hiện xu hướng tương tự" },
+            { id: 10, base: "while ...", syn: "whilst ... = whereas ...", vi: "trong khi ..." },
+            { id: 11, base: "in terms of ...", syn: "regarding... = Looking at ..., it can be seen that ...", vi: "Khi nói về" },
+            { id: 12, base: "over the given period", syn: "during this time frame", vi: "trong suốt giai đoạn nào đó" },
+            { id: 13, base: "over a 10-year period", syn: "over a period of 10 years", vi: "trong giai đoạn 10 năm" },
+            { id: 14, base: "from 1990 to 2000", syn: "between 1990 and 2000", vi: "từ năm 1990 tới 2000" },
+            { id: 15, base: "in 1990 and 2000", syn: "in two different years, 1990 and 2000", vi: "trong 2 năm, 1990 và 2000" },
+            { id: 16, base: "beginning with collecting", syn: "starting with the collection of ...", vi: "bắt đầu bằng việc thu thập ..." },
+            { id: 17, base: "ending with ... being packaged ...", syn: "ending at the packing stage", vi: "kết thúc ở giai đoạn đóng gói" },
+            { id: 18, base: "to be transported to ...", syn: "to be delivered to ...", vi: "được vận chuyển tới ..." },
+            { id: 19, base: "the life cycle of ...", syn: "the development of ...", vi: "vòng đời/ sự phát triển của con gì" },
+            { id: 20, base: "the percentage of ...", syn: "the proportion of ...", vi: "tỷ lệ ..." }
+        ];
+
+        const mapData = [
+            {
+                title: "Chỉ Dân số (Population)",
+                icon: "users",
+                structures: [
+                    "Nơi nào đó + has a population of + số dân + people.",
+                    "Nơi nào đó + has + số dân + inhabitants.",
+                    "The population of + nơi nào đó + is + số dân."
+                ],
+                examples: [
+                    "This city has a population of 1,000 people.",
+                    "This city has 1,000 inhabitants.",
+                    "The population of this city is 1,000."
+                ]
+            },
+            {
+                title: "Chỉ Các tuyến đường (Roads)",
+                icon: "milestone",
+                desc: "Từ vựng: run through = pass through = go through = cross (Lưu ý: 'cross' không đi với 'through').",
+                structures: [
+                    "Tuyến đường + run through // pass through // go through // cross + địa điểm + hướng."
+                ],
+                examples: [
+                    "The main road runs through the entire city from North to South."
+                ]
+            },
+            {
+                title: "Chỉ Vị trí (Location)",
+                icon: "map-pin",
+                desc: "Từ vựng: east/west/south/north, left/right/top/bottom/middle/centre.",
+                structures: [
+                    "Nơi nào đó + to be + situated / located / positioned + ở đâu."
+                ],
+                examples: [
+                    "The primary school is located to the north of the river.",
+                    "The shop is situated in the centre of the city."
+                ]
+            },
+            {
+                title: "Chỉ Chiều dài (Length)",
+                icon: "ruler",
+                structures: [
+                    "Nơi nào đó + has a length of + chiều dài.",
+                    "Nơi nào đó's total length is + chiều dài.",
+                    "Nơi nào đó + is + chiều dài + long."
+                ],
+                examples: [
+                    "The island has a length of about 250 km.",
+                    "The island's total length is about 250 km.",
+                    "The island is about 250 km long."
+                ]
+            },
+            {
+                title: "Sự thay đổi: Giữ nguyên (No Change)",
+                icon: "lock",
+                structures: [
+                    "Nơi nào đó + remain unchanged // still exist."
+                ],
+                examples: [
+                    "From 1980 to 2000, the school remained unchanged. (Quá khứ thêm -ed)"
+                ]
+            },
+            {
+                title: "Sự thay đổi: Mở rộng / Kéo dài (Expansion)",
+                icon: "expand",
+                structures: [
+                    "Mở rộng: Nơi nào đó + to be + expanded / extented / widened.",
+                    "Mở rộng: Nơi nào đó + become + bigger.",
+                    "Kéo dài: Nơi nào đó + to be + lengthened."
+                ],
+                examples: [
+                    "Between 2000 and 2005, the car park was slightly extended.",
+                    "During the following 2 years, the industrial complex was significantly lengthened."
+                ]
+            },
+            {
+                title: "Sự thay đổi: Thu hẹp / Rút ngắn (Shrinkage)",
+                icon: "shrink",
+                structures: [
+                    "Thu hẹp: Nơi nào đó + to be + narrowed.",
+                    "Thu hẹp: Nơi nào đó + become smaller.",
+                    "Rút ngắn: Nơi nào đó + to be + shortened."
+                ],
+                examples: [
+                    "The shopping mall was dramatically narrowed over the period of 5 years.",
+                    "The railway line was slightly shortened from 1990 to 2000."
+                ]
+            },
+            {
+                title: "Sự thay đổi: Di chuyển (Relocation)",
+                icon: "move",
+                structures: [
+                    "Nơi nào đó + to be + moved / relocated to + nơi mới."
+                ],
+                examples: [
+                    "The school was relocated to the north of the village."
+                ]
+            },
+            {
+                title: "Sự thay đổi: Biến mất / Xuất hiện (Disappear/Appear)",
+                icon: "eye-off",
+                desc: "Lưu ý: Nếu dùng 'appear' hay 'disappear' thì không có 'to be' ở trước.",
+                structures: [
+                    "Biến mất: Nơi nào đó + disappear.",
+                    "Biến mất: Nơi nào đó + to be + demolished // destroyed // knocked down.",
+                    "Rừng cây: Rừng cây + to be + cleared // chopped down // cut down.",
+                    "Xuất hiện: Nơi nào đó + appear.",
+                    "Xây mới: Nơi nào đó + to be + built / constructed // erected."
+                ],
+                examples: [
+                    "The hospital was demolished.",
+                    "The woodland was cut down.",
+                    "A new school was built next to the car park."
+                ]
+            },
+            {
+                title: "Sự thay đổi: Bị thay thế (Replacement)",
+                icon: "refresh-cw",
+                structures: [
+                    "Nơi cũ + to be + demolished // destroyed // knocked down + to make way for + nơi mới.",
+                    "Nơi cũ + to be + demolished // destroyed // knocked down + and replaced by + nơi mới.",
+                    "Nơi mới + to be + built / constructed // erected + to replace + nơi cũ.",
+                    "Nơi mới + to be + built / constructed // erected + on the original site of + nơi cũ."
+                ],
+                examples: [
+                    "The school was demolished to make way for a new science block.",
+                    "The school was demolished and replaced by a new science block.",
+                    "A new science block was built to replace the school.",
+                    "A new science block was built on the original site of the school."
+                ]
+            }
+        ];
+
+        // --- RENDERING FUNCTIONS ---
+
+        function renderVocabList(containerId, dataObj) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = dataObj.vocab.map(item => `
+                <li class="p-4 bg-gray-50 hover:bg-teal-50 border border-gray-100 hover:border-teal-200 rounded-xl transition-colors group">
+                    <div class="font-semibold text-lg text-gray-800 group-hover:text-teal-700">${item.en}</div>
+                    <div class="text-sm text-gray-500 mt-1">${item.vi}</div>
+                </li>
+            `).join('');
+        }
+
+        function renderExamples(containerId, dataObj) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = dataObj.examples.map(ex => `
+                <div class="bg-white p-4 rounded-xl shadow-sm border border-teal-100 relative">
+                    <div class="absolute -left-3 top-4 w-6 h-6 bg-teal-100 rounded-full border-4 border-white flex items-center justify-center"><div class="w-2 h-2 bg-teal-500 rounded-full"></div></div>
+                    <p class="font-medium text-gray-800 text-sm md:text-base leading-relaxed ml-2">${ex.en}</p>
+                    <p class="text-sm text-teal-600/80 mt-2 ml-2 italic pb-1 border-b border-teal-50">${ex.vi}</p>
+                </div>
+            `).join('');
+        }
+
+        function renderSynonyms() {
+            const container = document.getElementById('synonyms-grid');
+            container.innerHTML = synonymsData.map(item => `
+                <div class="synonym-card bg-gray-50 p-5 rounded-xl border border-gray-200 hover:border-teal-300 hover:shadow-md transition-all">
+                    <div class="flex items-center gap-2 mb-2 text-xs font-bold text-gray-400 uppercase tracking-wider">
+                        <span>Phrase ${item.id}</span>
+                    </div>
+                    <div class="flex flex-col gap-3">
+                        <div class="font-semibold text-gray-900 bg-white p-3 rounded-lg border border-gray-100">${item.base}</div>
+                        <div class="flex justify-center text-teal-500"><i data-lucide="arrow-down-up" class="w-4 h-4"></i></div>
+                        <div class="font-semibold text-teal-700 bg-teal-50 p-3 rounded-lg border border-teal-100">${item.syn}</div>
+                        <div class="text-sm text-gray-500 italic text-center mt-1">${item.vi}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderMaps() {
+            const container = document.getElementById('maps-grid');
+            container.innerHTML = mapData.map(item => `
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
+                    <div class="bg-slate-800 px-5 py-4 border-b border-gray-100 flex items-center gap-3">
+                        <div class="p-2 bg-slate-700 rounded-lg text-slate-300">
+                            <i data-lucide="${item.icon}" class="w-5 h-5"></i>
+                        </div>
+                        <h3 class="font-bold text-lg text-white">${item.title}</h3>
+                    </div>
+                    <div class="p-5">
+                        ${item.desc ? `<p class="text-sm text-gray-500 mb-4 bg-gray-50 p-3 rounded-lg border border-gray-100">${item.desc}</p>` : ''}
+                        
+                        <div class="mb-4">
+                            <h4 class="text-xs font-bold text-teal-600 uppercase tracking-wider mb-2">Cấu trúc (Structures)</h4>
+                            <ul class="space-y-2">
+                                ${item.structures.map(s => `
+                                    <li class="flex items-start gap-2 text-sm bg-teal-50/50 p-3 rounded-lg border border-teal-100/50">
+                                        <i data-lucide="check-circle-2" class="w-4 h-4 text-teal-500 mt-0.5 shrink-0"></i>
+                                        <span class="font-medium text-gray-700">${highlightFormula(s)}</span>
+                                    </li>
+                                `).join('')}
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h4 class="text-xs font-bold text-indigo-600 uppercase tracking-wider mb-2">Ví dụ (Examples)</h4>
+                            <div class="space-y-2">
+                                ${item.examples.map(ex => `
+                                    <div class="text-sm italic text-gray-600 border-l-2 border-indigo-200 pl-3 py-1">${ex}</div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Helper to colorize structural parts
+        function highlightFormula(text) {
+            return text.replace(/\+/g, '<span class="text-teal-400 mx-1">+</span>')
+                       .replace(/\/\//g, '<span class="text-gray-300 mx-1">/</span>');
+        }
+
+        // --- INTERACTIVITY LOGIC ---
+
+        function switchTab(tabId) {
+            // Hide all tabs
+            const tabs = ['man-made', 'natural', 'synonyms', 'maps'];
+            tabs.forEach(id => {
+                document.getElementById(`tab-${id}`).classList.add('hidden');
+                document.getElementById(`tab-${id}`).classList.remove('block');
+                
+                // Reset tab button styles
+                const btn = document.getElementById(`tab-btn-${id}`);
+                btn.className = "whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-gray-500 border-b-2 border-transparent hover:text-gray-700 transition-colors flex items-center gap-2";
+            });
+
+            // Show active tab
+            document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+            document.getElementById(`tab-${tabId}`).classList.add('block');
+            
+            // Set active tab button style
+            const activeBtn = document.getElementById(`tab-btn-${tabId}`);
+            activeBtn.className = "whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-teal-600 border-b-2 border-teal-600 transition-colors flex items-center gap-2";
+        }
+
+        function filterList(listId, query) {
+            const list = document.getElementById(listId);
+            const items = list.getElementsByTagName('li');
+            const lowerQuery = query.toLowerCase();
+
+            for (let i = 0; i < items.length; i++) {
+                const text = items[i].innerText.toLowerCase();
+                if (text.includes(lowerQuery)) {
+                    items[i].style.display = "";
+                } else {
+                    items[i].style.display = "none";
+                }
+            }
+        }
+
+        function filterSynonyms(query) {
+            const cards = document.getElementsByClassName('synonym-card');
+            const lowerQuery = query.toLowerCase();
+
+            for (let i = 0; i < cards.length; i++) {
+                const text = cards[i].innerText.toLowerCase();
+                if (text.includes(lowerQuery)) {
+                    cards[i].style.display = "";
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+        }
+
+        // --- INITIALIZATION ---
+        document.addEventListener('DOMContentLoaded', () => {
+            renderVocabList('man-made-list', manMadeData);
+            renderExamples('man-made-examples', manMadeData);
+            
+            renderVocabList('natural-list', naturalData);
+            renderExamples('natural-examples', naturalData);
+            
+            renderSynonyms();
+            renderMaps();
+            
+            lucide.createIcons();
+        });
+    </script>
+</body>
+</html>

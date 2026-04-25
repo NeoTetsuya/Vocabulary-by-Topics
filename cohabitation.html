@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IELTS Vocab: Cohabitation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .animate-fade-in { animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        @keyframes fadeIn { 
+            from { opacity: 0; transform: translateY(10px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+        
+        /* Custom scrollbar for lists */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #7dd3fc; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #38bdf8; }
+        
+        /* Highlight specific words in text */
+        .highlight-vocab {
+            background-color: #e0f2fe;
+            color: #0369a1;
+            font-weight: 600;
+            padding: 0 4px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .highlight-vocab:hover {
+            background-color: #bae6fd;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-sky-50/40 text-gray-800 font-sans pb-12">
+
+    <!-- Header -->
+    <header class="bg-white border-b border-sky-100 sticky top-0 z-10 shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div class="flex items-center gap-4">
+                <div class="p-3 bg-sky-500 text-white rounded-xl shadow-md shadow-sky-200">
+                    <i data-lucide="home" class="w-6 h-6"></i>
+                </div>
+                <div>
+                    <h1 class="text-2xl sm:text-3xl font-extrabold text-gray-900">IELTS Vocabulary</h1>
+                    <p class="text-sm text-sky-600 font-medium mt-1">Topic: Cohabitation (Sống thử)</p>
+                </div>
+            </div>
+            
+            <!-- Tabs -->
+            <div class="flex overflow-x-auto mt-6 border-b border-gray-100 hide-scrollbar gap-2 sm:gap-8">
+                <button onclick="switchTab('vocabulary')" id="tab-btn-vocabulary" class="whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-sky-600 border-b-2 border-sky-600 transition-colors flex items-center gap-2">
+                    <i data-lucide="book-open" class="w-4 h-4"></i> Vocabulary & Examples
+                </button>
+                <button onclick="switchTab('reading')" id="tab-btn-reading" class="whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-gray-500 border-b-2 border-transparent hover:text-gray-800 transition-colors flex items-center gap-2">
+                    <i data-lucide="book-text" class="w-4 h-4"></i> Reading Practice
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+        
+        <!-- Tab: Vocabulary -->
+        <section id="tab-vocabulary" class="animate-fade-in block">
+            <div class="flex flex-col lg:flex-row gap-6">
+                <!-- Vocab List -->
+                <div class="flex-1 bg-white p-6 rounded-2xl shadow-sm border border-sky-100">
+                    <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-6">
+                        <h2 class="text-xl font-bold text-gray-800 flex items-center gap-2">
+                            <i data-lucide="list" class="w-5 h-5 text-sky-500"></i> Core Vocabulary
+                        </h2>
+                        <div class="relative w-full sm:w-64">
+                            <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                            <input type="text" onkeyup="filterList('vocab-list', this.value)" placeholder="Search vocabulary..." class="w-full pl-9 pr-4 py-2 bg-sky-50/50 border border-sky-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 transition-all">
+                        </div>
+                    </div>
+                    <ul id="vocab-list" class="space-y-3 max-h-[600px] overflow-y-auto pr-2">
+                        <!-- Populated by JS -->
+                    </ul>
+                </div>
+
+                <!-- Examples Panel -->
+                <div class="lg:w-1/3 bg-gradient-to-b from-sky-50 to-blue-50 p-6 rounded-2xl border border-sky-100 h-fit lg:sticky lg:top-48 shadow-inner">
+                    <h2 class="text-xl font-bold text-sky-900 mb-6 flex items-center gap-2">
+                        <i data-lucide="message-square-quote" class="w-5 h-5 text-sky-600"></i> Ví dụ (Examples)
+                    </h2>
+                    <div id="examples-list" class="space-y-5">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tab: Reading Practice -->
+        <section id="tab-reading" class="animate-fade-in hidden">
+            <div class="bg-white p-6 sm:p-8 rounded-3xl shadow-sm border border-sky-100 mb-8">
+                <div class="flex items-center gap-3 mb-6 pb-6 border-b border-sky-100">
+                    <div class="bg-amber-100 text-amber-600 p-2 rounded-lg">
+                        <i data-lucide="calendar-days" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-800">30-Day Reading Challenge</h2>
+                        <p class="text-gray-500 text-sm">Cohabitation Article Snippet</p>
+                    </div>
+                </div>
+
+                <div class="flex flex-col md:flex-row gap-8">
+                    <!-- Article Text -->
+                    <div class="flex-1 space-y-6 text-gray-700 text-lg leading-relaxed">
+                        <p>
+                            Of the various ways in which one can <span class="highlight-vocab" title="xây dựng gia đình">forge a family</span> (marriage, <span class="highlight-vocab" title="sống thử trước hôn nhân">cohabitation</span>, or having a child without being married), cohabitation has become the most common.
+                        </p>
+                        <p>
+                            One reason for this increased interest in cohabitation over marriage may not be <span class="highlight-vocab" title="nỗi sợ ...">the fear of</span> the union itself, so much as a concern for <span class="highlight-vocab" title="khả năng ...có thể xảy ra">the possibility of</span> its <span class="highlight-vocab" title="sự tan vỡ">collapse</span>. In other words, it may be the looming prospect of divorce that's <span class="highlight-vocab" title="khiến ai đó làm gì">driving more people to</span> choose the question "Will you <span class="highlight-vocab" title="dọn vào sống cùng với ai đó">move in with</span> me?" over "Will you marry me?"
+                        </p>
+                        <p>
+                            Young people voice a number of concerns about getting married, and these concerns may drive them to cohabit rather than marry. "Some people worry largely about the emotional turmoil that could result from <span class="highlight-vocab" title="ly hôn">divorce</span>. They feel the potential <span class="highlight-vocab" title="cạm bẫy">pitfalls</span> of divorce make them question whether marriage <span class="highlight-vocab" title="đáng (để làm gì ...)">is worth it</span>.
+                        </p>
+                        <p>
+                            To these people cohabitation offers similar benefits to marriage without the potential pain of divorce. "If you're just living together, and if one of you decides they want to leave..." said one participant, "you can leave and it will just be OK ..."
+                        </p>
+                    </div>
+
+                    <!-- Article Vocab Notes -->
+                    <div class="md:w-1/3 bg-slate-50 p-6 rounded-2xl border border-slate-200">
+                        <h3 class="font-bold text-slate-800 mb-4 flex items-center gap-2">
+                            <i data-lucide="notebook-pen" class="w-5 h-5 text-slate-500"></i> Reading Notes
+                        </h3>
+                        <div id="reading-vocab-list" class="space-y-4">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Data & Logic -->
+    <script>
+        // --- DATA ---
+        
+        const coreVocabData = [
+            { en: "to fully commit to marriage", vi: "cam kết hoàn toàn với hôn nhân" },
+            { en: "to be socially acceptable", vi: "được xã hội chấp nhận" },
+            { en: "to reduce the risk of divorce", vi: "giảm nguy cơ ly hôn" },
+            { en: "to live together before marriage = to cohabit before marriage", vi: "sống thử trước hôn nhân" },
+            { en: "to move in together", vi: "dọn vào sống cùng nhau" },
+            { en: "to share a place with someone", vi: "sống cùng ai đó" },
+            { en: "to bring up a lot of issues", vi: "xảy ra nhiều vấn đề" },
+            { en: "to put your relationship to the test", vi: "thử thách mối quan hệ của bạn" },
+            { en: "to be on the same page about something", vi: "cùng chung suy nghĩ, ý tưởng (không bất đồng với nhau)" },
+            { en: "to be in a serious romantic relationship", vi: "đang ở trong một mối quan hệ lãng mạn nghiêm túc" },
+            { en: "to build a stronger bond", vi: "xây dựng một mối quan hệ bền chặt hơn" },
+            { en: "your significant other", vi: "nửa kia của bạn" },
+            { en: "a true commitment", vi: "1 sự cam kết thực sự" },
+            { en: "a greater acceptance of cohabitation", vi: "sống thử trước hôn nhân được chấp nhận nhiều hơn" },
+            { en: "changes in social norms", vi: "những thay đổi trong các chuẩn mực xã hội" },
+            { en: "cohabiting couples", vi: "các cặp đôi đang sống thử trước hôn nhân" },
+            { en: "to establish clear boundaries", vi: "thiết lập ranh giới rõ ràng" },
+            { en: "to take the next step in your relationship", vi: "thực hiện bước tiếp theo trong mối quan hệ của bạn" },
+            { en: "to ruin a relationship", vi: "hủy hoại một mối quan hệ" }
+        ];
+
+        const examplesData = [
+            { en: "It's completely normal to have some awkward or challenging moments before you get the hang of cohabitation.", vi: "Việc gặp phải một số khoảnh khắc khó xử hoặc khó khăn trước khi bạn bắt đầu chung sống với nhau là điều hết sức bình thường." },
+            { en: "One of the risks of moving in together before marriage is the potential loss of relationships with those close to you who disapprove of your choice.", vi: "Một trong những rủi ro khi dọn đến sống chung trước hôn nhân là khả năng mất đi mối quan hệ với những người thân thiết người mà không đồng ý với lựa chọn của bạn." },
+            { en: "Some people used to think living together before marriage would ruin a relationship, but it's unclear if that's really the case today.", vi: "Một số người từng nghĩ sống chung trước hôn nhân sẽ hủy hoại một mối quan hệ, nhưng việc đó có đúng hay không thì chúng ta chưa rõ nữa." },
+            { en: "Not everyone who cohabits plans to marry, but many do, and those who do sometimes use it as a \"trial\" period before they fully commit to marriage.", vi: "Không phải tất cả những người sống thử đều có kế hoạch kết hôn, nhưng nhiều người thì có, và những người đó đôi khi xem việc sống thử như một giai đoạn \"thử nghiệm\" trước khi họ hoàn toàn cam kết với việc kết hôn." }
+        ];
+
+        const readingVocabData = [
+            { en: "to forge a family", type: "", def: "xây dựng gia đình" },
+            { en: "cohabitation", type: "(n)", phonetic: "/kəʊˌhæbɪˈteɪʃn/", def: "the state of living with another person and having a sexual relationship with them without being married (sống thử trước hôn nhân)" },
+            { en: "the fear of ...", type: "(n)", phonetic: "/fɪr/", def: "the bad feeling that you have when you are in danger or when a particular thing frightens you (nỗi sợ ...)" },
+            { en: "the possibility of ...", type: "(n)", phonetic: "/ˌpɑːsəˈbɪləti/", def: "a thing that may happen or be true (khả năng ...có thể xảy ra)" },
+            { en: "collapse", type: "(n)", phonetic: "/kəˈlæps/", def: "a sudden failure of something (sự tan vỡ)" },
+            { en: "to drive somebody to do something", type: "", def: "to make somebody do something (khiến ai đó làm gì)" },
+            { en: "to move in with somebody", type: "", def: "to start living with somebody in the house or flat where they already live (dọn vào sống cùng với ai đó)" },
+            { en: "pitfall", type: "(n)", phonetic: "/ˈpɪtfɔːl/", def: "a danger or difficulty, especially one that is hidden or not obvious at first (cạm bẫy)" },
+            { en: "divorce", type: "(n)", phonetic: "/dɪˈvɔːrs/", def: "the legal ending of a marriage (ly hôn)" },
+            { en: "to be worth something", type: "(adj)", phonetic: "/wɜːrθ/", def: "important, good or pleasant enough to make somebody feel satisfied (đáng để làm gì ...)" }
+        ];
+
+        // --- RENDERING FUNCTIONS ---
+
+        function renderVocabList(containerId, data) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = data.map(item => `
+                <li class="p-4 bg-gray-50 hover:bg-sky-50 border border-gray-100 hover:border-sky-200 rounded-xl transition-all duration-200 group">
+                    <div class="font-bold text-lg text-gray-800 group-hover:text-sky-700">${item.en}</div>
+                    <div class="text-[15px] font-medium text-gray-600 mt-1">${item.vi}</div>
+                </li>
+            `).join('');
+        }
+
+        function renderExamples(containerId, data) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = data.map(ex => `
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-sky-100 relative group hover:shadow-md transition-shadow">
+                    <i data-lucide="quote" class="w-8 h-8 text-sky-100 absolute top-3 right-3 z-0"></i>
+                    <p class="font-medium text-gray-800 text-sm md:text-base leading-relaxed relative z-10">${ex.en}</p>
+                    <p class="text-sm text-sky-700/90 mt-3 pt-3 border-t border-sky-50 relative z-10 font-medium">${ex.vi}</p>
+                </div>
+            `).join('');
+        }
+
+        function renderReadingVocab(containerId, data) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = data.map(item => `
+                <div class="bg-white p-3 rounded-lg border border-slate-100 shadow-sm">
+                    <div class="font-bold text-sky-800 text-sm mb-1 flex flex-wrap items-baseline gap-1">
+                        <span>${item.en}</span>
+                        ${item.type ? `<span class="text-xs text-gray-400 font-normal">${item.type}</span>` : ''}
+                        ${item.phonetic ? `<span class="text-xs text-slate-400 font-normal ml-1">${item.phonetic}</span>` : ''}
+                    </div>
+                    <div class="text-xs text-gray-600 leading-relaxed">${item.def}</div>
+                </div>
+            `).join('');
+        }
+
+        // --- INTERACTIVITY LOGIC ---
+
+        function switchTab(tabId) {
+            // Hide all tabs
+            const tabs = ['vocabulary', 'reading'];
+            tabs.forEach(id => {
+                document.getElementById(`tab-${id}`).classList.add('hidden');
+                document.getElementById(`tab-${id}`).classList.remove('block');
+                
+                // Reset tab button styles
+                const btn = document.getElementById(`tab-btn-${id}`);
+                btn.className = "whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-gray-500 border-b-2 border-transparent hover:text-gray-800 transition-colors flex items-center gap-2";
+            });
+
+            // Show active tab
+            document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+            document.getElementById(`tab-${tabId}`).classList.add('block');
+            
+            // Set active tab button style
+            const activeBtn = document.getElementById(`tab-btn-${tabId}`);
+            activeBtn.className = "whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-sky-600 border-b-2 border-sky-600 transition-colors flex items-center gap-2";
+        }
+
+        function filterList(listId, query) {
+            const list = document.getElementById(listId);
+            const items = list.getElementsByTagName('li');
+            const lowerQuery = query.toLowerCase();
+
+            for (let i = 0; i < items.length; i++) {
+                const text = items[i].innerText.toLowerCase();
+                if (text.includes(lowerQuery)) {
+                    items[i].style.display = "";
+                } else {
+                    items[i].style.display = "none";
+                }
+            }
+        }
+
+        // --- INITIALIZATION ---
+        document.addEventListener('DOMContentLoaded', () => {
+            renderVocabList('vocab-list', coreVocabData);
+            renderExamples('examples-list', examplesData);
+            renderReadingVocab('reading-vocab-list', readingVocabData);
+            
+            // Initialize Lucide icons
+            lucide.createIcons();
+        });
+    </script>
+</body>
+</html>

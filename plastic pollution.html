@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IELTS Vocab: Plastic Pollution</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .animate-fade-in { animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        @keyframes fadeIn { 
+            from { opacity: 0; transform: translateY(10px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+        
+        /* Custom scrollbar for lists */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #67e8f9; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #22d3ee; }
+
+        /* 3D Flip Card Styles */
+        .perspective-1000 { perspective: 1000px; }
+        .transform-style-3d { transform-style: preserve-3d; }
+        .backface-hidden { backface-visibility: hidden; }
+        .rotate-y-180 { transform: rotateY(180deg); }
+        
+        /* Highlight specific words in text */
+        .highlight-vocab {
+            background-color: #cffafe;
+            color: #0369a1;
+            font-weight: 600;
+            padding: 0 4px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .highlight-vocab:hover {
+            background-color: #bae6fd;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-cyan-50/40 text-gray-800 font-sans pb-12">
+
+    <!-- Header -->
+    <header class="bg-white border-b border-cyan-100 sticky top-0 z-10 shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
+                <div class="flex items-center gap-4">
+                    <div class="p-3 bg-cyan-600 text-white rounded-xl shadow-md shadow-cyan-200">
+                        <i data-lucide="waves" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl sm:text-3xl font-extrabold text-gray-900">IELTS Vocabulary</h1>
+                        <p class="text-sm text-cyan-600 font-medium mt-1">Topic: Plastic Pollution & Environment</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tabs -->
+            <div class="flex overflow-x-auto mt-6 border-b border-gray-100 hide-scrollbar gap-2 sm:gap-6">
+                <button onclick="switchTab('vocab')" id="tab-btn-vocab" class="whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-cyan-700 border-b-2 border-cyan-700 transition-colors flex items-center gap-2">
+                    <i data-lucide="trash-2" class="w-4 h-4"></i> Plastic Vocab
+                </button>
+                <button onclick="switchTab('writing')" id="tab-btn-writing" class="whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-gray-500 border-b-2 border-transparent hover:text-gray-800 transition-colors flex items-center gap-2">
+                    <i data-lucide="pen-tool" class="w-4 h-4"></i> Writing Task 2
+                </button>
+                <button onclick="switchTab('reading')" id="tab-btn-reading" class="whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-gray-500 border-b-2 border-transparent hover:text-gray-800 transition-colors flex items-center gap-2">
+                    <i data-lucide="book-open" class="w-4 h-4"></i> Reading Practice
+                </button>
+                <button onclick="switchTab('flashcards')" id="tab-btn-flashcards" class="whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-gray-500 border-b-2 border-transparent hover:text-gray-800 transition-colors flex items-center gap-2">
+                    <i data-lucide="layers" class="w-4 h-4"></i> Flashcards
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+        
+        <!-- Tab: Core Vocab -->
+        <section id="tab-vocab" class="animate-fade-in block">
+            <div class="flex flex-col lg:flex-row gap-6">
+                <!-- Vocab List -->
+                <div class="flex-1 space-y-6">
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-cyan-100">
+                        <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-6">
+                            <h2 class="text-xl font-bold text-gray-800 flex items-center gap-2">
+                                <i data-lucide="list" class="w-5 h-5 text-cyan-500"></i> Core Vocabulary
+                            </h2>
+                            <div class="relative w-full sm:w-64">
+                                <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                                <input type="text" onkeyup="filterList('vocab-list', this.value)" placeholder="Search vocabulary..." class="w-full pl-9 pr-4 py-2 bg-cyan-50/50 border border-cyan-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-cyan-500 transition-all">
+                            </div>
+                        </div>
+                        
+                        <ul id="vocab-list" class="space-y-3 max-h-[650px] overflow-y-auto pr-2">
+                            <!-- Populated by JS -->
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Examples Panel -->
+                <div class="lg:w-1/3 bg-gradient-to-b from-blue-50 to-cyan-50 p-6 rounded-2xl border border-cyan-100 h-fit lg:sticky lg:top-48 shadow-inner">
+                    <h2 class="text-xl font-bold text-cyan-900 mb-6 flex items-center gap-2">
+                        <i data-lucide="quote" class="w-5 h-5 text-cyan-600"></i> Contextual Examples
+                    </h2>
+                    <div id="examples-list" class="space-y-5">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tab: Writing Task 2 -->
+        <section id="tab-writing" class="animate-fade-in hidden">
+            <div class="bg-white p-6 sm:p-8 rounded-3xl shadow-sm border border-cyan-100 mb-8 max-w-4xl mx-auto">
+                <div class="mb-8 border-b border-gray-200 pb-6">
+                    <span class="bg-cyan-100 text-cyan-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">Sample Essay</span>
+                    <h2 class="text-2xl font-bold text-gray-800 mt-4 mb-2">Government vs. Individual Responsibility</h2>
+                    <p class="text-gray-600 italic">"Environmental protection is the responsibility of politicians, not individuals as individuals can do too little. To what extent do you agree or disagree?"</p>
+                </div>
+
+                <div class="space-y-6 text-gray-700 leading-relaxed text-lg font-serif" id="essay-content">
+                    <p>It is believed that only governments have the power to solve <span class="highlight-vocab" title="các vấn đề môi trường">environmental problems</span> that are <span class="highlight-vocab" title="đặt ra mối đe dọa nghiêm trọng">posing serious threats</span> to today's world. However, I think that protecting the earth is the responsibility of both governments and individuals.</p>
+                    
+                    <p>It is true that some environmental issues are too big for individuals to deal with. In order for serious problems, such as <span class="highlight-vocab" title="nóng lên toàn cầu">global warming</span>, prolonged droughts, violent storms or other <span class="highlight-vocab" title="các hiện tượng thời tiết khắc nghiệt">extreme weather events</span>, to be effectively addressed, it requires the <span class="highlight-vocab" title="nỗ lực và hợp tác">efforts and cooperation</span> of politicians and large environmental organisations. This is because solving such problems requires special equipment, the use of modern technological devices and large numbers of experienced scientists to work together. For instance, it takes years for researchers to collect various samples and analyse huge amounts of data in order to know the major causes of global warming, and to help them find the most effective solutions to tackle this problem. Only governments can have <span class="highlight-vocab" title="đủ quỹ và nguồn lực">sufficient funds and resources</span> to invest in this.</p>
+
+                    <p>However, I believe that individuals also need to <span class="highlight-vocab" title="chịu trách nhiệm">take responsibility</span> for environmental protection. As individuals, we can help in various ways, such as recycling more, buying more energy-efficient household items or planting more trees in our gardens. I think that without the cooperation of both politicians and individuals, environmental issues will never be effectively tackled. For example, if farmers continue to burn forests for their own purposes, regardless of the government's regulations, the problem of <span class="highlight-vocab" title="biến đổi khí hậu">climate change</span> will never be successfully mitigated.</p>
+
+                    <p>In conclusion, for the reasons mentioned above, I believe that protecting the environment is the obligation of both politicians and individuals.</p>
+                </div>
+                
+                <div class="mt-8 pt-4 border-t border-gray-100 flex justify-between text-sm text-gray-400">
+                    <span>Hover over highlighted phrases for Vietnamese translation.</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tab: Reading Practice -->
+        <section id="tab-reading" class="animate-fade-in hidden">
+            <div class="bg-white p-6 sm:p-8 rounded-3xl shadow-sm border border-cyan-100 mb-8">
+                <div class="flex items-center gap-3 mb-6 pb-6 border-b border-cyan-100">
+                    <div class="bg-blue-100 text-blue-600 p-2 rounded-lg">
+                        <i data-lucide="newspaper" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-800">30-Day Reading Challenge</h2>
+                        <p class="text-gray-500 text-sm">National Geographic Snippet: Plastic Pollution</p>
+                    </div>
+                </div>
+
+                <div class="flex flex-col md:flex-row gap-8">
+                    <!-- Article Text -->
+                    <div class="flex-1 space-y-6 text-gray-700 text-lg leading-relaxed font-serif">
+                        <p>
+                            Plastic pollution has become one of the most <span class="highlight-vocab" title="những vấn đề môi trường cấp bách">pressing environmental issues</span>, as rapidly increasing production of <span class="highlight-vocab" title="sản phẩm dùng 1 lần">disposable</span> plastic products overwhelms the world's ability to deal with them.
+                        </p>
+                        <p>
+                            Plastics <span class="highlight-vocab" title="cách mạng hóa, làm thay đổi hoàn toàn">revolutionized</span> medicine with life-saving devices, made space travel possible, lightened cars and jets - saving fuel and pollution - and saved lives with helmets, incubators, and equipment for clean drinking water.
+                        </p>
+                        <p>
+                            The conveniences plastics offer, however, led to a <span class="highlight-vocab" title="văn hóa sử dụng đồ dùng 1 lần rồi vứt">throw-away culture</span> that reveals the material's dark side: today, <span class="highlight-vocab" title="dùng 1 lần">single-use</span> plastics account for 40 percent of the plastic produced every year.
+                        </p>
+                        <p>
+                            Millions of animals are killed by plastics every year, from birds to fish to other <span class="highlight-vocab" title="thuộc về biển">marine</span> <span class="highlight-vocab" title="sinh vật">organisms</span>. Most of the deaths to animals are caused by entanglement or <span class="highlight-vocab" title="sự chết đói">starvation</span>. Seals, whales, turtles, and other animals are strangled by abandoned fishing gear or discarded six-pack rings.
+                        </p>
+                        <p>
+                            Plastics have also been found to have blocked digestive tracts or pierced organs, causing death. Stomachs so <span class="highlight-vocab" title="chứa đầy ...">packed with</span> plastics reduce the <span class="highlight-vocab" title="sự thèm/muốn ...">urge</span> to eat, causing starvation.
+                        </p>
+                    </div>
+
+                    <!-- Article Vocab Notes -->
+                    <div class="md:w-1/3 bg-cyan-50/50 p-6 rounded-2xl border border-cyan-200 h-fit sticky top-24">
+                        <h3 class="font-bold text-cyan-800 mb-4 flex items-center gap-2">
+                            <i data-lucide="notebook-pen" class="w-5 h-5 text-cyan-600"></i> Reading Glossary
+                        </h3>
+                        <div id="reading-vocab-list" class="space-y-4">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Tab: Flashcards -->
+        <section id="tab-flashcards" class="animate-fade-in hidden">
+            <div class="max-w-3xl mx-auto text-center space-y-6">
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-cyan-100">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-2">Study Mode</h2>
+                    <p class="text-gray-500 mb-8">Click the card to flip it and reveal the meaning.</p>
+                    
+                    <!-- Flashcard Container -->
+                    <div id="flashcard-container" class="relative w-full h-64 cursor-pointer group perspective-1000 mx-auto" onclick="flipCard()">
+                        <div id="flashcard-inner" class="w-full h-full transition-all duration-500 transform-style-3d">
+                            
+                            <!-- Front -->
+                            <div class="absolute inset-0 backface-hidden bg-gradient-to-br from-cyan-500 to-blue-600 text-white border-2 border-cyan-400 rounded-2xl shadow-lg flex flex-col items-center justify-center p-6 text-center">
+                                <i data-lucide="refresh-cw" class="w-6 h-6 absolute top-4 right-4 text-white/50 opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                                <h3 id="card-front-text" class="text-2xl md:text-3xl font-bold px-4"></h3>
+                                <p class="text-cyan-100 mt-6 text-sm uppercase tracking-widest font-semibold">Tap to reveal</p>
+                            </div>
+
+                            <!-- Back -->
+                            <div class="absolute inset-0 backface-hidden rotate-y-180 bg-white text-gray-800 border-2 border-cyan-200 rounded-2xl shadow-lg flex flex-col items-center justify-center p-6 text-center">
+                                <p id="card-back-en" class="text-base text-gray-500 font-medium italic mb-3 px-4"></p>
+                                <p id="card-back-vi" class="text-xl font-bold text-cyan-700 px-4"></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Controls -->
+                    <div class="flex justify-center items-center gap-6 mt-8">
+                        <button onclick="prevCard()" class="p-3 rounded-full bg-gray-100 text-gray-600 hover:bg-cyan-100 hover:text-cyan-700 transition-colors">
+                            <i data-lucide="chevron-left" class="w-6 h-6"></i>
+                        </button>
+                        <span id="card-counter" class="font-bold text-gray-500 text-lg min-w-[4rem]">1 / 10</span>
+                        <button onclick="nextCard()" class="p-3 rounded-full bg-gray-100 text-gray-600 hover:bg-cyan-100 hover:text-cyan-700 transition-colors">
+                            <i data-lucide="chevron-right" class="w-6 h-6"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Data & Logic -->
+    <script>
+        // --- DATA ---
+        
+        // Tab 1: Core Vocab
+        const generalVocabData = [
+            { en: "pressing environmental issues", vi: "các vấn đề môi trường cấp bách" },
+            { en: "disposable plastic products / single-use plastics", vi: "sản phẩm nhựa dùng một lần" },
+            { en: "garbage collection systems", vi: "hệ thống thu gom rác" },
+            { en: "discarded plastics", vi: "các vật nhựa bị bỏ đi" },
+            { en: "to be strangled by...", vi: "bị kẹt bởi ..." },
+            { en: "to reduce the urge to eat", vi: "giảm ham muốn ăn uống" },
+            { en: "to break down into...", vi: "chia thành, vỡ ra thành..." },
+            { en: "disposable packaging", vi: "bao bì dùng một lần" },
+            { en: "the global plastic waste crisis", vi: "cuộc khủng hoảng rác thải nhựa toàn cầu" },
+            { en: "to float around the world's oceans", vi: "trôi nổi khắp các đại dương trên thế giới" },
+            { en: "to kill millions of marine animals", vi: "giết hàng triệu động vật biển" },
+            { en: "to pose a serious threat to...", vi: "đe dọa nghiêm trọng đến ..." },
+            { en: "to mistake plastic for food", vi: "nhầm nhựa với thức ăn" },
+            { en: "to have detrimental effects on...", vi: "có ảnh hưởng bất lợi lên ..." },
+            { en: "to work towards...", vi: "làm việc hướng tới ..." },
+            { en: "a world free of plastic pollution", vi: "một thế giới không ô nhiễm nhựa" },
+            { en: "to become an integral part of our daily life", vi: "trở thành một phần không thể thiếu trong cuộc sống hàng ngày" },
+            { en: "the unfortunate victims of plastic pollution", vi: "những nạn nhân bất hạnh của nạn ô nhiễm nhựa" },
+            { en: "to suffer from entanglement and ingestion of plastic debris", vi: "bị vướng mắc kẹt và nuốt phải mảnh vụn nhựa" },
+            { en: "to be discharged into ...", vi: "bị thải ra" },
+            { en: "to contaminate ...", vi: "làm ô nhiễm" },
+            { en: "the efforts and cooperation of", vi: "nỗ lực và sự hợp tác của" }
+        ];
+
+        const examplesData = [
+            { en: "Due to excessive production of disposable goods, huge amounts of hazardous waste are being discharged into the environment, which directly contaminates soil and water.", vi: "Do sản xuất quá nhiều hàng hóa dùng một lần, một lượng lớn chất thải nguy hại đang bị thải ra môi trường, làm ô nhiễm trực tiếp đất và nước." },
+            { en: "One of the most pressing environmental issues which is posing a serious threat to the world is plastic pollution.", vi: "Một trong những vấn đề môi trường cấp bách đang đe dọa nghiêm trọng đến thế giới là ô nhiễm nhựa." },
+            { en: "In order for this problem to be effectively addressed, it requires the efforts and cooperation of politicians and large environmental organisations.", vi: "Để vấn đề này được giải quyết một cách hiệu quả, đòi hỏi sự nỗ lực và hợp tác của các chính trị gia và các tổ chức môi trường lớn." }
+        ];
+
+        // Tab 3: Reading Vocab
+        const readingVocabData = [
+            { term: "pressing environmental issues", type: "phrase", phonetic: "", def: "những vấn đề môi trường cấp bách (synonym: urgent/serious environmental problems)" },
+            { term: "disposable", type: "(adj)", phonetic: "/dɪˈspoʊzəbl/", def: "made to be thrown away after use: dùng 1 lần, được sản xuất ra để bỏ đi sau khi dùng" },
+            { term: "revolutionize", type: "(v)", phonetic: "/ˌrevəˈluːʃənaɪz/", def: "to completely change the way that something is done: cách mạng hóa, làm thay đổi hoàn toàn" },
+            { term: "a throw-away culture", type: "(n)", phonetic: "", def: "a society full of excessive consumption and waste of food, products, etc: xã hội sử dụng đồ đạc ngắn hạn rồi vứt đi" },
+            { term: "single-use", type: "(adj)", phonetic: "/ˌsɪŋɡl ˈjuːs/", def: "made to be used once only and then thrown away: dùng 1 lần" },
+            { term: "marine", type: "(adj)", phonetic: "/məˈriːn/", def: "connected with the sea and the creatures and plants that live there: thuộc về biển" },
+            { term: "organism", type: "(n)", phonetic: "/ˈɔːrɡənɪzəm/", def: "a living thing, especially one that is extremely small: sinh vật" },
+            { term: "starvation", type: "(n)", phonetic: "/stɑːrˈveɪʃn/", def: "the state in which somebody suffers or dies because they have no food: sự chết đói" },
+            { term: "to be packed with ...", type: "phrase", phonetic: "", def: "to be full of .../ to be filled with.... chứa đầy ..." },
+            { term: "urge", type: "(n)", phonetic: "/ɜːrdʒ/", def: "a strong desire to do something: sự thèm/muốn ..." }
+        ];
+
+        let flashcardDeck = [];
+        let currentCardIndex = 0;
+        let isCardFlipped = false;
+
+        // --- RENDERING FUNCTIONS ---
+
+        function renderVocabList() {
+            const container = document.getElementById('vocab-list');
+            container.innerHTML = generalVocabData.map(item => `
+                <li class="p-4 bg-gray-50 hover:bg-cyan-50 border border-gray-100 hover:border-cyan-200 rounded-xl transition-all duration-200 group list-item-vocab">
+                    <div class="font-bold text-[16px] text-gray-800 group-hover:text-cyan-700 term leading-snug">${item.en}</div>
+                    <div class="text-[14px] font-medium text-gray-600 mt-2 translation">${item.vi}</div>
+                </li>
+            `).join('');
+        }
+
+        function renderExamples() {
+            const container = document.getElementById('examples-list');
+            container.innerHTML = examplesData.map(ex => `
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-cyan-100 relative group hover:shadow-md transition-shadow">
+                    <i data-lucide="quote" class="w-8 h-8 text-cyan-50 absolute top-3 right-3 z-0"></i>
+                    <p class="font-medium text-gray-800 text-sm md:text-base leading-relaxed relative z-10">${ex.en}</p>
+                    <p class="text-sm text-cyan-700/90 mt-3 pt-3 border-t border-cyan-50 relative z-10 font-medium">${ex.vi}</p>
+                </div>
+            `).join('');
+        }
+
+        function renderReadingVocab() {
+            const container = document.getElementById('reading-vocab-list');
+            container.innerHTML = readingVocabData.map(item => `
+                <div class="bg-white p-4 rounded-xl border border-slate-100 shadow-sm">
+                    <div class="font-bold text-cyan-800 text-[15px] mb-1 flex flex-wrap items-baseline gap-1">
+                        <span>${item.term}</span>
+                        ${item.type ? `<span class="text-xs text-gray-400 font-normal">${item.type}</span>` : ''}
+                        ${item.phonetic ? `<span class="text-xs text-cyan-600/70 font-normal ml-1">${item.phonetic}</span>` : ''}
+                    </div>
+                    <div class="text-[13px] text-gray-600 leading-relaxed">${item.def}</div>
+                </div>
+            `).join('');
+        }
+
+        // --- FLASHCARD LOGIC ---
+        
+        function initFlashcards() {
+            // Combine vocab for flashcards
+            flashcardDeck = [
+                ...generalVocabData.map(i => ({ front: i.en, backEn: "", backVi: i.vi })),
+                ...readingVocabData.map(i => ({ front: i.term, backEn: i.def, backVi: "" }))
+            ];
+            // Shuffle
+            flashcardDeck.sort(() => Math.random() - 0.5);
+            currentCardIndex = 0;
+            updateFlashcardView();
+        }
+
+        function updateFlashcardView() {
+            const card = flashcardDeck[currentCardIndex];
+            document.getElementById('card-front-text').innerText = card.front;
+            document.getElementById('card-back-en').innerText = card.backEn;
+            document.getElementById('card-back-vi').innerText = card.backVi;
+            
+            if(!card.backEn) {
+                document.getElementById('card-back-en').classList.add('hidden');
+            } else {
+                document.getElementById('card-back-en').classList.remove('hidden');
+            }
+
+            if(!card.backVi) {
+                document.getElementById('card-back-vi').classList.add('hidden');
+            } else {
+                document.getElementById('card-back-vi').classList.remove('hidden');
+            }
+
+            document.getElementById('card-counter').innerText = `${currentCardIndex + 1} / ${flashcardDeck.length}`;
+            
+            if (isCardFlipped) {
+                document.getElementById('flashcard-inner').classList.remove('rotate-y-180');
+                isCardFlipped = false;
+            }
+        }
+
+        function flipCard() {
+            document.getElementById('flashcard-inner').classList.toggle('rotate-y-180');
+            isCardFlipped = !isCardFlipped;
+        }
+
+        function nextCard() {
+            if (currentCardIndex < flashcardDeck.length - 1) {
+                currentCardIndex++;
+                updateFlashcardView();
+            }
+        }
+
+        function prevCard() {
+            if (currentCardIndex > 0) {
+                currentCardIndex--;
+                updateFlashcardView();
+            }
+        }
+
+        // --- INTERACTIVITY LOGIC ---
+
+        function switchTab(tabId) {
+            // Hide all tabs
+            const tabs = ['vocab', 'writing', 'reading', 'flashcards'];
+            tabs.forEach(id => {
+                document.getElementById(`tab-${id}`).classList.add('hidden');
+                document.getElementById(`tab-${id}`).classList.remove('block');
+                
+                // Reset tab button styles
+                const btn = document.getElementById(`tab-btn-${id}`);
+                btn.className = "whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-gray-500 border-b-2 border-transparent hover:text-gray-800 transition-colors flex items-center gap-2";
+            });
+
+            // Show active tab
+            document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+            document.getElementById(`tab-${tabId}`).classList.add('block');
+            
+            // Set active tab button style
+            const activeBtn = document.getElementById(`tab-btn-${tabId}`);
+            activeBtn.className = "whitespace-nowrap pb-4 px-2 text-sm sm:text-base font-bold text-cyan-700 border-b-2 border-cyan-700 transition-colors flex items-center gap-2";
+        }
+
+        function filterList(listId, query) {
+            const list = document.getElementById(listId);
+            let items;
+            
+            if(listId === 'vocab-list') {
+                 items = list.getElementsByClassName('list-item-vocab');
+            }
+
+            const lowerQuery = query.toLowerCase();
+
+            for (let i = 0; i < items.length; i++) {
+                const text = items[i].innerText.toLowerCase();
+                if (text.includes(lowerQuery)) {
+                    items[i].style.display = "";
+                } else {
+                    items[i].style.display = "none";
+                }
+            }
+        }
+
+        // --- INITIALIZATION ---
+        document.addEventListener('DOMContentLoaded', () => {
+            renderVocabList();
+            renderReadingVocab();
+            renderExamples();
+            initFlashcards();
+            
+            // Initialize Lucide icons
+            lucide.createIcons();
+        });
+    </script>
+</body>
+</html>
